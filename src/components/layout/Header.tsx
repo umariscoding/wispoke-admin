@@ -21,7 +21,7 @@ const LogoutButton: React.FC = () => {
     setIsLoggingOut(true);
     try {
       await dispatch(logoutCompanyComprehensive());
-      router.push("/company/login");
+      router.push("/auth");
     } catch (error) {
       console.error("Logout failed:", error);
     } finally {

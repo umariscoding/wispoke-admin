@@ -15,8 +15,8 @@ export default function DashboardLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    document.documentElement.style.backgroundColor = "#0f172a";
-    document.body.style.backgroundColor = "#0f172a";
+    document.documentElement.style.backgroundColor = "#f8fafc";
+    document.body.style.backgroundColor = "#f8fafc";
     return () => {
       document.documentElement.style.backgroundColor = "";
       document.body.style.backgroundColor = "";

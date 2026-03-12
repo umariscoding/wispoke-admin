@@ -12,8 +12,6 @@ interface UseEmbedSettingsReturn {
     key: K,
     value: EmbedSettings[K]
   ) => void;
-  refreshPreview: () => void;
-  previewKey: number;
 }
 
 export function useEmbedSettings(): UseEmbedSettingsReturn {
@@ -21,9 +19,7 @@ export function useEmbedSettings(): UseEmbedSettingsReturn {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [previewKey, setPreviewKey] = useState(0);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const isInitialLoad = useRef(true);
 
   // Load settings from API
   useEffect(() => {
@@ -38,6 +34,14 @@ export function useEmbedSettings(): UseEmbedSettingsReturn {
             primaryColor: data.primaryColor || DEFAULT_EMBED_SETTINGS.primaryColor,
             welcomeText: data.welcomeText || DEFAULT_EMBED_SETTINGS.welcomeText,
             subtitleText: data.subtitleText || DEFAULT_EMBED_SETTINGS.subtitleText,
+            placeholderText: data.placeholderText ?? DEFAULT_EMBED_SETTINGS.placeholderText,
+            initialMessage: data.initialMessage ?? DEFAULT_EMBED_SETTINGS.initialMessage,
+            hideBranding: data.hideBranding ?? DEFAULT_EMBED_SETTINGS.hideBranding,
+            autoOpenDelay: data.autoOpenDelay ?? DEFAULT_EMBED_SETTINGS.autoOpenDelay,
+            headerColor: data.headerColor ?? DEFAULT_EMBED_SETTINGS.headerColor,
+            buttonIcon: data.buttonIcon || DEFAULT_EMBED_SETTINGS.buttonIcon,
+            botDisplayName: data.botDisplayName ?? DEFAULT_EMBED_SETTINGS.botDisplayName,
+            chatTemplate: data.chatTemplate || DEFAULT_EMBED_SETTINGS.chatTemplate,
           });
         }
       } catch (err) {
@@ -45,7 +49,6 @@ export function useEmbedSettings(): UseEmbedSettingsReturn {
         setError("Failed to load settings");
       } finally {
         setLoading(false);
-        isInitialLoad.current = false;
       }
     };
 
@@ -61,8 +64,16 @@ export function useEmbedSettings(): UseEmbedSettingsReturn {
         theme: newSettings.theme,
         position: newSettings.position,
         primaryColor: newSettings.primaryColor,
+        headerColor: newSettings.headerColor,
         welcomeText: newSettings.welcomeText,
         subtitleText: newSettings.subtitleText,
+        placeholderText: newSettings.placeholderText,
+        initialMessage: newSettings.initialMessage,
+        hideBranding: newSettings.hideBranding,
+        autoOpenDelay: newSettings.autoOpenDelay,
+        buttonIcon: newSettings.buttonIcon,
+        botDisplayName: newSettings.botDisplayName,
+        chatTemplate: newSettings.chatTemplate,
       });
     } catch (err) {
       console.error("Failed to save embed settings:", err);
@@ -72,13 +83,13 @@ export function useEmbedSettings(): UseEmbedSettingsReturn {
     }
   }, []);
 
-  // Update a single setting
+  // Update a single setting — updates React state immediately (instant preview),
+  // then debounces the API save to persist to backend
   const updateSetting = useCallback(
     <K extends keyof EmbedSettings>(key: K, value: EmbedSettings[K]) => {
       setSettings((prev) => {
         const newSettings = { ...prev, [key]: value };
 
-        // Debounced save
         if (saveTimeoutRef.current) {
           clearTimeout(saveTimeoutRef.current);
         }
@@ -92,11 +103,6 @@ export function useEmbedSettings(): UseEmbedSettingsReturn {
     },
     [saveSettings]
   );
-
-  // Manual preview refresh
-  const refreshPreview = useCallback(() => {
-    setPreviewKey((k) => k + 1);
-  }, []);
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -113,7 +119,5 @@ export function useEmbedSettings(): UseEmbedSettingsReturn {
     saving,
     error,
     updateSetting,
-    refreshPreview,
-    previewKey,
   };
 }

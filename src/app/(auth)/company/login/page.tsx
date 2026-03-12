@@ -7,7 +7,7 @@ export default function CompanyLoginPage() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/company/auth");
+    router.replace("/auth");
   }, [router]);
 
   return null;

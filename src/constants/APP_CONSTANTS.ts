@@ -12,8 +12,8 @@ export const ROUTES = {
   HOME: "/",
 
   // Company auth routes (only companies can access these directly)
-  COMPANY_LOGIN: "/company/auth",
-  COMPANY_REGISTER: "/company/auth",
+  COMPANY_LOGIN: "/auth",
+  COMPANY_REGISTER: "/auth",
 
   // Dashboard routes
   DASHBOARD: "/dashboard",

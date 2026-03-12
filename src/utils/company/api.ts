@@ -62,13 +62,13 @@ companyApi.interceptors.response.use(
           localStorage.removeItem("company_data");
 
           if (typeof window !== "undefined") {
-            window.location.href = "/company/login";
+            window.location.href = "/auth";
           }
         }
       } else {
         // No refresh token, redirect to company login
         if (typeof window !== "undefined") {
-          window.location.href = "/company/login";
+          window.location.href = "/auth";
         }
       }
     }
