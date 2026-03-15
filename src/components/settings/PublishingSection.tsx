@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Icons, Toggle } from "@/components/ui";
 
 interface PublishingSectionProps {
@@ -14,15 +14,15 @@ export default function PublishingSection({
   slug,
   onPublishToggle,
 }: PublishingSectionProps) {
-  const isLocalhost =
-    typeof window !== "undefined" &&
-    (window.location.hostname === "localhost" ||
-      window.location.hostname === "127.0.0.1");
-
   const CHAT_DOMAIN = "chatevo.vercel.app";
-  const chatBaseUrl = isLocalhost
-    ? "http://localhost:5173"
-    : `https://${CHAT_DOMAIN}`;
+  const [chatBaseUrl, setChatBaseUrl] = useState(`https://${CHAT_DOMAIN}`);
+
+  useEffect(() => {
+    const isLocalhost =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1";
+    if (isLocalhost) setChatBaseUrl("http://localhost:5173");
+  }, []);
 
   const handleVisitPublicChatbot = () => {
     if (slug) {
@@ -32,6 +32,9 @@ export default function PublishingSection({
 
   const handleVisitSubdomain = () => {
     if (slug) {
+      const isLocalhost =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1";
       const subdomainUrl = isLocalhost
         ? `http://${slug}.localhost:5173`
         : `https://${slug}.${CHAT_DOMAIN}`;
@@ -41,6 +44,10 @@ export default function PublishingSection({
 
   const getSubdomainUrl = () => {
     if (!slug) return "Loading...";
+    const isLocalhost =
+      typeof window !== "undefined" &&
+      (window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1");
     return isLocalhost
       ? `${slug}.localhost:5173`
       : `${slug}.${CHAT_DOMAIN}`;
