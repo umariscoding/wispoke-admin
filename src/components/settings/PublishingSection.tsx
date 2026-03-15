@@ -14,18 +14,24 @@ export default function PublishingSection({
   slug,
   onPublishToggle,
 }: PublishingSectionProps) {
+  const chatBaseUrl =
+    process.env.NEXT_PUBLIC_CHAT_URL ||
+    (typeof window !== "undefined" && window.location.hostname === "localhost"
+      ? "http://localhost:5173"
+      : "https://chatevo.vercel.app");
+
   const handleVisitPublicChatbot = () => {
-    if (slug && typeof window !== "undefined") {
-      const publicChatbotUrl = `${window.location.origin}/${slug}`;
-      window.open(publicChatbotUrl, "_blank");
+    if (slug) {
+      window.open(`${chatBaseUrl}/${slug}`, "_blank");
     }
   };
 
   const handleVisitSubdomain = () => {
-    if (typeof window !== "undefined" && slug) {
-      const hostname = window.location.hostname;
-      const port = window.location.port ? `:${window.location.port}` : "";
-      const protocol = window.location.protocol;
+    if (slug) {
+      const url = new URL(chatBaseUrl);
+      const hostname = url.hostname;
+      const port = url.port ? `:${url.port}` : "";
+      const protocol = url.protocol;
 
       let subdomainUrl;
       if (hostname === "localhost" || hostname === "127.0.0.1") {
@@ -41,9 +47,10 @@ export default function PublishingSection({
   };
 
   const getSubdomainUrl = () => {
-    if (typeof window === "undefined" || !slug) return "Loading...";
-    const hostname = window.location.hostname;
-    const port = window.location.port ? `:${window.location.port}` : "";
+    if (!slug) return "Loading...";
+    const url = new URL(chatBaseUrl);
+    const hostname = url.hostname;
+    const port = url.port ? `:${url.port}` : "";
 
     if (hostname === "localhost" || hostname === "127.0.0.1") {
       return `${slug}.localhost${port}`;
@@ -124,10 +131,7 @@ export default function PublishingSection({
                 <div>
                   <p className="text-xs text-neutral-400">Path URL</p>
                   <p className="text-sm font-mono text-neutral-700 mt-0.5">
-                    {typeof window !== "undefined"
-                      ? window.location.origin
-                      : "https://yoursite.com"}
-                    /<span className="text-primary-600">{slug}</span>
+                    {chatBaseUrl}/<span className="text-primary-600">{slug}</span>
                   </p>
                 </div>
                 <Icons.Eye className="h-4 w-4 text-neutral-400 group-hover:text-primary-600 transition-colors" />
