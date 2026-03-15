@@ -15,105 +15,88 @@ const Toggle: React.FC<ToggleProps> = ({
   className = "",
   ...props
 }) => {
-  const sizeClasses = {
-    sm: "h-5 w-9",
-    md: "h-6 w-11",
-    lg: "h-8 w-14",
+  const sizeConfig = {
+    sm: { track: "h-[22px] w-[40px]", thumb: "h-[16px] w-[16px]", translate: 18, padding: 3 },
+    md: { track: "h-[26px] w-[48px]", thumb: "h-[20px] w-[20px]", translate: 22, padding: 3 },
+    lg: { track: "h-[32px] w-[56px]", thumb: "h-[24px] w-[24px]", translate: 24, padding: 4 },
   };
 
-  const thumbSizeClasses = {
-    sm: "h-4 w-4",
-    md: "h-5 w-5",
-    lg: "h-7 w-7",
+  const variantColors = {
+    primary: { on: "bg-primary-600", glow: "shadow-primary-500/25" },
+    success: { on: "bg-emerald-500", glow: "shadow-emerald-500/25" },
+    warning: { on: "bg-amber-500", glow: "shadow-amber-500/25" },
+    error: { on: "bg-red-500", glow: "shadow-red-500/25" },
   };
 
-  const translateClasses = {
-    sm: checked ? "translate-x-4" : "translate-x-0",
-    md: checked ? "translate-x-5" : "translate-x-0",
-    lg: checked ? "translate-x-6" : "translate-x-0",
+  const config = sizeConfig[size];
+  const colors = variantColors[variant];
+
+  const handleChange = (val: boolean) => {
+    if (!disabled && !loading) onChange(val);
   };
 
-  const variantClasses = {
-    primary: checked
-      ? "bg-primary-600 focus:ring-primary-500"
-      : "bg-neutral-200 focus:ring-neutral-300",
-    success: checked
-      ? "bg-success-600 focus:ring-success-500"
-      : "bg-neutral-200 focus:ring-neutral-300",
-    warning: checked
-      ? "bg-warning-600 focus:ring-warning-500"
-      : "bg-neutral-200 focus:ring-neutral-300",
-    error: checked
-      ? "bg-error-600 focus:ring-error-500"
-      : "bg-neutral-200 focus:ring-neutral-300",
-  };
-
-  const handleChange = (checked: boolean) => {
-    if (!disabled && !loading) {
-      onChange(checked);
-    }
-  };
-
-  const toggleClasses = `
-    ${sizeClasses[size]}
-    ${variantClasses[variant]}
-    relative inline-flex shrink-0 cursor-pointer rounded-full border-2 border-transparent 
-    transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2
-    ${disabled || loading ? "opacity-50 cursor-not-allowed" : "hover:shadow-lg"}
-    ${className}
-  `.trim();
-
-  const thumbClasses = `
-    ${thumbSizeClasses[size]}
-    ${translateClasses[size]}
-    pointer-events-none inline-block rounded-full bg-white shadow-lg transform ring-0 
-    transition-all duration-200 ease-in-out
-    ${checked ? "shadow-xl" : "shadow-md"}
-  `.trim();
+  const switchEl = (
+    <Switch
+      checked={checked}
+      onChange={handleChange}
+      disabled={disabled || loading}
+      className={`
+        ${config.track}
+        ${checked ? `${colors.on} shadow-lg ${colors.glow}` : "bg-neutral-200/80"}
+        relative inline-flex shrink-0 cursor-pointer rounded-full
+        transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary-500/40
+        ${disabled || loading ? "opacity-40 cursor-not-allowed saturate-0" : "hover:brightness-105 active:scale-[0.97]"}
+        ${className}
+      `.trim()}
+      {...props}
+    >
+      <span className="sr-only">{label || "Toggle"}</span>
+      <span
+        className={`
+          ${config.thumb}
+          pointer-events-none inline-block rounded-full bg-white
+          transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]
+          ${checked ? "shadow-md" : "shadow-sm"}
+        `.trim()}
+        style={{
+          transform: `translateX(${checked ? config.translate : 0}px)`,
+          marginTop: config.padding,
+          marginLeft: config.padding,
+        }}
+      >
+        {loading && (
+          <span className="absolute inset-0 flex items-center justify-center">
+            <span className="block w-2.5 h-2.5 border-[1.5px] border-neutral-300 border-t-neutral-600 rounded-full animate-spin" />
+          </span>
+        )}
+      </span>
+    </Switch>
+  );
 
   if (label || description) {
     return (
       <Switch.Group>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3">
           <div className="flex flex-col">
             {label && (
-              <Switch.Label className="text-sm font-medium text-text-primary cursor-pointer">
+              <Switch.Label className="text-sm font-medium text-neutral-900 cursor-pointer select-none">
                 {label}
               </Switch.Label>
             )}
             {description && (
-              <Switch.Description className="text-sm text-text-secondary">
+              <Switch.Description className="text-[13px] text-neutral-500 mt-0.5">
                 {description}
               </Switch.Description>
             )}
           </div>
-          <Switch
-            checked={checked}
-            onChange={handleChange}
-            disabled={disabled || loading}
-            className={toggleClasses}
-            {...props}
-          >
-            <span className="sr-only">{label || "Toggle"}</span>
-            <span className={thumbClasses} />
-          </Switch>
+          {switchEl}
         </div>
       </Switch.Group>
     );
   }
 
-  return (
-    <Switch
-      checked={checked}
-      onChange={handleChange}
-      disabled={disabled || loading}
-      className={toggleClasses}
-      {...props}
-    >
-      <span className="sr-only">Toggle</span>
-      <span className={thumbClasses} />
-    </Switch>
-  );
+  return switchEl;
 };
 
 export default Toggle;

@@ -46,6 +46,11 @@ import {
   Database,
   Brain,
   Terminal,
+  Briefcase,
+  Smile,
+  Coffee,
+  Award,
+  Flame,
 } from "lucide-react";
 
 // Icon component props interface
@@ -249,5 +254,25 @@ export const Icons = {
 
   Terminal: ({ className = "h-5 w-5", size }: IconProps) => (
     <Terminal className={className} size={size} />
+  ),
+
+  Briefcase: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Briefcase className={className} size={size} />
+  ),
+
+  Smile: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Smile className={className} size={size} />
+  ),
+
+  Coffee: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Coffee className={className} size={size} />
+  ),
+
+  Award: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Award className={className} size={size} />
+  ),
+
+  Flame: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Flame className={className} size={size} />
   ),
 };

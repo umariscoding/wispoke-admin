@@ -201,21 +201,26 @@ export default function SettingsPage() {
       )}
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-neutral-100/80 p-1 rounded-xl mb-8 w-fit">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
-              activeTab === tab.id
-                ? "bg-white text-neutral-900 shadow-sm ring-1 ring-neutral-200/50"
-                : "text-neutral-500 hover:text-neutral-700 hover:bg-white/50"
-            }`}
-          >
-            {tab.icon}
-            {tab.label}
-          </button>
-        ))}
+      <div className="flex justify-center mb-8">
+        <div className="inline-flex items-center border border-neutral-200 bg-white rounded-xl p-1 gap-0.5">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 px-5 py-2 text-[13px] font-medium rounded-[10px] transition-all duration-200 ${
+                  isActive
+                    ? "bg-primary-600 text-white shadow-sm shadow-primary-600/25"
+                    : "text-neutral-500 hover:text-neutral-800 hover:bg-neutral-50"
+                }`}
+              >
+                {tab.icon}
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* === PROFILE TAB === */}
@@ -347,12 +352,14 @@ export default function SettingsPage() {
             <div className="px-6 py-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div
-                  className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
-                    formData.isPublished ? "bg-emerald-100" : "bg-neutral-100"
+                  className={`w-9 h-9 rounded-[10px] flex items-center justify-center transition-all duration-300 ${
+                    formData.isPublished
+                      ? "bg-emerald-500/10 shadow-sm shadow-emerald-500/10"
+                      : "bg-neutral-100"
                   }`}
                 >
                   <Icons.Globe
-                    className={`h-4 w-4 ${
+                    className={`h-4 w-4 transition-colors duration-300 ${
                       formData.isPublished
                         ? "text-emerald-600"
                         : "text-neutral-400"
@@ -360,9 +367,19 @@ export default function SettingsPage() {
                   />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-neutral-900">
-                    {formData.isPublished ? "Live" : "Not published"}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-medium text-neutral-900">
+                      {formData.isPublished ? "Live" : "Not published"}
+                    </p>
+                    {formData.isPublished && (
+                      <span className="flex items-center gap-1">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                        </span>
+                      </span>
+                    )}
+                  </div>
                   <p className="text-xs text-neutral-500 mt-0.5">
                     {formData.isPublished
                       ? "Your chatbot is publicly accessible"
@@ -376,8 +393,6 @@ export default function SettingsPage() {
                 disabled={!formData.slug}
                 variant="success"
                 size="md"
-                label=""
-                description=""
               />
             </div>
 
