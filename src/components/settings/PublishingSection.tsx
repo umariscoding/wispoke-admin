@@ -14,11 +14,15 @@ export default function PublishingSection({
   slug,
   onPublishToggle,
 }: PublishingSectionProps) {
-  const chatBaseUrl =
-    process.env.NEXT_PUBLIC_CHAT_URL ||
-    (typeof window !== "undefined" && window.location.hostname === "localhost"
-      ? "http://localhost:5173"
-      : "https://chatevo.vercel.app");
+  const isLocalhost =
+    typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1");
+
+  const CHAT_DOMAIN = "chatevo.vercel.app";
+  const chatBaseUrl = isLocalhost
+    ? "http://localhost:5173"
+    : `https://${CHAT_DOMAIN}`;
 
   const handleVisitPublicChatbot = () => {
     if (slug) {
@@ -28,38 +32,18 @@ export default function PublishingSection({
 
   const handleVisitSubdomain = () => {
     if (slug) {
-      const url = new URL(chatBaseUrl);
-      const hostname = url.hostname;
-      const port = url.port ? `:${url.port}` : "";
-      const protocol = url.protocol;
-
-      let subdomainUrl;
-      if (hostname === "localhost" || hostname === "127.0.0.1") {
-        subdomainUrl = `${protocol}//${slug}.localhost${port}`;
-      } else {
-        const domainParts = hostname.split(".");
-        const baseDomain =
-          domainParts.length >= 2 ? domainParts.slice(-2).join(".") : hostname;
-        subdomainUrl = `${protocol}//${slug}.${baseDomain}${port}`;
-      }
+      const subdomainUrl = isLocalhost
+        ? `http://${slug}.localhost:5173`
+        : `https://${slug}.${CHAT_DOMAIN}`;
       window.open(subdomainUrl, "_blank");
     }
   };
 
   const getSubdomainUrl = () => {
     if (!slug) return "Loading...";
-    const url = new URL(chatBaseUrl);
-    const hostname = url.hostname;
-    const port = url.port ? `:${url.port}` : "";
-
-    if (hostname === "localhost" || hostname === "127.0.0.1") {
-      return `${slug}.localhost${port}`;
-    } else {
-      const domainParts = hostname.split(".");
-      const baseDomain =
-        domainParts.length >= 2 ? domainParts.slice(-2).join(".") : hostname;
-      return `${slug}.${baseDomain}${port}`;
-    }
+    return isLocalhost
+      ? `${slug}.localhost:5173`
+      : `${slug}.${CHAT_DOMAIN}`;
   };
 
   return (
