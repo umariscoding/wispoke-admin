@@ -40,6 +40,22 @@ const MODEL_OPTIONS = [
     tag: "Recommended",
   },
   {
+    id: "GPT-OSS-20B",
+    name: "GPT-OSS 20B",
+    provider: "Groq",
+    desc: "Fastest production model on Groq",
+    speed: "~1000 tok/s",
+    tag: null,
+  },
+  {
+    id: "GPT-OSS-120B",
+    name: "GPT-OSS 120B",
+    provider: "Groq",
+    desc: "OpenAI open weights, strong reasoning",
+    speed: "~500 tok/s",
+    tag: null,
+  },
+  {
     id: "OpenAI",
     name: "GPT-4o Mini",
     provider: "OpenAI",
