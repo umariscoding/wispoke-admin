@@ -273,6 +273,42 @@ export default function WidgetPreview({
     }
   };
 
+  // Lightweight markdown → HTML (matches embed.js renderMarkdown exactly)
+  const renderMarkdown = useCallback((text: string): string => {
+    // Escape HTML
+    const div = document.createElement("div");
+    div.textContent = text;
+    let html = div.innerHTML;
+
+    // Code blocks
+    html = html.replace(/```(\w*)\n?([\s\S]*?)```/g, (_m: string, _l: string, code: string) =>
+      `<pre style="background:${colors.bgInput};padding:10px 12px;border-radius:8px;overflow-x:auto;margin:6px 0;font-size:13px;line-height:1.5;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;word-break:break-word"><code>${code.trim()}</code></pre>`
+    );
+    // Inline code
+    html = html.replace(/`([^`]+)`/g, `<code style="background:${colors.bgInput};padding:1px 5px;border-radius:4px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace">$1</code>`);
+    // Bold
+    html = html.replace(/\*\*(.+?)\*\*/g, `<strong style="font-weight:600;color:${colors.text}">$1</strong>`);
+    // Italic
+    html = html.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, "<em>$1</em>");
+    // Headings → bold
+    html = html.replace(/^#{1,6}\s+(.+)$/gm, `<strong style="font-weight:600;color:${colors.text}">$1</strong>`);
+    // Unordered lists
+    html = html.replace(/^[*-]\s+(.+)$/gm, '<li style="margin-bottom:2px;line-height:1.5">$1</li>');
+    html = html.replace(/((?:<li[^>]*>.*?<\/li>\s*)+)/g, '<ul style="margin:4px 0;padding:0 0 0 20px;list-style:disc">$1</ul>');
+    // Ordered lists
+    html = html.replace(/^\d+\.\s+(.+)$/gm, '<li style="margin-bottom:2px;line-height:1.5">$1</li>');
+    html = html.replace(/(?<!<\/ul>)\s*((?:<li[^>]*>.*?<\/li>\s*)+)/g, '<ol style="margin:4px 0;padding:0 0 0 20px;list-style:decimal">$1</ol>');
+    // Line breaks
+    html = html.replace(/\n/g, "<br>");
+    html = html.replace(/<br>\s*(<\/?(?:ul|ol|li|pre))/g, "$1");
+    html = html.replace(/(<\/(?:ul|ol|pre)>)\s*<br>/g, "$1");
+    return html;
+  }, [colors]);
+
+  const BotMarkdown = ({ content }: { content: string }) => (
+    <span dangerouslySetInnerHTML={{ __html: renderMarkdown(content) }} />
+  );
+
   const showWelcome = messages.length === 0;
 
   // Template-specific styles
@@ -283,7 +319,6 @@ export default function WidgetPreview({
       height: 600,
       maxHeight: "calc(100% - 100px)",
       background: colors.bg,
-      border: `1px solid ${colors.border}`,
       boxShadow: `0 20px 50px rgba(0,0,0,${theme === "light" ? 0.15 : 0.5})`,
       bottom: 88,
       [position === "left" ? "left" : "right"]: 20,
@@ -307,7 +342,6 @@ export default function WidgetPreview({
       return {
         padding: "20px 16px",
         background: resolvedHeaderColor,
-        borderRadius: "24px 24px 0 0",
       };
     }
     if (chatTemplate === "minimal") {
@@ -315,13 +349,11 @@ export default function WidgetPreview({
         padding: "14px 16px",
         background: colors.bg,
         borderBottom: `1px solid ${colors.border}`,
-        borderRadius: "8px 8px 0 0",
       };
     }
     return {
       padding: 16,
       background: resolvedHeaderColor,
-      borderRadius: "16px 16px 0 0",
     };
   };
 
@@ -536,11 +568,10 @@ export default function WidgetPreview({
               padding: "10px 16px",
               fontSize: 14,
               lineHeight: 1.5,
-              whiteSpace: "pre-wrap",
               wordBreak: "break-word",
             }}
           >
-            {msg.content}
+            <BotMarkdown content={msg.content} />
             {streamCursor}
           </div>
         </div>
@@ -574,11 +605,10 @@ export default function WidgetPreview({
               padding: "6px 0",
               fontSize: 13,
               lineHeight: 1.6,
-              whiteSpace: "pre-wrap",
               wordBreak: "break-word",
             }}
           >
-            {msg.content}
+            <BotMarkdown content={msg.content} />
             {streamCursor}
           </div>
         </div>
@@ -611,11 +641,10 @@ export default function WidgetPreview({
             color: colors.textSecondary,
             padding: "4px 0",
             lineHeight: 1.6,
-            whiteSpace: "pre-wrap",
             wordBreak: "break-word",
           }}
         >
-          {msg.content}
+          <BotMarkdown content={msg.content} />
           {streamCursor}
         </div>
       </div>
