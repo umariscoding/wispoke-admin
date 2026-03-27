@@ -27,7 +27,6 @@ export default function WidgetPreview({
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [chatId, setChatId] = useState<string | null>(null);
-  const [hasShownInitial, setHasShownInitial] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -39,11 +38,11 @@ export default function WidgetPreview({
     welcomeText,
     subtitleText,
     placeholderText,
-    initialMessage,
+    showHeaderSubtitle,
     hideBranding,
     buttonIcon,
-    botDisplayName,
     chatTemplate,
+    suggestedMessages,
   } = settings;
 
   const resolvedHeaderColor = headerColor || primaryColor;
@@ -79,39 +78,14 @@ export default function WidgetPreview({
     theme === "light" ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.08)";
 
   const title = chatbotTitle || companyName || "Chat Assistant";
-  const avatarInitial = botDisplayName
-    ? botDisplayName.charAt(0).toUpperCase()
-    : "";
-
-  // Show initial message on first open
-  useEffect(() => {
-    if (isOpen && !hasShownInitial && initialMessage) {
-      setHasShownInitial(true);
-      setMessages([{ role: "bot", content: initialMessage }]);
-    }
-  }, [isOpen, hasShownInitial, initialMessage]);
-
-  // Update initial message in real-time when it changes
-  useEffect(() => {
-    if (!initialMessage) {
-      setHasShownInitial(false);
-      // If there's only the initial bot message, clear it
-      if (messages.length === 1 && messages[0]?.role === "bot") {
-        setMessages([]);
-      }
-    } else if (hasShownInitial && messages.length === 1 && messages[0]?.role === "bot") {
-      // Update existing initial message in real-time
-      setMessages([{ role: "bot", content: initialMessage }]);
-    }
-  }, [initialMessage]);
 
   // Scroll to bottom only when a new message is added (not on streaming content updates)
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages.length]);
 
-  const sendMessage = useCallback(async () => {
-    const msg = inputValue.trim();
+  const sendMessage = useCallback(async (directMessage?: string) => {
+    const msg = (directMessage || inputValue).trim();
     if (!msg || isLoading || !companySlug) return;
 
     setInputValue("");
@@ -193,22 +167,7 @@ export default function WidgetPreview({
     }
   };
 
-  const BotAvatar = () =>
-    botDisplayName ? (
-      <div
-        className="flex-shrink-0 flex items-center justify-center rounded-full"
-        style={{
-          width: chatTemplate === "bubbles" ? 32 : 28,
-          height: chatTemplate === "bubbles" ? 32 : 28,
-          background: primaryColor,
-          fontSize: chatTemplate === "bubbles" ? 14 : 13,
-          fontWeight: 600,
-          color: "white",
-        }}
-      >
-        {avatarInitial}
-      </div>
-    ) : null;
+  const BotAvatar = () => null;
 
   const ButtonIconSvg = () => {
     const props = {
@@ -388,28 +347,15 @@ export default function WidgetPreview({
           style={getHeaderStyles()}
         >
           <div className="flex items-center gap-2.5">
-            {botDisplayName && (
-              <div
-                className="flex items-center justify-center rounded-md"
-                style={{
-                  width: 28,
-                  height: 28,
-                  background: primaryColor,
-                  fontSize: 12,
-                  fontWeight: 600,
-                  color: "white",
-                }}
-              >
-                {avatarInitial}
-              </div>
-            )}
             <div>
               <div style={{ fontSize: 14, fontWeight: 600, color: colors.text }}>
                 {title}
               </div>
-              <div style={{ fontSize: 11, color: colors.textMuted, marginTop: 1 }}>
-                {subtitleText}
-              </div>
+              {showHeaderSubtitle && subtitleText && (
+                <div style={{ fontSize: 11, color: colors.textMuted, marginTop: 1 }}>
+                  {subtitleText}
+                </div>
+              )}
             </div>
           </div>
           <button
@@ -441,28 +387,15 @@ export default function WidgetPreview({
           style={getHeaderStyles()}
         >
           <div className="flex items-center gap-3">
-            {botDisplayName && (
-              <div
-                className="flex items-center justify-center rounded-full"
-                style={{
-                  width: 36,
-                  height: 36,
-                  background: "rgba(255,255,255,0.2)",
-                  fontSize: 15,
-                  fontWeight: 600,
-                  color: "white",
-                }}
-              >
-                {avatarInitial}
-              </div>
-            )}
             <div>
               <div style={{ fontSize: 16, fontWeight: 600, color: "#ffffff" }}>
                 {title}
               </div>
-              <div style={{ fontSize: 12, color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
-                {subtitleText}
-              </div>
+              {showHeaderSubtitle && subtitleText && (
+                <div style={{ fontSize: 12, color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
+                  {subtitleText}
+                </div>
+              )}
             </div>
           </div>
           <button
@@ -497,9 +430,11 @@ export default function WidgetPreview({
           <div style={{ fontSize: 16, fontWeight: 500, color: "#ffffff" }}>
             {title}
           </div>
-          <div style={{ fontSize: 12, color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
-            {subtitleText}
-          </div>
+          {showHeaderSubtitle && subtitleText && (
+            <div style={{ fontSize: 12, color: "rgba(255, 255, 255, 0.7)", marginTop: 2 }}>
+              {subtitleText}
+            </div>
+          )}
         </div>
         <button
           onClick={() => setIsOpen(false)}
@@ -651,60 +586,66 @@ export default function WidgetPreview({
     );
   };
 
-  const renderWelcome = () => {
-    if (chatTemplate === "bubbles") {
-      return (
-        <div className="flex-1 flex flex-col items-center justify-center text-center p-6">
-          {botDisplayName && (
-            <div
-              className="flex items-center justify-center rounded-full"
-              style={{
-                width: 48,
-                height: 48,
-                background: primaryColor,
-                fontSize: 20,
-                fontWeight: 600,
-                color: "white",
-                marginBottom: 12,
-              }}
-            >
-              {avatarInitial}
-            </div>
-          )}
-          <div style={{ fontSize: 16, fontWeight: 500, color: colors.text, marginBottom: 4 }}>
-            {welcomeText}
-          </div>
-          <div style={{ fontSize: 13, color: colors.textMuted }}>
-            Ask us anything
-          </div>
-        </div>
-      );
-    }
+  const isBubbles = chatTemplate === "bubbles";
+  const isMinimal = chatTemplate === "minimal";
+  const filteredSuggestions = (suggestedMessages ?? []).filter((s) => s.trim().length > 0);
+  const suggestionBorder = theme === "light" ? "#d4d4d8" : "#3f3f46";
 
-    if (chatTemplate === "minimal") {
-      return (
-        <div className="flex-1 flex flex-col justify-center p-5">
-          <div style={{ fontSize: 14, color: colors.textSecondary, marginBottom: 4 }}>
-            {welcomeText}
-          </div>
-          <div style={{ fontSize: 12, color: colors.textMuted }}>
-            Ask us anything
-          </div>
-        </div>
-      );
-    }
-
+  const renderSuggestions = () => {
+    if (filteredSuggestions.length === 0) return null;
     return (
-      <div className="flex-1 flex flex-col items-center justify-center text-center p-5">
-        <div style={{ fontSize: 15, fontWeight: 400, color: colors.textSecondary, marginBottom: 4 }}>
-          {welcomeText}
-        </div>
-        <div style={{ fontSize: 13, color: colors.textMuted }}>
-          Ask us anything
-        </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start", padding: "12px 0" }}>
+        {filteredSuggestions.map((msg, i) => (
+          <button
+            key={i}
+            onClick={() => sendMessage(msg)}
+            style={{
+              padding: "8px 14px",
+              fontSize: 13,
+              borderRadius: 10,
+              border: `1.5px solid ${suggestionBorder}`,
+              background: "transparent",
+              color: colors.text,
+              cursor: "pointer",
+              textAlign: "left",
+              transition: "all 0.15s",
+              fontFamily: "inherit",
+              lineHeight: 1.4,
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = primaryColor; e.currentTarget.style.color = primaryColor; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = suggestionBorder; e.currentTarget.style.color = colors.text; }}
+          >
+            {msg}
+          </button>
+        ))}
       </div>
     );
   };
+
+  const renderWelcome = () => {
+    const hasSuggestions = filteredSuggestions.length > 0;
+    const centerStyle: React.CSSProperties = !hasSuggestions
+      ? { flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }
+      : {};
+
+    return (
+      <div className="flex-1 flex flex-col" style={{ padding: isBubbles ? 24 : 20 }}>
+        <div style={centerStyle}>
+          {welcomeText && (
+            <div style={{ fontSize: isMinimal ? 14 : 15, fontWeight: isBubbles ? 500 : 400, color: isBubbles ? colors.text : colors.textSecondary, marginBottom: 4 }}>
+              {welcomeText}
+            </div>
+          )}
+          {subtitleText && (
+            <div style={{ fontSize: isMinimal ? 12 : 13, color: colors.textMuted, marginBottom: 4 }}>{subtitleText}</div>
+          )}
+        </div>
+        {renderSuggestions()}
+      </div>
+    );
+  };
+
+  // isBubbles / isMinimal moved above renderWelcome
 
   const renderSendButton = () => {
     const disabled = !inputValue.trim() || isLoading;
@@ -712,7 +653,7 @@ export default function WidgetPreview({
     if (chatTemplate === "bubbles") {
       return (
         <button
-          onClick={sendMessage}
+          onClick={() => sendMessage()}
           disabled={disabled}
           className="flex items-center justify-center flex-shrink-0"
           style={{
@@ -737,7 +678,7 @@ export default function WidgetPreview({
     if (chatTemplate === "minimal") {
       return (
         <button
-          onClick={sendMessage}
+          onClick={() => sendMessage()}
           disabled={disabled}
           className="flex items-center justify-center flex-shrink-0"
           style={{
@@ -763,7 +704,7 @@ export default function WidgetPreview({
     // Default
     return (
       <button
-        onClick={sendMessage}
+        onClick={() => sendMessage()}
         disabled={disabled}
         className="flex items-center justify-center flex-shrink-0"
         style={{
@@ -879,6 +820,7 @@ export default function WidgetPreview({
                   </div>
                 </div>
               )}
+              {!messages.some((m) => m.role === "user") && renderSuggestions()}
               <div ref={messagesEndRef} />
             </>
           )}

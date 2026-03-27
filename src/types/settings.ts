@@ -34,12 +34,12 @@ export interface EmbedSettings {
   welcomeText: string;
   subtitleText: string;
   placeholderText: string;
-  initialMessage: string;
+  showHeaderSubtitle: boolean;
   hideBranding: boolean;
   autoOpenDelay: number; // 0 = disabled, otherwise seconds
   buttonIcon: ButtonIconType;
-  botDisplayName: string;
   chatTemplate: ChatTemplateType;
+  suggestedMessages: string[];
 }
 
 export const DEFAULT_EMBED_SETTINGS: EmbedSettings = {
@@ -50,10 +50,10 @@ export const DEFAULT_EMBED_SETTINGS: EmbedSettings = {
   welcomeText: "Hi there! How can we help you today?",
   subtitleText: "We typically reply instantly",
   placeholderText: "Type your message...",
-  initialMessage: "",
+  showHeaderSubtitle: true,
   hideBranding: false,
   autoOpenDelay: 0,
   buttonIcon: "chat",
-  botDisplayName: "",
   chatTemplate: "default",
+  suggestedMessages: [],
 };

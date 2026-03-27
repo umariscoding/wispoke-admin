@@ -392,6 +392,15 @@ export default function EmbedPage() {
                   className="mt-1.5 w-full rounded-lg border border-neutral-200 bg-white text-neutral-900 placeholder-neutral-400 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all"
                   placeholder="We typically reply instantly"
                 />
+                <label className="flex items-center gap-2 mt-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={settings.showHeaderSubtitle}
+                    onChange={(e) => updateSetting("showHeaderSubtitle", e.target.checked)}
+                    className="rounded border-neutral-300 text-primary-600 focus:ring-primary-500/20"
+                  />
+                  <span className="text-xs text-neutral-500">Show in header</span>
+                </label>
               </div>
 
               <div>
@@ -409,31 +418,47 @@ export default function EmbedPage() {
 
               <div>
                 <label className="text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                  Bot Display Name
+                  Suggested Messages
                 </label>
-                <input
-                  type="text"
-                  value={settings.botDisplayName}
-                  onChange={(e) => updateSetting("botDisplayName", e.target.value)}
-                  className="mt-1.5 w-full rounded-lg border border-neutral-200 bg-white text-neutral-900 placeholder-neutral-400 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all"
-                  placeholder="e.g. Ava, Luna, Max"
-                />
-                <p className="text-xs text-neutral-400 mt-1.5">
-                  Shows an avatar with the first letter next to bot messages
+                <p className="text-xs text-neutral-400 mt-0.5 mb-2">
+                  Quick-reply buttons shown to the user before they type
                 </p>
-              </div>
-
-              <div>
-                <label className="text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                  Initial Bot Message
-                </label>
-                <textarea
-                  value={settings.initialMessage}
-                  onChange={(e) => updateSetting("initialMessage", e.target.value)}
-                  className="mt-1.5 w-full rounded-lg border border-neutral-200 bg-white text-neutral-900 placeholder-neutral-400 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 resize-none transition-all"
-                  placeholder="Sent automatically when the user opens the chat"
-                  rows={2}
-                />
+                <div className="space-y-2">
+                  {(settings.suggestedMessages || []).map((msg, idx) => (
+                    <div key={idx} className="flex gap-2">
+                      <input
+                        value={msg}
+                        onChange={(e) => {
+                          const updated = [...(settings.suggestedMessages || [])];
+                          updated[idx] = e.target.value;
+                          updateSetting("suggestedMessages", updated);
+                        }}
+                        className="flex-1 rounded-lg border border-neutral-200 bg-white text-neutral-900 placeholder-neutral-400 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all"
+                        placeholder={`e.g. What are your pricing plans?`}
+                      />
+                      <button
+                        onClick={() => {
+                          const updated = (settings.suggestedMessages || []).filter((_, i) => i !== idx);
+                          updateSetting("suggestedMessages", updated);
+                        }}
+                        className="flex-shrink-0 w-9 h-9 rounded-lg border border-neutral-200 flex items-center justify-center text-neutral-400 hover:text-red-500 hover:border-red-200 transition-colors"
+                      >
+                        <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      </button>
+                    </div>
+                  ))}
+                  {(settings.suggestedMessages || []).length < 6 && (
+                    <button
+                      onClick={() => {
+                        const updated = [...(settings.suggestedMessages || []), ""];
+                        updateSetting("suggestedMessages", updated);
+                      }}
+                      className="w-full rounded-lg border border-dashed border-neutral-300 py-2 text-xs text-neutral-500 hover:text-primary-600 hover:border-primary-300 transition-colors"
+                    >
+                      + Add suggested message
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
 

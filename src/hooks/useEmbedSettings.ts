@@ -35,13 +35,13 @@ export function useEmbedSettings(): UseEmbedSettingsReturn {
             welcomeText: data.welcomeText || DEFAULT_EMBED_SETTINGS.welcomeText,
             subtitleText: data.subtitleText || DEFAULT_EMBED_SETTINGS.subtitleText,
             placeholderText: data.placeholderText ?? DEFAULT_EMBED_SETTINGS.placeholderText,
-            initialMessage: data.initialMessage ?? DEFAULT_EMBED_SETTINGS.initialMessage,
+            showHeaderSubtitle: data.showHeaderSubtitle ?? DEFAULT_EMBED_SETTINGS.showHeaderSubtitle,
             hideBranding: data.hideBranding ?? DEFAULT_EMBED_SETTINGS.hideBranding,
             autoOpenDelay: data.autoOpenDelay ?? DEFAULT_EMBED_SETTINGS.autoOpenDelay,
             headerColor: data.headerColor ?? DEFAULT_EMBED_SETTINGS.headerColor,
             buttonIcon: data.buttonIcon || DEFAULT_EMBED_SETTINGS.buttonIcon,
-            botDisplayName: data.botDisplayName ?? DEFAULT_EMBED_SETTINGS.botDisplayName,
             chatTemplate: data.chatTemplate || DEFAULT_EMBED_SETTINGS.chatTemplate,
+            suggestedMessages: data.suggestedMessages ?? DEFAULT_EMBED_SETTINGS.suggestedMessages,
           });
         }
       } catch (err) {
@@ -68,12 +68,12 @@ export function useEmbedSettings(): UseEmbedSettingsReturn {
         welcomeText: newSettings.welcomeText,
         subtitleText: newSettings.subtitleText,
         placeholderText: newSettings.placeholderText,
-        initialMessage: newSettings.initialMessage,
+        showHeaderSubtitle: newSettings.showHeaderSubtitle,
         hideBranding: newSettings.hideBranding,
         autoOpenDelay: newSettings.autoOpenDelay,
         buttonIcon: newSettings.buttonIcon,
-        botDisplayName: newSettings.botDisplayName,
         chatTemplate: newSettings.chatTemplate,
+        suggestedMessages: newSettings.suggestedMessages,
       });
     } catch (err) {
       console.error("Failed to save embed settings:", err);
