@@ -8,6 +8,18 @@ import { Icons, IOSContentLoader } from "@/components/ui";
 import IOSLoader from "@/components/ui/IOSLoader";
 import { API_CONFIG } from "@/constants/api";
 import WidgetPreview from "./WidgetPreview";
+import {
+  MessageCircle,
+  Mail,
+  Headphones,
+  Sparkles,
+  Zap,
+  HelpCircle,
+  Bot,
+  Wand2,
+  Phone,
+  MessagesSquare,
+} from "lucide-react";
 import type { ButtonIconType, ChatTemplateType } from "@/types/settings";
 
 const COLOR_PRESETS = [
@@ -30,14 +42,17 @@ const HEADER_COLOR_PRESETS = [
   { name: "Plum", value: "#4a1942" },
 ];
 
-const BUTTON_ICON_DEFS: { value: ButtonIconType; label: string; paths: React.ReactNode }[] = [
-  { value: "chat", label: "Chat", paths: <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /> },
-  { value: "message", label: "Mail", paths: <><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></> },
-  { value: "headset", label: "Support", paths: <><path d="M3 18v-6a9 9 0 0 1 18 0v6" /><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" /></> },
-  { value: "sparkle", label: "Sparkle", paths: <path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z" /> },
-  { value: "bolt", label: "Bolt", paths: <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /> },
-  { value: "help", label: "Help", paths: <><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><line x1="12" y1="17" x2="12.01" y2="17" /></> },
-  { value: "robot", label: "Robot", paths: <><rect x="3" y="11" width="18" height="10" rx="2" /><circle cx="12" cy="5" r="2" /><path d="M12 7v4" /><line x1="8" y1="16" x2="8" y2="16" /><line x1="16" y1="16" x2="16" y2="16" /></> },
+const BUTTON_ICON_DEFS: { value: ButtonIconType; label: string; icon: React.ElementType }[] = [
+  { value: "chat", label: "Chat", icon: MessageCircle },
+  { value: "message", label: "Mail", icon: Mail },
+  { value: "headset", label: "Support", icon: Headphones },
+  { value: "sparkle", label: "Sparkle", icon: Sparkles },
+  { value: "bolt", label: "Bolt", icon: Zap },
+  { value: "help", label: "Help", icon: HelpCircle },
+  { value: "robot", label: "Robot", icon: Bot },
+  { value: "wand", label: "AI Wand", icon: Wand2 },
+  { value: "phone", label: "Phone", icon: Phone },
+  { value: "bubble", label: "Bubble", icon: MessagesSquare },
 ];
 
 function SetupRequiredBanner({
@@ -633,8 +648,8 @@ export default function EmbedPage() {
             </div>
 
             {/* Behavior */}
-            <div className="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-100">
-              <div className="p-5">
+            <div className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
+              <div className="p-5 border-b border-neutral-100">
                 <p className="text-sm font-semibold text-neutral-900">Behavior</p>
                 <p className="text-xs text-neutral-500 mt-0.5">
                   Button style and branding
@@ -642,62 +657,43 @@ export default function EmbedPage() {
               </div>
 
               {/* Button Icon */}
-              <div className="p-5">
-                <label className="text-xs font-medium text-neutral-400 uppercase tracking-wider">
+              <div className="p-5 space-y-4">
+                <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
                   Launcher Icon
                 </label>
-                {/* Preview of selected icon on contrasting surface */}
-                <div
-                  className="mt-2.5 mb-3 flex items-center justify-center rounded-lg py-4"
-                  style={{
-                    background: settings.theme === "light"
-                      ? "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)"
-                      : "linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)",
-                  }}
-                >
-                  <div
-                    className="flex items-center justify-center transition-all"
-                    style={{
-                      width: 52,
-                      height: 52,
-                      borderRadius: settings.chatTemplate === "minimal" ? 12 : "50%",
-                      background: settings.primaryColor,
-                      boxShadow: `0 4px 16px ${settings.primaryColor}40`,
-                    }}
-                  >
-                    <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      {BUTTON_ICON_DEFS.find((d) => d.value === settings.buttonIcon)?.paths}
-                    </svg>
-                  </div>
-                </div>
-                {/* Icon grid — flat selection, no colored circles */}
-                <div className="grid grid-cols-7 gap-1">
+
+                {/* Icon grid — 5 per row, 2 rows */}
+                <div className="grid grid-cols-5 gap-1.5">
                   {BUTTON_ICON_DEFS.map((opt) => {
                     const isActive = settings.buttonIcon === opt.value;
                     return (
                       <button
                         key={opt.value}
                         onClick={() => updateSetting("buttonIcon", opt.value)}
-                        className={`flex flex-col items-center gap-1 py-1.5 px-1 rounded-lg transition-all ${
+                        className={`group flex flex-col items-center gap-1.5 py-2.5 px-1 rounded-xl border transition-all duration-150 ${
                           isActive
-                            ? "bg-primary-50 ring-1 ring-primary-400"
-                            : "hover:bg-neutral-50"
+                            ? "bg-primary-50 border-primary-300 shadow-sm shadow-primary-500/10"
+                            : "border-transparent hover:border-neutral-200 hover:bg-neutral-50"
                         }`}
                       >
-                        <svg
-                          className={`w-4 h-4 transition-colors ${
-                            isActive ? "text-primary-600" : "text-neutral-400"
+                        <div
+                          className={`w-9 h-9 flex items-center justify-center transition-all ${
+                            settings.chatTemplate === "minimal" ? "rounded-lg" : "rounded-full"
+                          } ${
+                            isActive
+                              ? "bg-primary-600 shadow-md shadow-primary-600/25"
+                              : "bg-neutral-100 group-hover:bg-neutral-200"
                           }`}
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
                         >
-                          {opt.paths}
-                        </svg>
+                          <opt.icon
+                            className={`w-[18px] h-[18px] transition-colors ${
+                              isActive ? "text-white" : "text-neutral-500 group-hover:text-neutral-700"
+                            }`}
+                          />
+                        </div>
                         <span
-                          className={`text-[9px] font-medium leading-none ${
-                            isActive ? "text-primary-600" : "text-neutral-400"
+                          className={`text-[10px] font-semibold leading-none transition-colors ${
+                            isActive ? "text-primary-700" : "text-neutral-400 group-hover:text-neutral-600"
                           }`}
                         >
                           {opt.label}
@@ -706,27 +702,113 @@ export default function EmbedPage() {
                     );
                   })}
                 </div>
+
+                {/* Site mockup preview */}
+                <div className="relative rounded-xl overflow-hidden border border-neutral-200">
+                  {/* Mini browser chrome */}
+                  <div className="flex items-center gap-1.5 px-3 py-2 bg-neutral-100 border-b border-neutral-200">
+                    <div className="flex gap-1">
+                      <div className="w-2 h-2 rounded-full bg-neutral-300" />
+                      <div className="w-2 h-2 rounded-full bg-neutral-300" />
+                      <div className="w-2 h-2 rounded-full bg-neutral-300" />
+                    </div>
+                    <div className="flex-1 mx-2 h-4 rounded-md bg-white border border-neutral-200 flex items-center px-2">
+                      <span className="text-[8px] text-neutral-400 font-mono">yourwebsite.com</span>
+                    </div>
+                  </div>
+
+                  {/* Page body */}
+                  <div
+                    className="relative h-36"
+                    style={{
+                      background: settings.theme === "light"
+                        ? "#ffffff"
+                        : "#111114",
+                    }}
+                  >
+                    {/* Fake page content lines */}
+                    <div className="p-4 space-y-2.5">
+                      <div
+                        className="h-3 rounded-full w-2/3"
+                        style={{ background: settings.theme === "light" ? "#e5e7eb" : "#27272a" }}
+                      />
+                      <div
+                        className="h-2 rounded-full w-full"
+                        style={{ background: settings.theme === "light" ? "#f3f4f6" : "#1e1e21" }}
+                      />
+                      <div
+                        className="h-2 rounded-full w-5/6"
+                        style={{ background: settings.theme === "light" ? "#f3f4f6" : "#1e1e21" }}
+                      />
+                      <div
+                        className="h-2 rounded-full w-3/4"
+                        style={{ background: settings.theme === "light" ? "#f3f4f6" : "#1e1e21" }}
+                      />
+                      <div className="pt-1 flex gap-2">
+                        <div
+                          className="h-6 rounded-md w-16"
+                          style={{ background: settings.theme === "light" ? "#e5e7eb" : "#27272a" }}
+                        />
+                        <div
+                          className="h-6 rounded-md w-20"
+                          style={{ background: settings.theme === "light" ? "#f3f4f6" : "#1e1e21" }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Floating launcher button — positioned in corner */}
+                    <div
+                      className={`absolute bottom-3 ${settings.position === "right" ? "right-3" : "left-3"} transition-all`}
+                    >
+                      {/* Pulse ring */}
+                      <div
+                        className="absolute inset-0 rounded-full animate-ping opacity-20"
+                        style={{ background: settings.primaryColor }}
+                      />
+                      <div
+                        className="relative flex items-center justify-center transition-all"
+                        style={{
+                          width: 44,
+                          height: 44,
+                          borderRadius: settings.chatTemplate === "minimal" ? 12 : "50%",
+                          background: settings.primaryColor,
+                          boxShadow: `0 4px 16px ${settings.primaryColor}45, 0 1px 3px rgba(0,0,0,0.1)`,
+                        }}
+                      >
+                        {(() => {
+                          const IconComp = BUTTON_ICON_DEFS.find((d) => d.value === settings.buttonIcon)?.icon || MessageCircle;
+                          return <IconComp className="w-5 h-5 text-white" />;
+                        })()}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Hide Branding */}
-              <div className="p-5 flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-neutral-900">
-                    {settings.hideBranding ? "Branding hidden" : "Branding visible"}
-                  </p>
-                  <p className="text-xs text-neutral-500 mt-0.5">
-                    &quot;Powered by ChatEvo&quot; footer
-                  </p>
+              <div className="mx-5 mb-5 flex items-center justify-between rounded-xl border border-neutral-200 px-4 py-3.5">
+                <div className="flex items-center gap-3">
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${settings.hideBranding ? "bg-primary-50" : "bg-neutral-100"}`}>
+                    <Icons.Eye className={`h-4 w-4 ${settings.hideBranding ? "text-primary-600" : "text-neutral-400"}`} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-neutral-900">
+                      {settings.hideBranding ? "Branding hidden" : "Show branding"}
+                    </p>
+                    <p className="text-[11px] text-neutral-400 mt-0.5">
+                      &quot;Powered by ChatEvo&quot; footer
+                    </p>
+                  </div>
                 </div>
                 <button
                   onClick={() => updateSetting("hideBranding", !settings.hideBranding)}
-                  className={`relative rounded-full transition-colors ${
+                  className={`relative rounded-full transition-colors duration-200 ${
                     settings.hideBranding ? "bg-primary-500" : "bg-neutral-300"
                   }`}
                   style={{ minWidth: 44, height: 24 }}
                 >
                   <span
-                    className={`absolute top-0.5 left-0.5 bg-white rounded-full shadow transition-transform ${
+                    className={`absolute top-0.5 left-0.5 bg-white rounded-full shadow-sm transition-transform duration-200 ${
                       settings.hideBranding ? "translate-x-5" : "translate-x-0"
                     }`}
                     style={{ width: 20, height: 20 }}

@@ -26,7 +26,7 @@ export interface SettingsChanges {
 }
 
 // Embed Widget Settings
-export type ButtonIconType = "chat" | "message" | "headset" | "sparkle" | "bolt" | "help" | "robot";
+export type ButtonIconType = "chat" | "message" | "headset" | "sparkle" | "bolt" | "help" | "robot" | "wand" | "phone" | "bubble";
 export type ChatTemplateType = "default" | "bubbles" | "minimal";
 
 export interface EmbedSettings {

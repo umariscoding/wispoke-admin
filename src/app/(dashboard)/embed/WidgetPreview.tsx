@@ -1,8 +1,34 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import type { EmbedSettings } from "@/types/settings";
+import {
+  MessageCircle,
+  Mail,
+  Headphones,
+  Sparkles,
+  Zap,
+  HelpCircle,
+  Bot,
+  Wand2,
+  Phone,
+  MessagesSquare,
+  X,
+} from "lucide-react";
+import type { EmbedSettings, ButtonIconType } from "@/types/settings";
 import { API_CONFIG } from "@/constants/api";
+
+const BUTTON_ICON_MAP: Record<ButtonIconType, React.ElementType> = {
+  chat: MessageCircle,
+  message: Mail,
+  headset: Headphones,
+  sparkle: Sparkles,
+  bolt: Zap,
+  help: HelpCircle,
+  robot: Bot,
+  wand: Wand2,
+  phone: Phone,
+  bubble: MessagesSquare,
+};
 
 interface WidgetPreviewProps {
   settings: EmbedSettings;
@@ -170,66 +196,8 @@ export default function WidgetPreview({
   const BotAvatar = () => null;
 
   const ButtonIconSvg = () => {
-    const props = {
-      width: 24,
-      height: 24,
-      viewBox: "0 0 24 24",
-      fill: "none",
-      stroke: "white",
-      strokeWidth: 2,
-    };
-    switch (buttonIcon) {
-      case "message":
-        return (
-          <svg {...props}>
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-            <polyline points="22,6 12,13 2,6" />
-          </svg>
-        );
-      case "headset":
-        return (
-          <svg {...props}>
-            <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
-            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
-          </svg>
-        );
-      case "sparkle":
-        return (
-          <svg {...props}>
-            <path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z" />
-          </svg>
-        );
-      case "bolt":
-        return (
-          <svg {...props}>
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-          </svg>
-        );
-      case "help":
-        return (
-          <svg {...props}>
-            <circle cx="12" cy="12" r="10" />
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-            <line x1="12" y1="17" x2="12.01" y2="17" />
-          </svg>
-        );
-      case "robot":
-        return (
-          <svg {...props}>
-            <rect x="3" y="11" width="18" height="10" rx="2" />
-            <circle cx="12" cy="5" r="2" />
-            <path d="M12 7v4" />
-            <line x1="8" y1="16" x2="8" y2="16" />
-            <line x1="16" y1="16" x2="16" y2="16" />
-          </svg>
-        );
-      default:
-        return (
-          <svg {...props}>
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
-        );
-    }
+    const IconComp = BUTTON_ICON_MAP[buttonIcon] || MessageCircle;
+    return <IconComp size={24} color="white" strokeWidth={2} />;
   };
 
   // Lightweight markdown → HTML (matches embed.js renderMarkdown exactly)
@@ -774,14 +742,34 @@ export default function WidgetPreview({
           zIndex: 10,
         }}
       >
-        {isOpen ? (
-          <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={2}>
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        ) : (
+        {/* Chat icon — animates out when open */}
+        <span
+          style={{
+            position: "absolute",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            opacity: isOpen ? 0 : 1,
+            transform: isOpen ? "scale(0) rotate(90deg)" : "scale(1) rotate(0deg)",
+            transition: "opacity 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
+        >
           <ButtonIconSvg />
-        )}
+        </span>
+        {/* Close icon — animates in when open */}
+        <span
+          style={{
+            position: "absolute",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            opacity: isOpen ? 1 : 0,
+            transform: isOpen ? "scale(1) rotate(0deg)" : "scale(0) rotate(-90deg)",
+            transition: "opacity 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
+        >
+          <X size={24} color="white" strokeWidth={2} />
+        </span>
       </button>
 
       {/* Chat Modal */}

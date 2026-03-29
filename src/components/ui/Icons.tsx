@@ -51,6 +51,12 @@ import {
   Coffee,
   Award,
   Flame,
+  Mail,
+  Headphones,
+  HelpCircle,
+  Wand2,
+  Phone,
+  MessagesSquare,
 } from "lucide-react";
 
 // Icon component props interface
@@ -274,5 +280,29 @@ export const Icons = {
 
   Flame: ({ className = "h-5 w-5", size }: IconProps) => (
     <Flame className={className} size={size} />
+  ),
+
+  Mail: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Mail className={className} size={size} />
+  ),
+
+  Headphones: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Headphones className={className} size={size} />
+  ),
+
+  HelpCircle: ({ className = "h-5 w-5", size }: IconProps) => (
+    <HelpCircle className={className} size={size} />
+  ),
+
+  Wand: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Wand2 className={className} size={size} />
+  ),
+
+  Phone: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Phone className={className} size={size} />
+  ),
+
+  Bubble: ({ className = "h-5 w-5", size }: IconProps) => (
+    <MessagesSquare className={className} size={size} />
   ),
 };
