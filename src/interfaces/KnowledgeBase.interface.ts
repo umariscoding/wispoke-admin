@@ -26,4 +26,5 @@ export interface UploadModalProps {
   onTextUpload: (content: string, filename: string) => Promise<void>;
   loading?: boolean;
   uploadProgress?: number; // 0-100
+  isFileUploadDisabled?: boolean;
 }

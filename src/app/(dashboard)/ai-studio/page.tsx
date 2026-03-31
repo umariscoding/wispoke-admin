@@ -18,6 +18,9 @@ import { updateCompanyInfo } from "@/store/company/slices/companyAuthSlice";
 import { Icons, IOSContentLoader } from "@/components/ui";
 import IOSLoader from "@/components/ui/IOSLoader";
 import { useSettings } from "@/hooks/useSettings";
+import { usePlan } from "@/hooks/usePlan";
+import ProBadge from "@/components/billing/ProBadge";
+import UpgradeNudge from "@/components/billing/UpgradeNudge";
 import DocumentList from "@/components/knowledge-base/DocumentList";
 import UploadDrawer from "@/components/knowledge-base/UploadDrawer";
 
@@ -133,6 +136,8 @@ export default function AIStudioPage() {
   const { loading: settingsLoading, error } = useCompanyAppSelector(
     (state) => state.company,
   );
+
+  const { isFree } = usePlan();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
@@ -380,13 +385,18 @@ export default function AIStudioPage() {
         {/* === MODEL & TONE === */}
         {activeSection === "model" && (
           <div className="space-y-6">
+            {isFree && <UpgradeNudge feature="Model & Tone" />}
+
             {/* Model selection */}
             <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
-              <div className="px-5 py-4 border-b border-neutral-100">
-                <h2 className="text-sm font-semibold text-neutral-900">Language Model</h2>
-                <p className="text-xs text-neutral-500 mt-0.5">
-                  Choose the AI model that powers your chatbot
-                </p>
+              <div className="px-5 py-4 border-b border-neutral-100 flex items-center justify-between">
+                <div>
+                  <h2 className="text-sm font-semibold text-neutral-900">Language Model</h2>
+                  <p className="text-xs text-neutral-500 mt-0.5">
+                    Choose the AI model that powers your chatbot
+                  </p>
+                </div>
+                {isFree && <ProBadge />}
               </div>
               <div className="p-2 space-y-1">
                 {MODEL_OPTIONS.map((model) => {
@@ -394,15 +404,16 @@ export default function AIStudioPage() {
                   return (
                     <button
                       key={model.id}
-                      onClick={() => updateField("defaultModel", model.id)}
+                      aria-disabled={isFree}
+                      onClick={() => !isFree && updateField("defaultModel", model.id)}
                       className={`group w-full flex items-center gap-3.5 px-4 py-3 rounded-lg text-left transition-all duration-150 ${
                         isSelected
                           ? "bg-primary-50 ring-1 ring-primary-500/20"
                           : "hover:bg-neutral-50"
-                      }`}
+                      } ${isFree && !isSelected ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       <div className={`w-[18px] h-[18px] rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
-                        isSelected ? "border-primary-600 bg-primary-600" : "border-neutral-300 group-hover:border-neutral-400"
+                        isSelected ? "border-primary-600 bg-primary-600" : "border-neutral-300"
                       }`}>
                         {isSelected && <div className="w-[7px] h-[7px] rounded-full bg-white" />}
                       </div>
@@ -435,11 +446,14 @@ export default function AIStudioPage() {
 
             {/* Tone selection */}
             <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
-              <div className="px-5 py-4 border-b border-neutral-100">
-                <h2 className="text-sm font-semibold text-neutral-900">Tone</h2>
-                <p className="text-xs text-neutral-500 mt-0.5">
-                  Set the personality and voice of your chatbot
-                </p>
+              <div className="px-5 py-4 border-b border-neutral-100 flex items-center justify-between">
+                <div>
+                  <h2 className="text-sm font-semibold text-neutral-900">Tone</h2>
+                  <p className="text-xs text-neutral-500 mt-0.5">
+                    Set the personality and voice of your chatbot
+                  </p>
+                </div>
+                {isFree && <ProBadge />}
               </div>
               <div className="p-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
                 {TONE_OPTIONS.map((tone) => {
@@ -448,17 +462,18 @@ export default function AIStudioPage() {
                   return (
                     <button
                       key={tone.id}
-                      onClick={() => updateField("tone", tone.id)}
+                      aria-disabled={isFree}
+                      onClick={() => !isFree && updateField("tone", tone.id)}
                       className={`group flex flex-col items-center gap-2 py-4 px-3 rounded-xl border transition-all duration-150 ${
                         isSelected
                           ? `${tone.color.bg} ${tone.color.border}`
                           : "border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50"
-                      }`}
+                      } ${isFree && !isSelected ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${
-                        isSelected ? `${tone.color.bgActive}` : "bg-neutral-100 group-hover:bg-neutral-200/60"
+                        isSelected ? `${tone.color.bgActive}` : "bg-neutral-100"
                       }`}>
-                        <IconComponent className={`h-[18px] w-[18px] transition-colors ${isSelected ? tone.color.text : "text-neutral-400 group-hover:text-neutral-500"}`} />
+                        <IconComponent className={`h-[18px] w-[18px] transition-colors ${isSelected ? tone.color.text : "text-neutral-400"}`} />
                       </div>
                       <div className="text-center">
                         <span className={`text-[13px] font-semibold block transition-colors ${isSelected ? tone.color.text : "text-neutral-800"}`}>
@@ -477,6 +492,8 @@ export default function AIStudioPage() {
         {/* === INSTRUCTIONS (System Prompt) === */}
         {activeSection === "prompt" && (
           <div className="space-y-4">
+            {isFree && <UpgradeNudge feature="Custom instructions" />}
+
             <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
               <div className="px-6 py-4 border-b border-neutral-100 flex items-center justify-between">
                 <div>
@@ -485,23 +502,29 @@ export default function AIStudioPage() {
                     These instructions are appended to the default system prompt — your base prompt is always preserved
                   </p>
                 </div>
-                {formData.systemPrompt && (
-                  <button
-                    onClick={() => updateField("systemPrompt", "")}
-                    className="flex items-center gap-1.5 text-xs font-medium text-neutral-400 hover:text-neutral-600 px-2.5 py-1.5 rounded-lg hover:bg-neutral-100 transition-all"
-                  >
-                    <Icons.RotateCcw className="h-3 w-3" />
-                    Clear
-                  </button>
-                )}
+                <div className="flex items-center gap-2">
+                  {isFree && <ProBadge />}
+                  {!isFree && formData.systemPrompt && (
+                    <button
+                      onClick={() => updateField("systemPrompt", "")}
+                      className="flex items-center gap-1.5 text-xs font-medium text-neutral-400 hover:text-neutral-600 px-2.5 py-1.5 rounded-lg hover:bg-neutral-100 transition-all"
+                    >
+                      <Icons.RotateCcw className="h-3 w-3" />
+                      Clear
+                    </button>
+                  )}
+                </div>
               </div>
               <div className="p-5">
                 <textarea
                   value={formData.systemPrompt}
                   onChange={(e) => updateField("systemPrompt", e.target.value)}
-                  placeholder={`Add custom instructions for your chatbot...\n\nExamples:\n- "Always recommend our premium plan when relevant"\n- "Never discuss competitor products"\n- "Include a link to our docs when answering technical questions"`}
+                  readOnly={isFree}
+                  placeholder={isFree
+                    ? "Upgrade to Pro to add custom instructions..."
+                    : `Add custom instructions for your chatbot...\n\nExamples:\n- "Always recommend our premium plan when relevant"\n- "Never discuss competitor products"\n- "Include a link to our docs when answering technical questions"`}
                   rows={10}
-                  className="w-full rounded-lg border border-neutral-200 bg-neutral-50/50 text-neutral-800 placeholder-neutral-300 px-4 py-3.5 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 focus:bg-white resize-y transition-all"
+                  className={`w-full rounded-lg border border-neutral-200 bg-neutral-50/50 text-neutral-800 placeholder-neutral-300 px-4 py-3.5 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 focus:bg-white resize-y transition-all ${isFree ? "bg-neutral-100 text-neutral-400 cursor-not-allowed resize-none" : ""}`}
                 />
               </div>
             </div>
@@ -527,6 +550,7 @@ export default function AIStudioPage() {
         onTextUpload={handleTextUpload}
         loading={isUploading}
         uploadProgress={uploadProgress}
+        isFileUploadDisabled={isFree}
       />
     </>
   );

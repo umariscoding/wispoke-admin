@@ -7,6 +7,7 @@ import { resetCompany } from "./companySlice";
 import { resetAnalytics } from "./analyticsSlice";
 import { resetKnowledgeBase } from "./knowledgeBaseSlice";
 import { resetUI } from "./uiSlice";
+import { resetBilling } from "./billingSlice";
 
 interface CompanyAuthState {
   company: Company | null;
@@ -138,6 +139,7 @@ export const logoutCompanyComprehensive = createAsyncThunk(
     dispatch(resetKnowledgeBase()); // Company owns knowledge base
     dispatch(resetAnalytics()); // Company analytics
     dispatch(resetUI()); // Clean UI state
+    dispatch(resetBilling()); // Billing state
 
     return true;
   },

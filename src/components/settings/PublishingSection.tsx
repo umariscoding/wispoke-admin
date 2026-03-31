@@ -21,7 +21,7 @@ export default function PublishingSection({
     const isLocalhost =
       window.location.hostname === "localhost" ||
       window.location.hostname === "127.0.0.1";
-    if (isLocalhost) setChatBaseUrl("http://localhost:5173");
+    if (isLocalhost) setChatBaseUrl("http://localhost:3001");
   }, []);
 
   const handleVisitPublicChatbot = () => {
@@ -36,7 +36,7 @@ export default function PublishingSection({
         window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1";
       const subdomainUrl = isLocalhost
-        ? `http://${slug}.localhost:5173`
+        ? `http://${slug}.localhost:3001`
         : `https://${slug}.${CHAT_DOMAIN}`;
       window.open(subdomainUrl, "_blank");
     }
@@ -49,7 +49,7 @@ export default function PublishingSection({
       (window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1");
     return isLocalhost
-      ? `${slug}.localhost:5173`
+      ? `${slug}.localhost:3001`
       : `${slug}.${CHAT_DOMAIN}`;
   };
 

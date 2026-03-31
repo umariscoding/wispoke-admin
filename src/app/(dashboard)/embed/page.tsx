@@ -7,6 +7,8 @@ import { useEmbedSettings } from "@/hooks/useEmbedSettings";
 import { Icons, IOSContentLoader } from "@/components/ui";
 import IOSLoader from "@/components/ui/IOSLoader";
 import { API_CONFIG } from "@/constants/api";
+import { usePlan } from "@/hooks/usePlan";
+import UpgradeNudge from "@/components/billing/UpgradeNudge";
 import WidgetPreview from "./WidgetPreview";
 import {
   MessageCircle,
@@ -155,7 +157,9 @@ function SetupRequiredBanner({
 export default function EmbedPage() {
   const companyAuth = useCompanyAppSelector((state) => state.companyAuth);
   const { settings, loading, saving, updateSetting } = useEmbedSettings();
+  const { isFree } = usePlan();
   const [copied, setCopied] = useState(false);
+  const [showEmbedCode, setShowEmbedCode] = useState(false);
 
   const slug = companyAuth.company?.slug;
   const isPublished = companyAuth.company?.is_published;
@@ -205,12 +209,84 @@ export default function EmbedPage() {
         <SetupRequiredBanner slug={slug} isPublished={isPublished} />
       )}
 
+      {/* Embed Code — collapsible, always accessible */}
+      {slug && isPublished && (
+        <div className="mb-6 bg-white rounded-lg border border-neutral-200 overflow-hidden">
+          <div className="px-5 py-4 flex items-center justify-between">
+            <button
+              onClick={() => setShowEmbedCode(!showEmbedCode)}
+              className="flex items-center gap-3 flex-1 min-w-0"
+            >
+              <div className="w-8 h-8 rounded-lg bg-neutral-900 flex items-center justify-center flex-shrink-0">
+                <Icons.Code className="h-4 w-4 text-neutral-300" />
+              </div>
+              <div className="text-left">
+                <p className="text-sm font-semibold text-neutral-900">
+                  Embed Code
+                </p>
+                <p className="text-xs text-neutral-500 mt-0.5">
+                  Add the widget to your website
+                </p>
+              </div>
+              <Icons.ChevronDown
+                className={`h-4 w-4 text-neutral-400 transition-transform duration-200 ml-2 flex-shrink-0 ${
+                  showEmbedCode ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); handleCopy(); }}
+              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition-all duration-200 flex-shrink-0 ml-3 ${
+                copied
+                  ? "bg-green-50 text-green-600 border border-green-200"
+                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 border border-neutral-200"
+              }`}
+            >
+              {copied ? (
+                <>
+                  <Icons.CheckCircle className="h-3.5 w-3.5" />
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <Icons.Copy className="h-3.5 w-3.5" />
+                  Copy code
+                </>
+              )}
+            </button>
+          </div>
+
+          <div
+            className="transition-all duration-300 ease-in-out"
+            style={{
+              maxHeight: showEmbedCode ? "300px" : "0px",
+              opacity: showEmbedCode ? 1 : 0,
+              overflow: "hidden",
+            }}
+          >
+            <div className="px-5 pb-5 space-y-3 border-t border-neutral-100 pt-4">
+              <pre className="bg-neutral-900 text-neutral-300 p-4 rounded-xl overflow-x-auto text-xs font-mono leading-relaxed">
+                <code>{embedCode}</code>
+              </pre>
+              <p className="text-[11px] text-neutral-400">
+                Paste this snippet inside your website&apos;s{" "}
+                <code className="bg-neutral-100 text-neutral-600 px-1 py-0.5 rounded font-mono">
+                  &lt;head&gt;
+                </code>{" "}
+                tag
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {slug && isPublished && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left: Settings */}
           <div className="space-y-5">
-            {/* Appearance */}
-            <div className="bg-white rounded-lg border border-neutral-200 p-5 space-y-5">
+            {isFree && <UpgradeNudge feature="Appearance, content, and chat style" />}
+            {/* Appearance — disabled for free users */}
+            <div className={`bg-white rounded-lg border border-neutral-200 p-5 space-y-5 ${isFree ? "opacity-50 pointer-events-none select-none" : ""}`}>
               <div>
                 <p className="text-sm font-semibold text-neutral-900">Appearance</p>
                 <p className="text-xs text-neutral-500 mt-0.5">
@@ -374,8 +450,8 @@ export default function EmbedPage() {
               </div>
             </div>
 
-            {/* Content */}
-            <div className="bg-white rounded-lg border border-neutral-200 p-5 space-y-5">
+            {/* Content — disabled for free users */}
+            <div className={`bg-white rounded-lg border border-neutral-200 p-5 space-y-5 ${isFree ? "opacity-50 pointer-events-none select-none" : ""}`}>
               <div>
                 <p className="text-sm font-semibold text-neutral-900">Content</p>
                 <p className="text-xs text-neutral-500 mt-0.5">
@@ -477,8 +553,8 @@ export default function EmbedPage() {
               </div>
             </div>
 
-            {/* Chat Template */}
-            <div className="bg-white rounded-lg border border-neutral-200 p-5 space-y-5">
+            {/* Chat Template — disabled for free users */}
+            <div className={`bg-white rounded-lg border border-neutral-200 p-5 space-y-5 ${isFree ? "opacity-50 pointer-events-none select-none" : ""}`}>
               <div>
                 <p className="text-sm font-semibold text-neutral-900">Chat Style</p>
                 <p className="text-xs text-neutral-500 mt-0.5">
@@ -817,46 +893,6 @@ export default function EmbedPage() {
               </div>
             </div>
 
-            {/* Embed Code */}
-            <div className="bg-white rounded-lg border border-neutral-200 p-5 space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-neutral-900">
-                    Embed Code
-                  </p>
-                  <p className="text-xs text-neutral-500 mt-0.5">
-                    Paste in your website&apos;s{" "}
-                    <code className="bg-neutral-100 px-1 py-0.5 rounded text-[10px] font-mono">
-                      &lt;head&gt;
-                    </code>
-                  </p>
-                </div>
-                <button
-                  onClick={handleCopy}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                    copied
-                      ? "bg-accent-600 text-white"
-                      : "bg-primary-600 text-white hover:bg-primary-700"
-                  }`}
-                >
-                  {copied ? (
-                    <>
-                      <Icons.CheckCircle className="h-3.5 w-3.5" />
-                      Copied!
-                    </>
-                  ) : (
-                    <>
-                      <Icons.Copy className="h-3.5 w-3.5" />
-                      Copy
-                    </>
-                  )}
-                </button>
-              </div>
-
-              <pre className="bg-neutral-900 text-neutral-300 p-4 rounded-lg overflow-x-auto text-xs font-mono leading-relaxed">
-                <code>{embedCode}</code>
-              </pre>
-            </div>
           </div>
 
           {/* Right: Preview */}

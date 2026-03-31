@@ -5,7 +5,7 @@ export interface Company {
   company_id: string;
   name: string;
   email: string;
-  plan: "free" | "premium" | "enterprise";
+  plan: "free" | "pro";
   status: "active" | "inactive" | "suspended";
   slug: string | null;
   is_published: boolean;
@@ -18,6 +18,9 @@ export interface Company {
     enable_user_portal?: boolean;
     embed?: Record<string, unknown>;
   };
+  ls_subscription_status?: "none" | "active" | "cancelled" | "expired" | "past_due" | "paused";
+  subscription_ends_at?: string | null;
+  subscription_renews_at?: string | null;
   created_at: string;
 }
 

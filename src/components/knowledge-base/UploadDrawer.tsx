@@ -7,6 +7,7 @@ import { Icons } from "@/components/ui";
 import IOSLoader from "@/components/ui/IOSLoader";
 import FileUpload from "@/components/knowledge-base/FileUpload";
 import TextUpload from "@/components/knowledge-base/TextUpload";
+import UpgradePrompt from "@/components/billing/UpgradePrompt";
 import type { UploadModalProps } from "@/interfaces/KnowledgeBase.interface";
 
 type UploadMode = "file" | "text";
@@ -19,6 +20,7 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
   onTextUpload,
   loading = false,
   uploadProgress = 0,
+  isFileUploadDisabled = false,
 }) => {
   const [uploadMode, setUploadMode] = useState<UploadMode>("file");
   const [uploadState, setUploadState] = useState<UploadState>("idle");
@@ -136,13 +138,22 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
 
                 {/* Content */}
                 {uploadMode === "file" && (
-                  <FileUpload
-                    onUpload={onFileUpload}
-                    loading={loading}
-                    multiple={false}
-                    maxSize={10 * 1024 * 1024}
-                    accept=".txt,.pdf,.doc,.docx,.md"
-                  />
+                  isFileUploadDisabled ? (
+                    <div className="py-8">
+                      <UpgradePrompt
+                        feature="File Uploads"
+                        description="Upgrade to Pro to upload PDF, DOCX, and other documents to your knowledge base."
+                      />
+                    </div>
+                  ) : (
+                    <FileUpload
+                      onUpload={onFileUpload}
+                      loading={loading}
+                      multiple={false}
+                      maxSize={10 * 1024 * 1024}
+                      accept=".txt,.pdf,.doc,.docx,.md"
+                    />
+                  )
                 )}
 
                 {uploadMode === "text" && (

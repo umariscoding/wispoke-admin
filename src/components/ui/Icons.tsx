@@ -57,6 +57,9 @@ import {
   Wand2,
   Phone,
   MessagesSquare,
+  Lock,
+  CreditCard,
+  Crown,
 } from "lucide-react";
 
 // Icon component props interface
@@ -304,5 +307,17 @@ export const Icons = {
 
   Bubble: ({ className = "h-5 w-5", size }: IconProps) => (
     <MessagesSquare className={className} size={size} />
+  ),
+
+  Lock: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Lock className={className} size={size} />
+  ),
+
+  CreditCard: ({ className = "h-5 w-5", size }: IconProps) => (
+    <CreditCard className={className} size={size} />
+  ),
+
+  Crown: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Crown className={className} size={size} />
   ),
 };

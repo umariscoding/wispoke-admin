@@ -13,6 +13,8 @@ import { updateCompanyInfo } from "@/store/company/slices/companyAuthSlice";
 import { Icons, IOSContentLoader, Toggle } from "@/components/ui";
 import IOSLoader from "@/components/ui/IOSLoader";
 import { useSettings } from "@/hooks/useSettings";
+import { usePlan } from "@/hooks/usePlan";
+import BillingSection from "@/components/settings/BillingSection";
 
 export default function SettingsPage() {
   const dispatch = useCompanyAppDispatch();
@@ -20,6 +22,8 @@ export default function SettingsPage() {
   const { loading, error } = useCompanyAppSelector((state) => state.company);
 
   const [saveSuccess, setSaveSuccess] = useState(false);
+
+  const { isFree } = usePlan();
 
   const { formData, updateField, getChanges, markAsSaved, resetChanges } =
     useSettings();
@@ -87,7 +91,7 @@ export default function SettingsPage() {
     (window.location.hostname === "localhost" ||
       window.location.hostname === "127.0.0.1");
   const chatBaseUrl = isLocalhost
-    ? "http://localhost:5173"
+    ? "http://localhost:3001"
     : `https://${CHAT_DOMAIN}`;
 
   const handleVisitPublicChatbot = () => {
@@ -99,7 +103,7 @@ export default function SettingsPage() {
   const handleVisitSubdomain = () => {
     if (formData.slug) {
       const url = isLocalhost
-        ? `http://${formData.slug}.localhost:5173`
+        ? `http://${formData.slug}.localhost:3001`
         : `https://${formData.slug}.${CHAT_DOMAIN}`;
       window.open(url, "_blank");
     }
@@ -108,7 +112,7 @@ export default function SettingsPage() {
   const getSubdomainUrl = () => {
     if (!formData.slug) return "";
     return isLocalhost
-      ? `${formData.slug}.localhost:5173`
+      ? `${formData.slug}.localhost:3001`
       : `${formData.slug}.${CHAT_DOMAIN}`;
   };
 
@@ -167,6 +171,8 @@ export default function SettingsPage() {
           <p className="text-sm text-primary-700 font-medium">Settings saved</p>
         </div>
       )}
+
+      <BillingSection />
 
       {/* ══════════════════════════════════════
           1. PUBLISHING
@@ -250,31 +256,42 @@ export default function SettingsPage() {
           {/* User Portal toggle — only visible when published */}
           {formData.isPublished && (
             <div className="px-5 pb-4">
-              <div className="border border-neutral-200 rounded-xl px-4 py-3 flex items-center justify-between">
+              <div className={`border rounded-xl px-4 py-3 flex items-center justify-between ${isFree ? "border-neutral-100 bg-neutral-50/50" : "border-neutral-200"}`}>
                 <div className="flex items-center gap-3">
-                  <Icons.User className="h-4 w-4 text-neutral-400 flex-shrink-0" />
+                  <Icons.User className={`h-4 w-4 flex-shrink-0 ${isFree ? "text-neutral-300" : "text-neutral-400"}`} />
                   <div>
-                    <span className="text-xs font-semibold text-neutral-700">
-                      User Portal
-                    </span>
-                    <p className="text-[11px] text-neutral-400 mt-0.5">
-                      {formData.enableUserPortal
-                        ? "Standalone chat page with login, history & accounts"
-                        : "Users can only interact through the embed widget on your website"}
+                    <div className="flex items-center gap-1.5">
+                      <span className={`text-xs font-semibold ${isFree ? "text-neutral-400" : "text-neutral-700"}`}>
+                        User Portal
+                      </span>
+                      {isFree && (
+                        <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-primary-100 text-primary-600 text-[9px] font-bold uppercase tracking-wider">
+                          <Icons.Lock className="h-2.5 w-2.5" />
+                          Pro
+                        </span>
+                      )}
+                    </div>
+                    <p className={`text-[11px] mt-0.5 ${isFree ? "text-neutral-300" : "text-neutral-400"}`}>
+                      {isFree
+                        ? "Upgrade to Pro to enable the standalone chat portal"
+                        : formData.enableUserPortal
+                          ? "Standalone chat page with login, history & accounts"
+                          : "Users can only interact through the embed widget on your website"}
                     </p>
                   </div>
                 </div>
                 <Toggle
-                  checked={formData.enableUserPortal}
+                  checked={isFree ? false : formData.enableUserPortal}
                   onChange={(checked) => updateField("enableUserPortal", checked)}
                   size="md"
+                  disabled={isFree}
                 />
               </div>
             </div>
           )}
 
-          {/* Public URLs — only when published AND user portal is on */}
-          {formData.slug && formData.isPublished && formData.enableUserPortal && (
+          {/* Public URLs — only when published AND user portal is on AND not free */}
+          {formData.slug && formData.isPublished && formData.enableUserPortal && !isFree && (
             <div className="px-5 pb-4">
               <div className="grid grid-cols-2 gap-2">
                 <button
