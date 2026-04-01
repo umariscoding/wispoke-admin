@@ -60,27 +60,35 @@ const MODEL_OPTIONS = [
     tag: null,
   },
   {
-    id: "OpenAI",
+    id: "GPT-4o-mini",
     name: "GPT-4o Mini",
     provider: "OpenAI",
-    desc: "Strong reasoning, reliable",
+    desc: "Fast and affordable, great for most tasks",
     speed: "~100 tok/s",
     tag: null,
   },
   {
-    id: "Claude",
-    name: "Claude 3.5 Sonnet",
-    provider: "Anthropic",
-    desc: "Nuanced, thoughtful responses",
+    id: "GPT-4o",
+    name: "GPT-4o",
+    provider: "OpenAI",
+    desc: "Strong reasoning, multimodal",
     speed: "~80 tok/s",
     tag: null,
   },
   {
-    id: "Cohere",
-    name: "Command A",
-    provider: "Cohere",
-    desc: "Enterprise-grade RAG",
+    id: "GPT-4.1",
+    name: "GPT-4.1",
+    provider: "OpenAI",
+    desc: "Latest flagship, best coding & instruction following",
     speed: "~70 tok/s",
+    tag: "New",
+  },
+  {
+    id: "GPT-4.1-mini",
+    name: "GPT-4.1 Mini",
+    provider: "OpenAI",
+    desc: "Fast, smart, and cost-effective",
+    speed: "~120 tok/s",
     tag: null,
   },
 ];
@@ -164,7 +172,7 @@ export default function AIStudioPage() {
       const progressInterval = setInterval(() => {
         setUploadProgress((prev) => {
           if (prev >= 90) return prev;
-          return prev + Math.random() * 30;
+          return Math.min(prev + Math.random() * 30, 90);
         });
       }, 300);
       await dispatch(uploadFile(file)).unwrap();
@@ -185,7 +193,7 @@ export default function AIStudioPage() {
       const progressInterval = setInterval(() => {
         setUploadProgress((prev) => {
           if (prev >= 90) return prev;
-          return prev + Math.random() * 30;
+          return Math.min(prev + Math.random() * 30, 90);
         });
       }, 300);
       await dispatch(uploadText({ content, filename })).unwrap();

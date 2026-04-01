@@ -63,7 +63,7 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
     <>
       {/* Overlay with gradient backdrop */}
       <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300"
+        className="fixed inset-0 bg-black/60 z-40 transition-opacity duration-300"
         onClick={onClose}
       />
 
@@ -190,7 +190,7 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
                     <div
                       className="h-full bg-gradient-to-r from-primary-500 via-primary-600 to-primary-500 transition-all duration-500 ease-out rounded-full shadow-sm"
                       style={{
-                        width: `${uploadProgress}%`,
+                        width: `${Math.min(uploadProgress, 100)}%`,
                         backgroundSize: "200% 100%",
                         animation: "shimmer 3s infinite"
                       }}

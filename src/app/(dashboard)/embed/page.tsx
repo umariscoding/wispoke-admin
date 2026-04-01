@@ -222,25 +222,26 @@ export default function EmbedPage() {
 
       {/* Embed Code — collapsible, always accessible */}
       {slug && isPublished && (
-        <div className="mb-6 bg-white rounded-lg border border-neutral-200 overflow-hidden">
-          <div className="px-5 py-4 flex items-center justify-between">
+        <div className="mb-6 rounded-xl overflow-hidden border border-[#1A2424] bg-[#0E1515] shadow-lg shadow-black/20">
+          {/* Header */}
+          <div className="px-5 py-4 flex items-center justify-between border-b border-white/[0.06]">
             <button
               onClick={() => setShowEmbedCode(!showEmbedCode)}
-              className="flex items-center gap-3 flex-1 min-w-0"
+              className="flex items-center gap-3 flex-1 min-w-0 group"
             >
-              <div className="w-8 h-8 rounded-lg bg-neutral-900 flex items-center justify-center flex-shrink-0">
-                <Icons.Code className="h-4 w-4 text-neutral-300" />
+              <div className="w-8 h-8 rounded-lg bg-primary-600/15 border border-primary-500/20 flex items-center justify-center flex-shrink-0">
+                <Icons.Code className="h-4 w-4 text-primary-400" />
               </div>
               <div className="text-left">
-                <p className="text-sm font-semibold text-neutral-900">
+                <p className="text-sm font-semibold text-slate-100">
                   Embed Code
                 </p>
-                <p className="text-xs text-neutral-500 mt-0.5">
+                <p className="text-xs text-slate-500 mt-0.5">
                   Add the widget to your website
                 </p>
               </div>
               <Icons.ChevronDown
-                className={`h-4 w-4 text-neutral-400 transition-transform duration-200 ml-2 flex-shrink-0 ${
+                className={`h-4 w-4 text-slate-500 group-hover:text-slate-400 transition-all duration-200 ml-2 flex-shrink-0 ${
                   showEmbedCode ? "rotate-180" : ""
                 }`}
               />
@@ -249,8 +250,8 @@ export default function EmbedPage() {
               onClick={(e) => { e.stopPropagation(); handleCopy(); }}
               className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold transition-all duration-200 flex-shrink-0 ml-3 ${
                 copied
-                  ? "bg-green-50 text-green-600 border border-green-200"
-                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 border border-neutral-200"
+                  ? "bg-primary-500/15 text-primary-400 border border-primary-500/25"
+                  : "bg-white/[0.06] text-slate-400 hover:text-slate-200 hover:bg-white/[0.1] border border-white/[0.08]"
               }`}
             >
               {copied ? (
@@ -267,6 +268,7 @@ export default function EmbedPage() {
             </button>
           </div>
 
+          {/* Collapsible code block */}
           <div
             className="transition-all duration-300 ease-in-out"
             style={{
@@ -275,13 +277,16 @@ export default function EmbedPage() {
               overflow: "hidden",
             }}
           >
-            <div className="px-5 pb-5 space-y-3 border-t border-neutral-100 pt-4">
-              <pre className="bg-neutral-900 text-neutral-300 p-4 rounded-xl overflow-x-auto text-xs font-mono leading-relaxed">
-                <code>{embedCode}</code>
-              </pre>
-              <p className="text-[11px] text-neutral-400">
+            <div className="px-5 pb-5 pt-4 space-y-3">
+              <div className="relative rounded-lg bg-black/30 border border-white/[0.06] overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-500/20 to-transparent" />
+                <pre className="p-4 overflow-x-auto text-[13px] font-mono leading-relaxed text-slate-300">
+                  <code>{embedCode}</code>
+                </pre>
+              </div>
+              <p className="text-[11px] text-slate-500">
                 Paste this snippet inside your website&apos;s{" "}
-                <code className="bg-neutral-100 text-neutral-600 px-1 py-0.5 rounded font-mono">
+                <code className="bg-white/[0.06] text-slate-400 px-1.5 py-0.5 rounded font-mono border border-white/[0.06]">
                   &lt;head&gt;
                 </code>{" "}
                 tag
