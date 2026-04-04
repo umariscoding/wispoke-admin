@@ -51,6 +51,12 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("company_access_token");
+    setIsLoggedIn(!!token);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -126,18 +132,29 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-3">
-            <Link
-              href={ROUTES.COMPANY_LOGIN}
-              className="hidden sm:inline-flex items-center justify-center text-sm font-medium text-neutral-600 border border-neutral-200 hover:border-neutral-300 rounded-full h-10 px-5 transition-colors"
-            >
-              Login
-            </Link>
-            <Link
-              href={ROUTES.COMPANY_REGISTER}
-              className="inline-flex items-center justify-center text-sm font-medium bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-10 px-5 transition-colors"
-            >
-              Sign up for free
-            </Link>
+            {isLoggedIn ? (
+              <Link
+                href={ROUTES.DASHBOARD}
+                className="inline-flex items-center justify-center text-sm font-medium bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-10 px-5 transition-colors"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href={ROUTES.COMPANY_LOGIN}
+                  className="hidden sm:inline-flex items-center justify-center text-sm font-medium text-neutral-600 border border-neutral-200 hover:border-neutral-300 rounded-full h-10 px-5 transition-colors"
+                >
+                  Login
+                </Link>
+                <Link
+                  href={ROUTES.COMPANY_REGISTER}
+                  className="inline-flex items-center justify-center text-sm font-medium bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-10 px-5 transition-colors"
+                >
+                  Sign up for free
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -186,19 +203,30 @@ export default function Home() {
           </p>
 
           <div className="animate-slide-up-d2 flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 lg:mb-24">
-            <Link
-              href={ROUTES.COMPANY_REGISTER}
-              className="inline-flex items-center justify-center text-base font-semibold bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-14 px-10 transition-all shadow-lg shadow-neutral-900/20 hover:shadow-xl hover:shadow-neutral-900/25"
-            >
-              Sign up for free
-            </Link>
-            <Link
-              href={ROUTES.COMPANY_LOGIN}
-              className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors"
-            >
-              Already have an account?{" "}
-              <span className="underline">Sign in</span>
-            </Link>
+            {isLoggedIn ? (
+              <Link
+                href={ROUTES.DASHBOARD}
+                className="inline-flex items-center justify-center text-base font-semibold bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-14 px-10 transition-all shadow-lg shadow-neutral-900/20 hover:shadow-xl hover:shadow-neutral-900/25"
+              >
+                Go to Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href={ROUTES.COMPANY_REGISTER}
+                  className="inline-flex items-center justify-center text-base font-semibold bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-14 px-10 transition-all shadow-lg shadow-neutral-900/20 hover:shadow-xl hover:shadow-neutral-900/25"
+                >
+                  Sign up for free
+                </Link>
+                <Link
+                  href={ROUTES.COMPANY_LOGIN}
+                  className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors"
+                >
+                  Already have an account?{" "}
+                  <span className="underline">Sign in</span>
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
@@ -654,6 +682,225 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ═══════════ PRICING ═══════════ */}
+      <section id="pricing" className="relative py-28 lg:py-36 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="scroll-reveal text-center mb-20">
+            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-5">
+              Start free, scale when ready
+            </h2>
+            <p className="text-neutral-500 text-lg max-w-lg mx-auto">
+              No credit card required. Upgrade anytime to unlock the full
+              platform.
+            </p>
+          </div>
+
+          <div className="scroll-reveal grid lg:grid-cols-5 gap-6 items-start">
+            {/* Free — compact */}
+            <div className="lg:col-span-2 rounded-3xl border border-neutral-200 bg-white p-8 lg:p-10">
+              <p className="text-sm font-bold text-neutral-900 mb-1">Free</p>
+              <p className="text-xs text-neutral-400 mb-6">
+                For trying things out
+              </p>
+              <div className="flex items-baseline gap-1 mb-8">
+                <span className="text-5xl font-black tracking-tight text-neutral-900">
+                  $0
+                </span>
+                <span className="text-neutral-400 text-sm">/month</span>
+              </div>
+              <Link
+                href={ROUTES.COMPANY_REGISTER}
+                className="w-full inline-flex items-center justify-center text-sm font-semibold text-neutral-700 border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 rounded-full h-12 transition-colors mb-8"
+              >
+                Get started
+              </Link>
+              <div className="space-y-3.5">
+                {[
+                  "Text-based knowledge base",
+                  "Default AI model",
+                  "Basic embed widget",
+                  "Dashboard analytics",
+                ].map((f) => (
+                  <div key={f} className="flex items-start gap-3">
+                    <svg
+                      className="w-4 h-4 text-neutral-400 mt-0.5 flex-shrink-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <span className="text-sm text-neutral-600">{f}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Pro — hero card */}
+            <div className="lg:col-span-3 rounded-3xl bg-neutral-900 p-8 lg:p-10 relative overflow-hidden">
+              <div
+                className="absolute inset-0 pointer-events-none"
+                aria-hidden="true"
+              >
+                <div className="absolute -top-20 -right-20 w-60 h-60 bg-primary-500/10 rounded-full blur-3xl" />
+                <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary-500/5 rounded-full blur-2xl" />
+              </div>
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-1">
+                  <p className="text-sm font-bold text-white">Pro</p>
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-primary-300 bg-primary-500/15 rounded-full px-2.5 py-0.5">
+                    Recommended
+                  </span>
+                </div>
+                <p className="text-xs text-neutral-500 mb-6">
+                  Everything you need to run AI support
+                </p>
+                <div className="flex items-baseline gap-1 mb-8">
+                  <span className="text-5xl font-black tracking-tight text-white">
+                    $99
+                  </span>
+                  <span className="text-neutral-500 text-sm">/month</span>
+                </div>
+                <Link
+                  href={isLoggedIn ? ROUTES.SETTINGS : ROUTES.COMPANY_REGISTER}
+                  className="w-full inline-flex items-center justify-center text-sm font-semibold bg-white hover:bg-neutral-100 text-neutral-900 rounded-full h-12 transition-colors mb-10"
+                >
+                  {isLoggedIn ? "Upgrade to Pro" : "Start free, upgrade later"}
+                </Link>
+
+                {/* Feature groups */}
+                <div className="grid sm:grid-cols-2 gap-x-10 gap-y-8">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-3">
+                      Knowledge Base
+                    </p>
+                    <div className="space-y-2.5">
+                      {[
+                        "Everything in Free",
+                        "File uploads — PDF, DOCX, MD",
+                      ].map((f) => (
+                        <div key={f} className="flex items-start gap-2.5">
+                          <svg
+                            className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <span className="text-sm text-neutral-300">{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-3">
+                      AI Configuration
+                    </p>
+                    <div className="space-y-2.5">
+                      {[
+                        "Choose from 9 AI models",
+                        "5 tone presets",
+                        "Custom system instructions",
+                      ].map((f) => (
+                        <div key={f} className="flex items-start gap-2.5">
+                          <svg
+                            className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <span className="text-sm text-neutral-300">{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-3">
+                      Chat Widget
+                    </p>
+                    <div className="space-y-2.5">
+                      {[
+                        "Theme & color customization",
+                        "Welcome messages & content",
+                        "Chat style templates",
+                        "Auto-open & behavior",
+                      ].map((f) => (
+                        <div key={f} className="flex items-start gap-2.5">
+                          <svg
+                            className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <span className="text-sm text-neutral-300">{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-3">
+                      Users & Portal
+                    </p>
+                    <div className="space-y-2.5">
+                      {[
+                        "User portal with login",
+                        "Chat history per user",
+                        "User management & analytics",
+                      ].map((f) => (
+                        <div key={f} className="flex items-start gap-2.5">
+                          <svg
+                            className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <span className="text-sm text-neutral-300">{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══════════ FAQ ═══════════ */}
       <section id="faq" className="relative py-28 lg:py-36 px-6">
         <div className="max-w-3xl mx-auto">
@@ -734,17 +981,19 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
-                  href={ROUTES.COMPANY_REGISTER}
+                  href={isLoggedIn ? ROUTES.DASHBOARD : ROUTES.COMPANY_REGISTER}
                   className="inline-flex items-center justify-center text-base font-semibold bg-white hover:bg-neutral-100 text-neutral-900 rounded-full h-14 px-10 transition-colors shadow-lg"
                 >
-                  Get started — it&apos;s free
+                  {isLoggedIn ? "Go to Dashboard" : "Get started — it\u2019s free"}
                 </Link>
-                <Link
-                  href={ROUTES.COMPANY_LOGIN}
-                  className="inline-flex items-center justify-center text-sm font-medium text-neutral-400 border border-neutral-700 hover:border-neutral-500 hover:text-white rounded-full h-12 px-8 transition-all"
-                >
-                  Talk to sales
-                </Link>
+                {!isLoggedIn && (
+                  <Link
+                    href={ROUTES.COMPANY_LOGIN}
+                    className="inline-flex items-center justify-center text-sm font-medium text-neutral-400 border border-neutral-700 hover:border-neutral-500 hover:text-white rounded-full h-12 px-8 transition-all"
+                  >
+                    I have an account
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -773,38 +1022,32 @@ export default function Home() {
               </p>
             </div>
 
-            {[
-              {
-                title: "Product",
-                links: ["Features", "Pricing", "Integrations", "Changelog"],
-              },
-              {
-                title: "Company",
-                links: ["About", "Blog", "Careers", "Contact"],
-              },
-              {
-                title: "Legal",
-                links: ["Privacy", "Terms", "Security", "GDPR"],
-              },
-            ].map((group) => (
-              <div key={group.title}>
-                <h4 className="text-sm font-semibold text-neutral-900 mb-4">
-                  {group.title}
-                </h4>
-                <ul className="space-y-2.5">
-                  {group.links.map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
-                        className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors"
-                      >
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <div>
+              <h4 className="text-sm font-semibold text-neutral-900 mb-4">Product</h4>
+              <ul className="space-y-2.5">
+                <li><a href="#features" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Features</a></li>
+                <li><a href="#pricing" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Pricing</a></li>
+                <li><a href="#platform" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Platforms</a></li>
+                <li><a href="#faq" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">FAQ</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-neutral-900 mb-4">Account</h4>
+              <ul className="space-y-2.5">
+                <li><Link href={ROUTES.COMPANY_LOGIN} className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Login</Link></li>
+                <li><Link href={ROUTES.COMPANY_REGISTER} className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Sign up</Link></li>
+                <li><Link href={ROUTES.DASHBOARD} className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Dashboard</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-neutral-900 mb-4">Legal</h4>
+              <ul className="space-y-2.5">
+                <li><Link href="/privacy" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Terms of Service</Link></li>
+              </ul>
+            </div>
           </div>
 
           <div className="mt-12 pt-8 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-4">
