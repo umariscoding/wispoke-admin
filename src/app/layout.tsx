@@ -10,7 +10,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "BotBeetle - Chatbot as a Service",
+  title: "Wispoke - Chatbot as a Service",
   description: "Multi-tenant chatbot platform for businesses",
 };
 

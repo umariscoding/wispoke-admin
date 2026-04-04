@@ -23,7 +23,7 @@ const nextConfig = {
             key: "Access-Control-Allow-Origin",
             value:
               process.env.NODE_ENV === "production"
-                ? "https://*.botbeetle.com" // Replace with your domain
+                ? "https://*.wispoke.com" // Replace with your domain
                 : "*",
           },
           {
@@ -67,11 +67,11 @@ const nextConfig = {
 
   // Image optimization for subdomains
   images: {
-    domains: ["localhost", "botbeetle.com", "*.botbeetle.com"],
+    domains: ["localhost", "wispoke.com", "*.wispoke.com"],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.botbeetle.com",
+        hostname: "**.wispoke.com",
       },
     ],
   },

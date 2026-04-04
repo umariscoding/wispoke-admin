@@ -2,10 +2,10 @@
 // NEVER hardcode these values in components - always import from here
 
 export const APP_CONFIG = {
-  NAME: "BotBeetle",
+  NAME: "Wispoke",
   DESCRIPTION: "Multi-tenant chatbot platform for businesses",
   VERSION: "1.0.0",
-  AUTHOR: "BotBeetle Team",
+  AUTHOR: "Wispoke Team",
 } as const;
 
 export const ROUTES = {
