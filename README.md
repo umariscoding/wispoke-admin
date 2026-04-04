@@ -1,139 +1,140 @@
-# Wispoke Admin
+# Wispoke Admin - Dashboard
 
-A Next.js 14 admin frontend application for the Wispoke multi-tenant chatbot platform.
+A Next.js admin dashboard for the Wispoke multi-tenant chatbot platform. Companies manage their AI chatbots, knowledge bases, analytics, embed widgets, users, and billing from a single interface.
+
+## Tech Stack
+
+- **Next.js 13.5** with App Router and TypeScript
+- **Redux Toolkit** with Redux Persist - State management
+- **Tailwind CSS** - Styling
+- **Axios** - API client with token refresh interceptor
+- **Recharts** - Analytics charts
+- **Headless UI** - Accessible component patterns
+- **React Markdown** - Content rendering
+- **Google OAuth** (`@react-oauth/google`) - SSO
+- **Lucide React** - Icons
 
 ## Project Structure
 
 ```
 src/
-├── app/                    # Next.js App Router
-│   ├── (auth)/            # Auth route group
-│   │   ├── company/       # Company auth pages
-│   │   └── user/          # User auth pages
-│   ├── (dashboard)/       # Protected dashboard routes
-│   │   ├── dashboard/     # Main dashboard
-│   │   ├── chat/          # Chat interface
-│   │   ├── knowledge-base/ # Document management
-│   │   ├── profile/       # User profile
-│   │   └── settings/      # Company settings
-│   ├── (public)/          # Public chatbot routes
-│   │   └── [slug]/        # Company-specific public pages
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx           # Landing page
-├── components/            # Reusable components
-│   ├── ui/               # Base UI components
-│   ├── layout/           # Layout components
-│   ├── auth/             # Auth-related components
-│   ├── chat/             # Chat components
-│   ├── dashboard/        # Dashboard components
-│   └── forms/            # Form components
-├── store/                # Redux store
-│   └── slices/           # Redux slices
-├── types/                # TypeScript type definitions
-├── utils/                # Utility functions
-├── hooks/                # Custom React hooks
-├── lib/                  # Third-party configurations
-└── constants/            # App constants
+├── app/
+│   ├── (auth)/                      # Auth routes
+│   │   └── auth/                    # Login / Register (company)
+│   ├── (dashboard)/                 # Protected routes
+│   │   ├── dashboard/               # Analytics dashboard
+│   │   ├── ai-studio/               # Knowledge base & model config
+│   │   ├── users/                   # User management
+│   │   ├── settings/                # Company & chatbot settings
+│   │   ├── embed/                   # Widget customization
+│   │   └── layout.tsx               # Sidebar + header layout
+│   └── page.tsx                     # Landing page
+├── components/
+│   ├── ui/                          # Button, Toggle, Card, Modal, SkeletonLoader
+│   ├── layout/                      # Sidebar, Header
+│   ├── auth/company/                # AuthProvider, ProtectedRoute
+│   ├── dashboard/analytics/         # ChatsChart, MessagesChart, StatsCard
+│   ├── knowledge-base/              # FileUpload, TextUpload, DocumentList
+│   ├── settings/                    # ProfileSection, ChatbotSection, PublishingSection, BillingSection
+│   └── billing/                     # ProBadge, UpgradeNudge, UpgradePrompt
+├── store/company/
+│   └── slices/                      # companyAuth, company, knowledgeBase, analytics, billing, ui
+├── hooks/                           # useSettings, usePlan, useEmbedSettings, useCompanyAuth
+├── types/                           # auth, knowledgeBase, settings, billing
+├── utils/company/                   # Axios API client
+├── constants/                       # API config, app constants
+├── interfaces/                      # Component prop interfaces
+└── lib/                             # Redux provider
 ```
-
-## Technology Stack
-
-- **Next.js 14** with App Router
-- **TypeScript** for type safety
-- **Redux Toolkit** for state management
-- **Tailwind CSS** for styling
-- **Axios** for API calls
-- **Lucide React** for icons
 
 ## Getting Started
 
-1. Install dependencies:
-
 ```bash
+# Install dependencies
 npm install
-```
 
-2. Create environment file:
-
-```bash
+# Create environment file
 cp .env.example .env.local
-```
 
-3. Start development server:
-
-```bash
+# Start dev server
 npm run dev
+
+# Build for production
+npm run build
+
+# Type check
+npm run ts
+
+# Format code
+npm run prettier
 ```
 
-## Development Plan
+## Environment Variables
 
-This project follows a 7-day development plan:
+```
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
 
-### Day 1: Authentication Foundation
+## Features
 
-- Landing page
-- Auth store setup
-- API client configuration
+### Dashboard
+- Time-of-day greeting with live status indicator
+- Chat and message volume charts (Recharts)
+- Key stats cards with 7-day metrics
 
-### Day 2: Authentication Pages
+### AI Studio
+- Upload PDF/DOCX documents and plain text to the knowledge base
+- Track document embedding status (pending/failed/completed)
+- Select AI model (Groq Llama, GPT-4o, GPT-4.1, etc.)
+- Configure system prompt and tone
+- Pro/Free plan feature gating
 
-- Company registration/login
-- User registration/login
-- Authentication middleware
+### Settings
+- Company profile (name, email, slug)
+- Chatbot title, description, model, system prompt
+- Publish/unpublish chatbot and user portal
+- Billing info and plan management
 
-### Day 3: Dashboard Layout
+### Embed Widget
+- Theme, position, colors, button icon, chat template
+- Welcome messages and suggested prompts
+- Auto-open delay and branding toggle
+- Live preview component
 
-- Dashboard layout and navigation
-- User profile management
-- Role-based access
+### Users
+- View all users (anonymous and named)
+- Chat and message counts per user
+- Search and pagination
+- Pro plan feature
 
-### Day 4: Knowledge Base Management
+## Authentication
 
-- Document upload and management
-- File processing status
-- Knowledge base organization
-
-### Day 5: Chat Interface
-
-- Chat UI components
-- Real-time messaging
-- Chat history management
-
-### Day 6: Public Chatbot
-
-- Company settings
-- Public chatbot deployment
-- Guest session handling
-
-### Day 7: Polish & Testing
-
-- Error handling
-- Loading states
-- Responsive design
-- Testing and bug fixes
-
-## User Types
-
-1. **Company Admin**: Full dashboard access, knowledge base management, user management
-2. **Regular User**: Chat interface, chat history, profile management
-3. **Guest User**: Public chatbot access only
-
-## API Integration
-
-The frontend integrates with the Wispoke backend API for:
-
-- Authentication and user management
-- Knowledge base operations
-- Real-time chat functionality
-- Company and chatbot management
+- JWT-based with access + refresh tokens
+- Google OAuth SSO
+- Automatic token refresh via Axios interceptor
+- `CompanyProtectedRoute` HOC guards dashboard routes
 
 ## State Management
 
-Redux Toolkit is used for state management with the following slices:
+Redux Toolkit with 6 slices:
 
-- `authSlice`: User authentication and session management
-- `chatSlice`: Chat state and message handling
-- `knowledgeBaseSlice`: Document management
-- `companySlice`: Company settings and public chatbot
-- `uiSlice`: UI state and notifications
+| Slice | Persisted | Purpose |
+|-------|-----------|---------|
+| `companyAuth` | Yes | Auth state, tokens, company profile |
+| `company` | Yes | Company settings |
+| `knowledgeBase` | No | Documents, upload progress |
+| `analytics` | No | Dashboard metrics |
+| `billing` | No | Subscription status |
+| `ui` | No | Notifications, modals |
+
+## API Integration
+
+Key endpoints:
+
+- `POST /auth/company/register` / `login` / `google` - Auth
+- `PATCH /api/company/settings` - Batch settings update
+- `POST /chat/upload-document` / `upload-text` - KB uploads
+- `GET /chat/documents` - List documents
+- `GET /api/company/analytics/dashboard` - Dashboard metrics
+- `GET /api/company/analytics/users` - User list
+- `POST /billing/checkout` / `cancel` / `resume` - Billing
