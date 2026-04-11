@@ -248,20 +248,19 @@ export default function Home() {
       {/* ═══════════ TRUST ═══════════ */}
       <section className="relative py-14 px-6 border-y border-neutral-100">
         <div className="max-w-6xl mx-auto">
-          <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-neutral-400 mb-8">
-            Trusted by teams building the future
-          </p>
-          <div className="flex items-center justify-center gap-10 sm:gap-14 flex-wrap">
-            {["SaaS Co", "StartupX", "TechFlow", "DataHive", "CloudOps"].map(
-              (name) => (
-                <span
-                  key={name}
-                  className="text-lg font-bold tracking-tight text-neutral-200 select-none"
-                >
-                  {name}
-                </span>
-              ),
-            )}
+          <div className="flex items-center justify-center gap-8 sm:gap-14 flex-wrap">
+            {[
+              { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", text: "Setup in under 10 minutes" },
+              { icon: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z", text: "No credit card required" },
+              { icon: "M6 18L18 6M6 6l12 12", text: "Cancel anytime" },
+            ].map((item) => (
+              <div key={item.text} className="flex items-center gap-2 text-neutral-400">
+                <svg className="w-4 h-4 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
+                </svg>
+                <span className="text-sm font-medium">{item.text}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -641,44 +640,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════ SOCIAL PROOF ═══════════ */}
+      {/* ═══════════ VALUE PROPS ═══════════ */}
       <section className="relative py-16 px-6 border-y border-neutral-100">
-        <div className="scroll-reveal max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-5">
-          <div className="flex -space-x-2.5">
-            {[
-              "bg-primary-200",
-              "bg-blue-200",
-              "bg-amber-200",
-              "bg-rose-200",
-              "bg-violet-200",
-            ].map((color, i) => (
-              <div
-                key={i}
-                className={`w-10 h-10 rounded-full border-2 border-white ${color} flex items-center justify-center text-xs font-semibold text-neutral-600 shadow-sm`}
-              >
-                {["SK", "MR", "JL", "AP", "TC"][i]}
-              </div>
-            ))}
-          </div>
-          <div className="text-center sm:text-left">
-            <p className="text-sm font-semibold text-neutral-900">
-              Trusted by 500+ teams worldwide
-            </p>
-            <div className="flex items-center justify-center sm:justify-start gap-1 mt-1">
-              {[...Array(5)].map((_, i) => (
-                <svg
-                  key={i}
-                  className="w-3.5 h-3.5 text-amber-400 fill-amber-400"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-              ))}
-              <span className="text-xs text-neutral-400 ml-1">
-                4.9/5 average rating
-              </span>
+        <div className="scroll-reveal max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+          {[
+            { title: "10 min setup", desc: "From signup to live chatbot" },
+            { title: "Free to start", desc: "No credit card required" },
+            { title: "Your data, your AI", desc: "100% company data isolation" },
+          ].map((item) => (
+            <div key={item.title}>
+              <p className="text-lg font-bold text-neutral-900">{item.title}</p>
+              <p className="text-sm text-neutral-400 mt-1">{item.desc}</p>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -976,8 +950,7 @@ export default function Home() {
                 Ready to launch your AI&nbsp;chatbot?
               </h2>
               <p className="text-neutral-400 max-w-md mx-auto mb-10 text-lg">
-                Join hundreds of teams using {APP_CONFIG.NAME} to automate
-                support.
+                Launch your AI-powered customer support in minutes.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
@@ -1055,47 +1028,7 @@ export default function Home() {
               &copy; {new Date().getFullYear()} {APP_CONFIG.NAME}. All rights
               reserved.
             </p>
-            <div className="flex items-center gap-5">
-              <a
-                href="#"
-                className="text-neutral-300 hover:text-neutral-500 transition-colors"
-                aria-label="Twitter"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
-              <a
-                href="#"
-                className="text-neutral-300 hover:text-neutral-500 transition-colors"
-                aria-label="GitHub"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-                </svg>
-              </a>
-              <a
-                href="#"
-                className="text-neutral-300 hover:text-neutral-500 transition-colors"
-                aria-label="LinkedIn"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </a>
-            </div>
+            {/* Add social links here once profiles are created */}
           </div>
         </div>
       </footer>
