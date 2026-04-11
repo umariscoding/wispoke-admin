@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -56,6 +56,8 @@ export default function CompanyAuthPage() {
   });
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [googleLoading, setGoogleLoading] = useState(false);
+  const googleBtnRef = useRef<HTMLDivElement>(null);
+  const [googleBtnWidth, setGoogleBtnWidth] = useState(320);
 
   const handleGoogleSuccess = async (response: CredentialResponse) => {
     if (!response.credential) return;
@@ -81,6 +83,19 @@ export default function CompanyAuthPage() {
     dispatch(clearError());
     setFormErrors({});
   }, [dispatch, isLogin]);
+
+  useEffect(() => {
+    const el = googleBtnRef.current;
+    if (!el) return;
+    const update = () => {
+      const w = Math.min(400, Math.max(200, Math.round(el.getBoundingClientRect().width)));
+      setGoogleBtnWidth(w);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [isLogin]);
 
   const validateLoginForm = (): boolean => {
     const errors: FormErrors = {};
@@ -189,24 +204,24 @@ export default function CompanyAuthPage() {
   const inputErr = "border-error-500/50";
 
   return (
-    <div className="h-screen flex overflow-hidden">
-      {/* ====== LEFT — Light form panel (scrolls independently) ====== */}
-      <div className="flex-1 lg:w-[50%] overflow-y-auto bg-neutral-50">
-        <div className="flex flex-col justify-center min-h-full py-12 px-6 sm:px-12 lg:pl-16 lg:pr-12">
+    <div className="min-h-screen lg:h-screen flex lg:overflow-hidden bg-neutral-50">
+      {/* ====== LEFT — Light form panel (scrolls independently on lg) ====== */}
+      <div className="flex-1 lg:w-[50%] lg:overflow-y-auto bg-neutral-50">
+        <div className="flex flex-col justify-center min-h-screen lg:min-h-full py-10 sm:py-12 px-5 sm:px-12 lg:pl-16 lg:pr-12">
           <div className="mx-auto w-full max-w-sm">
             {/* Logo */}
-            <div className="mb-10">
+            <div className="mb-8 sm:mb-10">
               <Image
                 src="/wordmark.svg"
                 alt={APP_CONFIG.NAME}
                 width={200}
                 height={64}
-                className="h-11 w-auto"
+                className="h-9 sm:h-11 w-auto"
               />
             </div>
 
             {/* Tab switch */}
-            <div className="mb-8">
+            <div className="mb-7 sm:mb-8">
               <div className="flex bg-neutral-100 border border-neutral-200 rounded-full p-1">
                 <button
                   onClick={() => setIsLogin(true)}
@@ -233,7 +248,7 @@ export default function CompanyAuthPage() {
 
             {/* Heading */}
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-neutral-900 tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
                 {isLogin ? "Welcome back" : "Get started"}
               </h2>
               <p className="mt-1.5 text-sm text-neutral-500">
@@ -245,7 +260,7 @@ export default function CompanyAuthPage() {
 
             {/* Error */}
             {error && (
-              <div className="mb-5 flex items-start gap-3 bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded-full text-sm">
+              <div className="mb-5 flex items-start gap-3 bg-error-50 border border-error-200 text-error-700 px-4 py-3 rounded-2xl text-sm">
                 <svg className="w-4 h-4 text-error-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                 </svg>
@@ -311,13 +326,18 @@ export default function CompanyAuthPage() {
                   </div>
                 </div>
 
-                <div className="w-full [&>div]:!w-full [&_iframe]:!w-full">
+                <div
+                  ref={googleBtnRef}
+                  className="w-full flex justify-center [&>div]:!w-full [&_iframe]:!w-full [&_iframe]:!rounded-full overflow-hidden rounded-full"
+                >
                   <GoogleLogin
                     onSuccess={handleGoogleSuccess}
                     onError={() => dispatch(clearError())}
                     size="large"
-                    width="384"
+                    width={String(googleBtnWidth)}
                     text="signin_with"
+                    shape="pill"
+                    logo_alignment="center"
                   />
                 </div>
               </>
@@ -388,13 +408,18 @@ export default function CompanyAuthPage() {
                   </div>
                 </div>
 
-                <div className="w-full [&>div]:!w-full [&_iframe]:!w-full">
+                <div
+                  ref={googleBtnRef}
+                  className="w-full flex justify-center [&>div]:!w-full [&_iframe]:!w-full [&_iframe]:!rounded-full overflow-hidden rounded-full"
+                >
                   <GoogleLogin
                     onSuccess={handleGoogleSuccess}
                     onError={() => dispatch(clearError())}
                     size="large"
-                    width="384"
+                    width={String(googleBtnWidth)}
                     text="signup_with"
+                    shape="pill"
+                    logo_alignment="center"
                   />
                 </div>
               </>
