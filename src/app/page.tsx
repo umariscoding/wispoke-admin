@@ -107,14 +107,14 @@ export default function Home() {
             : ""
         }`}
       >
-        <div className="w-full px-8 lg:px-12 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center">
+        <div className="w-full px-4 sm:px-6 lg:px-12 h-14 sm:h-16 flex items-center justify-between gap-2">
+          <Link href="/" className="flex items-center shrink-0">
             <Image
               src="/wordmark.svg"
               alt={APP_CONFIG.NAME}
               width={240}
               height={80}
-              className="h-12 w-auto"
+              className="h-9 sm:h-12 w-auto"
             />
           </Link>
 
@@ -135,11 +135,11 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {isLoggedIn ? (
               <Link
                 href={ROUTES.DASHBOARD}
-                className="inline-flex items-center justify-center text-sm font-medium bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-10 px-5 transition-colors"
+                className="inline-flex items-center justify-center text-xs sm:text-sm font-medium bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-9 sm:h-10 px-4 sm:px-5 transition-colors"
               >
                 Dashboard
               </Link>
@@ -153,9 +153,10 @@ export default function Home() {
                 </Link>
                 <Link
                   href={ROUTES.COMPANY_REGISTER}
-                  className="inline-flex items-center justify-center text-sm font-medium bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-10 px-5 transition-colors"
+                  className="inline-flex items-center justify-center text-xs sm:text-sm font-medium bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-9 sm:h-10 px-4 sm:px-5 transition-colors whitespace-nowrap"
                 >
-                  Sign up for free
+                  <span className="sm:hidden">Sign up</span>
+                  <span className="hidden sm:inline">Sign up for free</span>
                 </Link>
               </>
             )}
@@ -164,23 +165,23 @@ export default function Home() {
       </nav>
 
       {/* ═══════════ HERO + PRODUCT MOCKUP ═══════════ */}
-      <section className="relative pt-36 lg:pt-48 pb-0 overflow-hidden">
+      <section className="relative pt-28 sm:pt-36 lg:pt-48 pb-0 overflow-hidden">
         {/* Geometric bg — covers hero and mockup */}
         <div
           className="absolute inset-0 pointer-events-none"
           aria-hidden="true"
         >
-          <div className="absolute top-24 -left-8 w-44 h-44 bg-primary-100/40 rounded-3xl rotate-12" />
-          <div className="absolute top-16 right-12 w-56 h-36 bg-primary-50/50 rounded-3xl -rotate-6" />
-          <div className="absolute bottom-[40%] left-[20%] w-52 h-52 bg-primary-100/25 rounded-3xl rotate-45" />
-          <div className="absolute top-[30%] right-[22%] w-36 h-64 bg-primary-50/35 rounded-3xl -rotate-12" />
-          <div className="absolute bottom-[30%] right-16 w-40 h-40 bg-primary-100/30 rounded-3xl rotate-6" />
-          <div className="absolute bottom-[20%] left-[8%] w-32 h-32 bg-primary-50/30 rounded-3xl -rotate-45" />
+          <div className="absolute top-24 -left-8 w-28 h-28 sm:w-44 sm:h-44 bg-primary-100/40 rounded-3xl rotate-12" />
+          <div className="absolute top-16 right-4 sm:right-12 w-32 h-20 sm:w-56 sm:h-36 bg-primary-50/50 rounded-3xl -rotate-6" />
+          <div className="absolute bottom-[40%] left-[20%] w-32 h-32 sm:w-52 sm:h-52 bg-primary-100/25 rounded-3xl rotate-45" />
+          <div className="absolute top-[30%] right-[22%] w-20 h-36 sm:w-36 sm:h-64 bg-primary-50/35 rounded-3xl -rotate-12" />
+          <div className="absolute bottom-[30%] right-6 sm:right-16 w-24 h-24 sm:w-40 sm:h-40 bg-primary-100/30 rounded-3xl rotate-6" />
+          <div className="absolute bottom-[20%] left-[8%] w-20 h-20 sm:w-32 sm:h-32 bg-primary-50/30 rounded-3xl -rotate-45" />
         </div>
 
         {/* Hero text */}
-        <div className="relative max-w-4xl mx-auto text-center px-6">
-          <h1 className="animate-slide-up text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] text-neutral-900 mb-6">
+        <div className="relative max-w-4xl mx-auto text-center px-5 sm:px-6">
+          <h1 className="animate-slide-up text-[2.5rem] sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] sm:leading-[1.1] text-neutral-900 mb-5 sm:mb-6">
             Your AI support,
             <br />
             deployed on
@@ -209,16 +210,16 @@ export default function Home() {
             </span>
           </h1>
 
-          <p className="animate-slide-up-d1 text-lg sm:text-xl text-neutral-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="animate-slide-up-d1 text-base sm:text-xl text-neutral-500 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2">
             Upload your knowledge base, customize the widget, embed on any site
             with one line of code.
           </p>
 
-          <div className="animate-slide-up-d2 flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 lg:mb-24">
+          <div className="animate-slide-up-d2 flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 sm:mb-16 lg:mb-24">
             {isLoggedIn ? (
               <Link
                 href={ROUTES.DASHBOARD}
-                className="inline-flex items-center justify-center text-base font-semibold bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-14 px-10 transition-all shadow-lg shadow-neutral-900/20 hover:shadow-xl hover:shadow-neutral-900/25"
+                className="inline-flex items-center justify-center text-sm sm:text-base font-semibold bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-12 sm:h-14 px-8 sm:px-10 transition-all shadow-lg shadow-neutral-900/20 hover:shadow-xl hover:shadow-neutral-900/25"
               >
                 Go to Dashboard
               </Link>
@@ -226,7 +227,7 @@ export default function Home() {
               <>
                 <Link
                   href={ROUTES.COMPANY_REGISTER}
-                  className="inline-flex items-center justify-center text-base font-semibold bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-14 px-10 transition-all shadow-lg shadow-neutral-900/20 hover:shadow-xl hover:shadow-neutral-900/25"
+                  className="inline-flex items-center justify-center text-sm sm:text-base font-semibold bg-neutral-900 hover:bg-neutral-800 text-white rounded-full h-12 sm:h-14 px-8 sm:px-10 transition-all shadow-lg shadow-neutral-900/20 hover:shadow-xl hover:shadow-neutral-900/25"
                 >
                   Sign up for free
                 </Link>
@@ -243,13 +244,14 @@ export default function Home() {
         </div>
 
         {/* Product mockup — cropped at bottom, no bottom border */}
-        <div className="relative max-w-6xl mx-auto px-6 animate-slide-up-d3">
-          <div className="rounded-t-[20px] border-[6px] border-b-0 border-neutral-900 overflow-hidden shadow-2xl shadow-neutral-400/30">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 animate-slide-up-d3">
+          <div className="rounded-t-[14px] sm:rounded-t-[20px] border-[3px] sm:border-[6px] border-b-0 border-neutral-900 overflow-hidden shadow-2xl shadow-neutral-400/30">
             <Image
               src="/screenshots/dashboard.png"
               alt="Wispoke Dashboard"
               width={2800}
               height={1800}
+              sizes="(max-width: 1024px) 100vw, 1152px"
               className="w-full h-auto"
               priority
             />
@@ -258,9 +260,9 @@ export default function Home() {
       </section>
 
       {/* ═══════════ TRUST ═══════════ */}
-      <section className="relative py-14 px-6 border-y border-neutral-100">
+      <section className="relative py-10 sm:py-14 px-5 sm:px-6 border-y border-neutral-100">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center gap-8 sm:gap-14 flex-wrap">
+          <div className="flex items-center justify-center gap-5 sm:gap-14 flex-wrap">
             {[
               { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", text: "Setup in under 10 minutes" },
               { icon: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z", text: "No credit card required" },
@@ -278,33 +280,34 @@ export default function Home() {
       </section>
 
       {/* ═══════════ BENTO GRID ═══════════ */}
-      <section className="relative py-28 lg:py-36 px-6">
+      <section className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="scroll-reveal">
-            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-16 max-w-xl">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-10 sm:mb-16 max-w-xl">
               Everything you need to deploy AI&nbsp;support
             </h2>
           </div>
 
-          <div className="scroll-reveal grid lg:grid-cols-3 gap-5 auto-rows-[240px]">
+          <div className="scroll-reveal grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 lg:auto-rows-[240px]">
             {/* Large card — product screenshot */}
-            <div className="lg:col-span-2 lg:row-span-2 bg-neutral-50 rounded-3xl overflow-hidden relative flex flex-col">
-              <div className="p-8 lg:p-10 relative z-10">
-                <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-neutral-500 border border-neutral-200 rounded-full px-3 py-1 mb-5">
+            <div className="lg:col-span-2 lg:row-span-2 bg-neutral-50 rounded-3xl overflow-hidden relative flex flex-col lg:min-h-0">
+              <div className="p-6 sm:p-8 lg:p-10 relative z-10">
+                <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-neutral-500 border border-neutral-200 rounded-full px-3 py-1 mb-4 sm:mb-5">
                   Platform
                 </span>
-                <h3 className="text-2xl lg:text-3xl font-bold text-neutral-900 max-w-sm leading-snug">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-900 max-w-sm leading-snug">
                   Full visibility into every conversation
                 </h3>
               </div>
-              {/* Screenshot — overflows and crops at bottom */}
-              <div className="mt-auto px-6 lg:px-8 flex-1 relative min-h-0">
-                <div className="rounded-t-xl border-[4px] border-b-0 border-neutral-900 overflow-hidden shadow-xl h-full">
+              {/* Screenshot — desktop only; overflows and crops at bottom */}
+              <div className="hidden lg:block mt-auto px-5 sm:px-6 lg:px-8 flex-1 relative min-h-0">
+                <div className="rounded-t-xl border-[3px] sm:border-[4px] border-b-0 border-neutral-900 overflow-hidden shadow-xl h-full">
                   <Image
                     src="/screenshots/embedscreen.png"
                     alt="Wispoke platform — widget customization and live preview"
                     width={2800}
                     height={1800}
+                    sizes="768px"
                     className="w-full h-full object-cover object-top"
                   />
                 </div>
@@ -312,7 +315,7 @@ export default function Home() {
             </div>
 
             {/* Top-right — stat card */}
-            <div className="bg-neutral-50 rounded-3xl p-8 flex flex-col justify-between">
+            <div className="bg-neutral-50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between gap-6 min-h-[200px]">
               <div className="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center">
                 <svg className="w-5 h-5 text-neutral-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -325,7 +328,7 @@ export default function Home() {
             </div>
 
             {/* Bottom-right — accent card */}
-            <div className="bg-primary-50 rounded-3xl p-8 flex flex-col justify-between">
+            <div className="bg-primary-50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between gap-6 min-h-[180px]">
               <p className="text-lg font-bold text-neutral-900 leading-snug">
                 Train your chatbot on your own data.
               </p>
@@ -345,15 +348,15 @@ export default function Home() {
       </section>
 
       {/* ═══════════ FEATURES ═══════════ */}
-      <section id="features" className="relative py-28 lg:py-36 px-6">
+      <section id="features" className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="scroll-reveal grid lg:grid-cols-2 gap-16 items-center">
+          <div className="scroll-reveal grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left: text list */}
             <div>
               <span className="text-xs font-medium uppercase tracking-widest text-neutral-400 mb-4 block">
                 Features
               </span>
-              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-12">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-8 sm:mb-12">
                 Upload knowledge,
                 <br />
                 deploy instantly
@@ -362,7 +365,7 @@ export default function Home() {
                 {featureList.map((f) => (
                   <p
                     key={f}
-                    className="py-5 text-lg text-neutral-700 font-medium"
+                    className="py-4 sm:py-5 text-base sm:text-lg text-neutral-700 font-medium"
                   >
                     {f}
                   </p>
@@ -448,16 +451,16 @@ export default function Home() {
       </section>
 
       {/* ═══════════ EMBED WIDGET ═══════════ */}
-      <section className="relative py-28 lg:py-36 px-6 bg-neutral-50/70 overflow-hidden">
+      <section className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6 bg-neutral-50/70 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          <div className="scroll-reveal text-center mb-16">
+          <div className="scroll-reveal text-center mb-12 sm:mb-16">
             <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-neutral-500 border border-neutral-200 rounded-full px-3 py-1 mb-5">
               Embed Widget
             </span>
-            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-5">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4 sm:mb-5">
               Your brand, your chatbot
             </h2>
-            <p className="text-neutral-500 text-lg max-w-xl mx-auto">
+            <p className="text-neutral-500 text-base sm:text-lg max-w-xl mx-auto">
               Customize colors, templates, welcome messages, and see changes
               live before you publish.
             </p>
@@ -465,12 +468,13 @@ export default function Home() {
 
           {/* Screenshot — full width, cropped bottom */}
           <div className="scroll-reveal relative max-w-5xl mx-auto">
-            <div className="rounded-t-[20px] border-[5px] border-b-0 border-neutral-900 overflow-hidden shadow-2xl shadow-neutral-300/40">
+            <div className="rounded-t-[14px] sm:rounded-t-[20px] border-[3px] sm:border-[5px] border-b-0 border-neutral-900 overflow-hidden shadow-2xl shadow-neutral-300/40">
               <Image
                 src="/screenshots/embedcropped.png"
                 alt="Widget customization — edit colors, messages, templates, with live preview"
                 width={1400}
                 height={900}
+                sizes="(max-width: 1024px) 100vw, 1024px"
                 className="w-full h-auto"
               />
             </div>
@@ -493,13 +497,13 @@ export default function Home() {
       </section>
 
       {/* ═══════════ PLATFORMS ═══════════ */}
-      <section id="platform" className="relative py-28 lg:py-36 px-6">
+      <section id="platform" className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="scroll-reveal text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-5">
+          <div className="scroll-reveal text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4 sm:mb-5">
               Deploy everywhere
             </h2>
-            <p className="text-neutral-500 text-lg max-w-md mx-auto">
+            <p className="text-neutral-500 text-base sm:text-lg max-w-md mx-auto">
               One script tag. Any platform. Your chatbot works wherever your
               customers are.
             </p>
@@ -568,17 +572,17 @@ export default function Home() {
       </section>
 
       {/* ═══════════ INTEGRATION ═══════════ */}
-      <section className="relative py-28 lg:py-36 px-6">
+      <section className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="scroll-reveal">
               <span className="text-xs font-medium uppercase tracking-widest text-neutral-400 mb-4 block">
                 Integration
               </span>
-              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4">
                 One line of code
               </h2>
-              <p className="text-neutral-500 leading-relaxed mb-8 max-w-md text-lg">
+              <p className="text-neutral-500 leading-relaxed mb-8 max-w-md text-base sm:text-lg">
                 Add your chatbot to any website with a single script tag.
               </p>
               <ul className="space-y-3 text-sm text-neutral-500">
@@ -621,8 +625,8 @@ export default function Home() {
                   </div>
                   <span className="text-xs text-neutral-500">index.html</span>
                 </div>
-                <div className="bg-neutral-900 p-6 font-mono text-sm text-neutral-400 leading-relaxed">
-                  <pre className="whitespace-pre-wrap">
+                <div className="bg-neutral-900 p-4 sm:p-6 font-mono text-xs sm:text-sm text-neutral-400 leading-relaxed overflow-x-auto">
+                  <pre className="whitespace-pre">
                     {`<`}
                     <span className="text-sky-300">script</span>
                     {`\n  `}
@@ -653,7 +657,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════ VALUE PROPS ═══════════ */}
-      <section className="relative py-16 px-6 border-y border-neutral-100">
+      <section className="relative py-12 sm:py-16 px-5 sm:px-6 border-y border-neutral-100">
         <div className="scroll-reveal max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
           {[
             { title: "10 min setup", desc: "From signup to live chatbot" },
@@ -669,21 +673,21 @@ export default function Home() {
       </section>
 
       {/* ═══════════ PRICING ═══════════ */}
-      <section id="pricing" className="relative py-28 lg:py-36 px-6">
+      <section id="pricing" className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="scroll-reveal text-center mb-20">
-            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-5">
+          <div className="scroll-reveal text-center mb-12 sm:mb-20">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4 sm:mb-5">
               Start free, scale when ready
             </h2>
-            <p className="text-neutral-500 text-lg max-w-lg mx-auto">
+            <p className="text-neutral-500 text-base sm:text-lg max-w-lg mx-auto">
               No credit card required. Upgrade anytime to unlock the full
               platform.
             </p>
           </div>
 
-          <div className="scroll-reveal grid lg:grid-cols-5 gap-6 items-start">
+          <div className="scroll-reveal grid lg:grid-cols-5 gap-5 sm:gap-6 items-start">
             {/* Free — compact */}
-            <div className="lg:col-span-2 rounded-3xl border border-neutral-200 bg-white p-8 lg:p-10">
+            <div className="lg:col-span-2 rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 lg:p-10">
               <p className="text-sm font-bold text-neutral-900 mb-1">Free</p>
               <p className="text-xs text-neutral-400 mb-6">
                 For trying things out
@@ -728,7 +732,7 @@ export default function Home() {
             </div>
 
             {/* Pro — hero card */}
-            <div className="lg:col-span-3 rounded-3xl bg-neutral-900 p-8 lg:p-10 relative overflow-hidden">
+            <div className="lg:col-span-3 rounded-3xl bg-neutral-900 p-6 sm:p-8 lg:p-10 relative overflow-hidden">
               <div
                 className="absolute inset-0 pointer-events-none"
                 aria-hidden="true"
@@ -760,7 +764,7 @@ export default function Home() {
                 </Link>
 
                 {/* Feature groups */}
-                <div className="grid sm:grid-cols-2 gap-x-10 gap-y-8">
+                <div className="grid sm:grid-cols-2 gap-x-8 sm:gap-x-10 gap-y-6 sm:gap-y-8">
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-3">
                       Knowledge Base
@@ -888,13 +892,13 @@ export default function Home() {
       </section>
 
       {/* ═══════════ FAQ ═══════════ */}
-      <section id="faq" className="relative py-28 lg:py-36 px-6">
+      <section id="faq" className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6">
         <div className="max-w-3xl mx-auto">
-          <div className="scroll-reveal text-center mb-16">
+          <div className="scroll-reveal text-center mb-12 sm:mb-16">
             <span className="text-xs font-medium uppercase tracking-widest text-neutral-400 mb-4 block">
               FAQ
             </span>
-            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4">
               Common questions
             </h2>
           </div>
@@ -947,34 +951,34 @@ export default function Home() {
       </section>
 
       {/* ═══════════ CTA ═══════════ */}
-      <section className="relative py-28 lg:py-36 px-6">
+      <section className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="scroll-reveal relative overflow-hidden rounded-3xl bg-neutral-900 px-8 py-16 lg:px-16 lg:py-24 text-center">
+          <div className="scroll-reveal relative overflow-hidden rounded-3xl bg-neutral-900 px-6 py-14 sm:px-8 sm:py-16 lg:px-16 lg:py-24 text-center">
             <div
               className="absolute inset-0 pointer-events-none"
               aria-hidden="true"
             >
-              <div className="absolute top-10 left-10 w-40 h-40 bg-primary-500/10 rounded-3xl rotate-12" />
-              <div className="absolute bottom-10 right-10 w-56 h-56 bg-primary-500/5 rounded-3xl -rotate-6" />
+              <div className="absolute top-6 left-6 sm:top-10 sm:left-10 w-28 h-28 sm:w-40 sm:h-40 bg-primary-500/10 rounded-3xl rotate-12" />
+              <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 w-36 h-36 sm:w-56 sm:h-56 bg-primary-500/5 rounded-3xl -rotate-6" />
             </div>
             <div className="relative">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white max-w-2xl mx-auto mb-5">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white max-w-2xl mx-auto mb-4 sm:mb-5">
                 Ready to launch your AI&nbsp;chatbot?
               </h2>
-              <p className="text-neutral-400 max-w-md mx-auto mb-10 text-lg">
+              <p className="text-neutral-400 max-w-md mx-auto mb-8 sm:mb-10 text-base sm:text-lg">
                 Launch your AI-powered customer support in minutes.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
                   href={isLoggedIn ? ROUTES.DASHBOARD : ROUTES.COMPANY_REGISTER}
-                  className="inline-flex items-center justify-center text-base font-semibold bg-white hover:bg-neutral-100 text-neutral-900 rounded-full h-14 px-10 transition-colors shadow-lg"
+                  className="inline-flex items-center justify-center text-sm sm:text-base font-semibold bg-white hover:bg-neutral-100 text-neutral-900 rounded-full h-12 sm:h-14 px-8 sm:px-10 transition-colors shadow-lg"
                 >
                   {isLoggedIn ? "Go to Dashboard" : "Get started — it\u2019s free"}
                 </Link>
                 {!isLoggedIn && (
                   <Link
                     href={ROUTES.COMPANY_LOGIN}
-                    className="inline-flex items-center justify-center text-sm font-medium text-neutral-400 border border-neutral-700 hover:border-neutral-500 hover:text-white rounded-full h-12 px-8 transition-all"
+                    className="inline-flex items-center justify-center text-sm font-medium text-neutral-400 border border-neutral-700 hover:border-neutral-500 hover:text-white rounded-full h-11 sm:h-12 px-7 sm:px-8 transition-all"
                   >
                     I have an account
                   </Link>
@@ -986,9 +990,9 @@ export default function Home() {
       </section>
 
       {/* ═══════════ FOOTER ═══════════ */}
-      <footer className="border-t border-neutral-100 py-12 lg:py-16 px-6">
+      <footer className="border-t border-neutral-100 py-12 lg:py-16 px-5 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-8">
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="mb-4">
                 <Image
