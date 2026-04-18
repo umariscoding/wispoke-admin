@@ -50,6 +50,12 @@ const getNavigationSections = (): NavigationSection[] => [
         icon: Icons.Code,
         allowedUserTypes: ["company"],
       },
+      {
+        name: "Voice Agent",
+        href: "/voice-agent",
+        icon: Icons.Phone,
+        allowedUserTypes: ["company"],
+      },
     ],
   },
   {

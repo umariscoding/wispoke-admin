@@ -8,6 +8,7 @@ import companySlice from "./slices/companySlice";
 import analyticsSlice from "./slices/analyticsSlice";
 import uiSlice from "./slices/uiSlice";
 import billingSlice from "./slices/billingSlice";
+import voiceAgentSlice from "./slices/voiceAgentSlice";
 
 // Create a noop storage for server-side rendering
 const createNoopStorage = () => {
@@ -44,6 +45,7 @@ const rootReducer = combineReducers({
   analytics: analyticsSlice,
   ui: uiSlice,
   billing: billingSlice,
+  voiceAgent: voiceAgentSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
