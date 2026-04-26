@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Icons } from "@/components/ui";
 import IOSLoader from "@/components/ui/IOSLoader";
 import { useAppointments, type Appointment, type StatusFilter } from "@/hooks/useAppointments";
@@ -37,6 +38,9 @@ const FILTERS: { key: StatusFilter; label: string }[] = [
 
 export default function AppointmentsPage() {
   const { appointments, loading, counts, updateStatus, remove, create } = useAppointments();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const deepLinkId = searchParams?.get("id") || null;
 
   const [view, setView] = useState<View>("calendar");
   const [filter, setFilter] = useState<StatusFilter>("all");
@@ -44,6 +48,17 @@ export default function AppointmentsPage() {
 
   const [selected, setSelected] = useState<Appointment | null>(null);
   const [adding, setAdding] = useState<{ date?: string; time?: string } | null>(null);
+
+  // When deep-linked from /calls (?id=…) pop the detail modal once the
+  // appointment list arrives, then strip the param so refresh doesn't replay.
+  useEffect(() => {
+    if (!deepLinkId || loading) return;
+    const match = appointments.find((a) => a.appointment_id === deepLinkId);
+    if (match) {
+      setSelected(match);
+      router.replace("/appointments");
+    }
+  }, [deepLinkId, loading, appointments, router]);
 
   const filtered = useMemo(() => {
     let list = appointments;

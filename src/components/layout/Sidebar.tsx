@@ -51,6 +51,12 @@ const getNavigationSections = (): NavigationSection[] => [
         allowedUserTypes: ["company"],
       },
       {
+        name: "Call Logs",
+        href: "/calls",
+        icon: Icons.Phone,
+        allowedUserTypes: ["company"],
+      },
+      {
         name: "Appointments",
         href: "/appointments",
         icon: Icons.Calendar,
