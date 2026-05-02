@@ -73,7 +73,7 @@ const TrendChip: React.FC<{
 }> = ({ change }) => {
   if (change.type === "neutral") {
     return (
-      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold tabular-nums bg-slate-100 dark:bg-white/[0.04] text-slate-500 dark:text-slate-500 border border-slate-200/60 dark:border-white/[0.06]">
+      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold tabular-nums bg-slate-100 dark:bg-white/[0.04] text-slate-500 dark:text-slate-400 border border-slate-200/60 dark:border-white/[0.06]">
         {change.value}
       </span>
     );
@@ -83,8 +83,8 @@ const TrendChip: React.FC<{
     <span
       className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] font-semibold tabular-nums border ${
         positive
-          ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-200/60 dark:border-emerald-500/20"
-          : "bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-400 border-rose-200/60 dark:border-rose-500/20"
+          ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 dark:text-emerald-400 border-emerald-200/60 dark:border-emerald-500/20"
+          : "bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 dark:text-rose-400 border-rose-200/60 dark:border-rose-500/20"
       }`}
     >
       <svg
@@ -134,15 +134,7 @@ const ErrorState: React.FC<{
       </p>
       <button
         onClick={onRetry}
-        className="
-          inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full
-          text-xs font-semibold tracking-wide
-          text-white dark:text-teal-200
-          bg-slate-900 dark:bg-teal-500/15
-          border border-transparent dark:border-teal-500/30
-          hover:bg-slate-800 dark:hover:bg-teal-500/25
-          transition-colors
-        "
+        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide text-white dark:text-teal-200 bg-slate-900 dark:bg-teal-500/15 border border-transparent dark:border-teal-500/30 hover:bg-slate-800 dark:hover:bg-teal-500/25 transition-colors"
       >
         <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
           <path
@@ -243,12 +235,12 @@ const DashboardAnalytics: React.FC<DashboardAnalyticsProps> = ({
             <h2 className="text-[15px] font-semibold text-slate-900 dark:text-white tracking-[-0.02em] leading-none">
               Overview
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-500 mt-1.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5">
               Last 7 days
             </p>
           </div>
         </div>
-        <span className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 dark:text-slate-500">
+        <span className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 dark:text-slate-400">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inset-0 rounded-full bg-teal-400 animate-ping opacity-60" />
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-400" />

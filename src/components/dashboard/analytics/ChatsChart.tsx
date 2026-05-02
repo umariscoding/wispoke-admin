@@ -25,12 +25,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (!active || !payload?.length) return null;
   return (
     <div className="bg-white dark:bg-[#0E1515] border border-slate-200 dark:border-white/[0.08] rounded-lg px-3 py-2.5 shadow-xl shadow-slate-900/5 dark:shadow-black/40 backdrop-blur-md">
-      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 dark:text-slate-500 mb-1">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 dark:text-slate-400 mb-1">
         {label}
       </p>
-      <p className="text-sm font-semibold text-amber-600 dark:text-amber-300 tabular-nums">
+      <p className="text-sm font-semibold text-amber-600 dark:text-amber-400 dark:text-amber-300 tabular-nums">
         {payload[0].value?.toLocaleString()}{" "}
-        <span className="text-slate-400 dark:text-slate-500 font-normal">
+        <span className="text-slate-400 dark:text-slate-400 font-normal">
           chats
         </span>
       </p>
@@ -75,13 +75,7 @@ const ChatsChart: React.FC<ChatsChartProps> = ({
 
   return (
     <div
-      className={`
-        relative overflow-hidden p-5
-        bg-white dark:bg-white/[0.02]
-        border border-slate-200/80 dark:border-white/[0.06]
-        rounded-xl
-        ${className}
-      `}
+      className={`relative overflow-hidden p-5 bg-white dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.06] rounded-xl ${className}`}
     >
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/20 to-transparent" />
 
@@ -89,13 +83,13 @@ const ChatsChart: React.FC<ChatsChartProps> = ({
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-500/10 ring-1 ring-inset ring-amber-200 dark:ring-amber-500/20">
-            <Icons.MessageSquare className="h-4 w-4 text-amber-600 dark:text-amber-300" />
+            <Icons.MessageSquare className="h-4 w-4 text-amber-600 dark:text-amber-400 dark:text-amber-300" />
           </div>
           <div>
             <h3 className="text-[13px] font-semibold text-slate-900 dark:text-white tracking-[-0.01em]">
               Chat Activity
             </h3>
-            <p className="text-[11px] text-slate-500 dark:text-slate-500 mt-0.5">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
               New conversations · last 7 days
             </p>
           </div>
@@ -108,7 +102,7 @@ const ChatsChart: React.FC<ChatsChartProps> = ({
               <p className="text-xl font-bold text-slate-900 dark:text-white tracking-[-0.03em] tabular-nums leading-none">
                 {total.toLocaleString()}
               </p>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 dark:text-slate-500 mt-1.5">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 dark:text-slate-400 mt-1.5">
                 Total
               </p>
             </>

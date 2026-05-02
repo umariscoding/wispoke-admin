@@ -8,20 +8,20 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
-      <nav className="border-b border-neutral-100 dark:border-neutral-800 px-6">
+    <div className="min-h-screen bg-white dark:bg-white/[0.02]">
+      <nav className="border-b border-slate-100 dark:border-white/[0.06] px-6">
         <div className="max-w-3xl mx-auto h-16 flex items-center">
-          <Link href="/" className="text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+          <Link href="/" className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
             {APP_CONFIG.NAME}
           </Link>
         </div>
       </nav>
 
       <main className="max-w-3xl mx-auto px-6 py-16">
-        <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 mb-2">Terms of Service</h1>
-        <p className="text-sm text-neutral-400 dark:text-neutral-500 mb-12">Last updated: April 5, 2026</p>
+        <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">Terms of Service</h1>
+        <p className="text-sm text-slate-400 dark:text-slate-400 mb-12">Last updated: April 5, 2026</p>
 
-        <div className="prose prose-neutral prose-sm max-w-none [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:text-neutral-600 [&_p]:leading-relaxed [&_ul]:text-neutral-600 [&_li]:leading-relaxed">
+        <div className="prose prose-neutral prose-sm max-w-none [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:text-slate-600 [&_p]:leading-relaxed [&_ul]:text-slate-600 [&_li]:leading-relaxed">
           <h2>1. Acceptance of Terms</h2>
           <p>By accessing or using {APP_CONFIG.NAME}, you agree to be bound by these Terms of Service. If you do not agree, do not use the service.</p>
 

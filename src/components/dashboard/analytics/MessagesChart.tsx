@@ -25,12 +25,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (!active || !payload?.length) return null;
   return (
     <div className="bg-white dark:bg-[#0E1515] border border-slate-200 dark:border-white/[0.08] rounded-lg px-3 py-2.5 shadow-xl shadow-slate-900/5 dark:shadow-black/40 backdrop-blur-md">
-      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 dark:text-slate-500 mb-1">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 dark:text-slate-400 mb-1">
         {label}
       </p>
       <p className="text-sm font-semibold text-teal-600 dark:text-teal-300 tabular-nums">
         {payload[0].value?.toLocaleString()}{" "}
-        <span className="text-slate-400 dark:text-slate-500 font-normal">
+        <span className="text-slate-400 dark:text-slate-400 font-normal">
           messages
         </span>
       </p>
@@ -73,13 +73,7 @@ const MessagesChart: React.FC<MessagesChartProps> = ({
 
   return (
     <div
-      className={`
-        relative overflow-hidden p-5
-        bg-white dark:bg-white/[0.02]
-        border border-slate-200/80 dark:border-white/[0.06]
-        rounded-xl
-        ${className}
-      `}
+      className={`relative overflow-hidden p-5 bg-white dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/[0.06] rounded-xl ${className}`}
     >
       {/* Decorative top hairline — same recipe as the sidebar */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-teal-500/20 to-transparent" />
@@ -94,7 +88,7 @@ const MessagesChart: React.FC<MessagesChartProps> = ({
             <h3 className="text-[13px] font-semibold text-slate-900 dark:text-white tracking-[-0.01em]">
               Messages Over Time
             </h3>
-            <p className="text-[11px] text-slate-500 dark:text-slate-500 mt-0.5">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
               Daily activity · last 7 days
             </p>
           </div>
@@ -107,7 +101,7 @@ const MessagesChart: React.FC<MessagesChartProps> = ({
               <p className="text-xl font-bold text-slate-900 dark:text-white tracking-[-0.03em] tabular-nums leading-none">
                 {total.toLocaleString()}
               </p>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 dark:text-slate-500 mt-1.5">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 dark:text-slate-400 mt-1.5">
                 Total
               </p>
             </>

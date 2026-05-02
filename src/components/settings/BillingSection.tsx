@@ -154,9 +154,9 @@ export default function BillingSection() {
       )}
 
       {billingSuccess && !billingActivating && (
-        <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl px-4 py-3">
+        <div className="flex items-center gap-3 bg-green-50 dark:bg-emerald-500/10 border border-green-200 dark:border-emerald-500/20 rounded-xl px-4 py-3">
           <Icons.CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-          <p className="text-sm text-green-700 font-medium flex-1">
+          <p className="text-sm text-green-700 dark:text-emerald-300 font-medium flex-1">
             Welcome to Pro! Your subscription is now active.
           </p>
           <button
@@ -169,12 +169,12 @@ export default function BillingSection() {
       )}
 
       {error && (
-        <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
-          <Icons.AlertCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
-          <p className="text-sm text-red-700 flex-1">{error}</p>
+        <div className="flex items-center gap-3 bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 rounded-xl px-4 py-3">
+          <Icons.AlertCircle className="h-4 w-4 text-rose-500 flex-shrink-0" />
+          <p className="text-sm text-rose-700 dark:text-rose-300 flex-1">{error}</p>
           <button
             onClick={() => setError(null)}
-            className="text-red-400 hover:text-red-600 transition-colors"
+            className="text-rose-400 hover:text-rose-600 dark:text-rose-400 transition-colors"
           >
             <Icons.Close className="h-3.5 w-3.5" />
           </button>
@@ -182,13 +182,13 @@ export default function BillingSection() {
       )}
 
       {/* Billing card */}
-      <div className="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+      <div className="bg-white dark:bg-white/[0.02] rounded-2xl border border-neutral-200 dark:border-white/[0.06] overflow-hidden">
         <div className="px-5 pt-5 pb-4">
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-6 h-6 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
-              <Icons.CreditCard className="h-3.5 w-3.5 text-neutral-500 dark:text-neutral-400" />
+            <div className="w-6 h-6 rounded-full bg-neutral-100 dark:bg-white/[0.04] flex items-center justify-center">
+              <Icons.CreditCard className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
             </div>
-            <span className="text-xs font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-400">
               Billing
             </span>
           </div>
@@ -200,30 +200,30 @@ export default function BillingSection() {
                 className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${
                   isPro
                     ? "bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-orange-500/25"
-                    : "bg-neutral-100 dark:bg-neutral-800"
+                    : "bg-neutral-100 dark:bg-white/[0.04]"
                 }`}
               >
                 <Icons.Crown
-                  className={`h-4 w-4 ${isPro ? "text-white" : "text-neutral-400 dark:text-neutral-500"}`}
+                  className={`h-4 w-4 ${isPro ? "text-white" : "text-slate-400 dark:text-slate-400"}`}
                 />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-neutral-900 dark:text-neutral-50">
+                  <span className="text-sm font-bold text-slate-900 dark:text-white">
                     {isPro ? "Pro" : "Free"} Plan
                   </span>
                   {isPro && !isCancelled && (
-                    <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-green-100 text-green-700 text-[10px] font-semibold uppercase tracking-wider">
+                    <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-green-100 dark:bg-emerald-500/15 text-green-700 dark:text-emerald-300 text-[10px] font-semibold uppercase tracking-wider">
                       Active
                     </span>
                   )}
                   {isCancelled && (
-                    <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700 text-[10px] font-semibold uppercase tracking-wider">
+                    <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-500/15 text-amber-700 dark:text-amber-300 text-[10px] font-semibold uppercase tracking-wider">
                       Cancelling
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   {isFree && "Upgrade to unlock all features"}
                   {isPro && !isCancelled && subscriptionRenewsAt && (
                     <>Renews {new Date(subscriptionRenewsAt).toLocaleDateString()}</>
@@ -237,7 +237,7 @@ export default function BillingSection() {
             </div>
 
             {isPro && !isCancelled && (
-              <span className="text-xs font-bold text-neutral-900 dark:text-neutral-50 bg-neutral-100 dark:bg-neutral-800 px-3 py-1.5 rounded-full">
+              <span className="text-xs font-bold text-slate-900 dark:text-white bg-neutral-100 dark:bg-white/[0.04] px-3 py-1.5 rounded-full">
                 $99/mo
               </span>
             )}
@@ -245,12 +245,12 @@ export default function BillingSection() {
 
           {/* Free plan — upgrade CTA */}
           {isFree && (
-            <div className="bg-gradient-to-br from-neutral-50 to-primary-50/30 border border-neutral-200 dark:border-neutral-800 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-neutral-50 to-primary-50/30 border border-neutral-200 dark:border-white/[0.06] rounded-xl p-4">
               <div className="space-y-2.5 mb-4">
                 {PRO_FEATURES.map((feature) => (
                   <div key={feature} className="flex items-center gap-2.5">
                     <Icons.CheckCircle className="h-3.5 w-3.5 text-primary-500 flex-shrink-0" />
-                    <span className="text-xs text-neutral-600 dark:text-neutral-400">{feature}</span>
+                    <span className="text-xs text-slate-600 dark:text-slate-400">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -258,7 +258,7 @@ export default function BillingSection() {
                 onClick={handleUpgrade}
                 disabled={checkoutLoading}
                 aria-busy={checkoutLoading}
-                className="w-full px-4 py-2.5 text-sm font-semibold text-white bg-primary-600 hover:bg-primary-500 rounded-full transition-all disabled:opacity-40 flex items-center justify-center gap-2"
+                className="w-full px-4 py-2.5 text-sm font-semibold text-white bg-primary-600 hover:bg-teal-500 dark:hover:bg-teal-500/25 dark:border dark:border-teal-500/30 rounded-full transition-all disabled:opacity-40 flex items-center justify-center gap-2"
               >
                 {checkoutLoading ? (
                   <IOSLoader size="sm" color="white" />
@@ -276,7 +276,7 @@ export default function BillingSection() {
           {isPro && !isCancelled && (
             <button
               onClick={() => setShowCancelConfirm(true)}
-              className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-red-500 transition-colors"
+              className="text-xs text-slate-400 dark:text-slate-400 hover:text-rose-500 transition-colors"
             >
               Cancel subscription
             </button>
@@ -288,7 +288,7 @@ export default function BillingSection() {
               onClick={handleResume}
               disabled={billingLoading}
               aria-busy={billingLoading}
-              className="w-full px-4 py-2.5 text-sm font-semibold text-white bg-primary-600 hover:bg-primary-500 rounded-full transition-all disabled:opacity-40 flex items-center justify-center gap-2"
+              className="w-full px-4 py-2.5 text-sm font-semibold text-white bg-primary-600 hover:bg-teal-500 dark:hover:bg-teal-500/25 dark:border dark:border-teal-500/30 rounded-full transition-all disabled:opacity-40 flex items-center justify-center gap-2"
             >
               {billingLoading ? (
                 <IOSLoader size="sm" color="white" />
@@ -303,11 +303,11 @@ export default function BillingSection() {
 
           {/* Cancel confirmation dialog */}
           {showCancelConfirm && (
-            <div className="mt-3 bg-red-50 border border-red-200 rounded-xl p-4">
-              <p className="text-sm text-red-700 font-medium mb-1">
+            <div className="mt-3 bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 rounded-xl p-4">
+              <p className="text-sm text-rose-700 dark:text-rose-300 font-medium mb-1">
                 Cancel your subscription?
               </p>
-              <p className="text-xs text-red-600 mb-3">
+              <p className="text-xs text-rose-600 dark:text-rose-400 mb-3">
                 You&#39;ll keep Pro access until the end of your billing period.
                 After that, your plan will revert to Free.
               </p>
@@ -316,7 +316,7 @@ export default function BillingSection() {
                   onClick={handleCancel}
                   disabled={billingLoading}
                   aria-busy={billingLoading}
-                  className="px-3.5 py-1.5 text-xs font-semibold text-white bg-red-500 hover:bg-red-600 rounded-full transition-all disabled:opacity-40 flex items-center gap-1.5"
+                  className="px-3.5 py-1.5 text-xs font-semibold text-white bg-rose-500 hover:bg-rose-600 rounded-full transition-all disabled:opacity-40 flex items-center gap-1.5"
                 >
                   {billingLoading ? (
                     <IOSLoader size="sm" color="white" />
@@ -327,7 +327,7 @@ export default function BillingSection() {
                 <button
                   onClick={() => setShowCancelConfirm(false)}
                   disabled={billingLoading}
-                  className="px-3.5 py-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 rounded-full border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all disabled:opacity-40"
+                  className="px-3.5 py-1.5 text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 rounded-full border border-neutral-200 dark:border-white/[0.06] hover:bg-neutral-50 dark:hover:bg-white/[0.04] transition-all disabled:opacity-40"
                 >
                   Keep subscription
                 </button>

@@ -8,7 +8,7 @@ import {
   loadFromStorage,
   verifyCompanyToken,
 } from "@/store/company/slices/companyAuthSlice";
-import IOSLoader from "@/components/ui/IOSLoader";
+import { IOSContentLoader } from "@/components/ui";
 
 interface CompanyAuthProviderProps {
   children: React.ReactNode;
@@ -44,11 +44,11 @@ export const CompanyAuthProvider: React.FC<CompanyAuthProviderProps> = ({
     initAuth();
   }, [dispatch]);
 
-  // Show loading state until auth is initialized
+  // Show loading state until auth is initialized — matches platform loader
   if (!isInitialized) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-bg-primary">
-        <IOSLoader size="xl" color="primary" />
+      <div className="min-h-screen bg-white dark:bg-sidebar-bg">
+        <IOSContentLoader isLoading={true} message="Loading..." />
       </div>
     );
   }

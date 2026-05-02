@@ -112,7 +112,7 @@ const TONE_OPTIONS: {
     label: "Friendly",
     icon: "Smile",
     desc: "Warm and approachable",
-    color: { bg: "bg-amber-50", bgActive: "bg-amber-100", text: "text-amber-600", border: "border-amber-200" },
+    color: { bg: "bg-amber-50 dark:bg-amber-500/10", bgActive: "bg-amber-100 dark:bg-amber-500/15", text: "text-amber-600 dark:text-amber-400", border: "border-amber-200 dark:border-amber-500/20" },
   },
   {
     id: "casual",
@@ -133,7 +133,7 @@ const TONE_OPTIONS: {
     label: "Witty",
     icon: "Flame",
     desc: "Clever with subtle humor",
-    color: { bg: "bg-rose-50", bgActive: "bg-rose-100", text: "text-rose-600", border: "border-rose-200" },
+    color: { bg: "bg-rose-50 dark:bg-rose-500/10", bgActive: "bg-rose-100 dark:bg-rose-500/15", text: "text-rose-600 dark:text-rose-400", border: "border-rose-200 dark:border-rose-500/20" },
   },
 ];
 
@@ -244,13 +244,13 @@ export default function AIStudioPage() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center px-4">
         <div className="text-center space-y-4">
-          <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-neutral-100 dark:bg-neutral-800">
-            <Icons.Shield className="h-8 w-8 text-neutral-400 dark:text-neutral-500" />
+          <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-neutral-100 dark:bg-white/[0.04]">
+            <Icons.Shield className="h-8 w-8 text-slate-400 dark:text-slate-400" />
           </div>
-          <h1 className="text-xl font-bold text-neutral-900 dark:text-neutral-50">
+          <h1 className="text-xl font-bold text-slate-900 dark:text-white">
             Access Restricted
           </h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-sm">
+          <p className="text-sm text-slate-500 dark:text-slate-400 max-w-sm">
             This section is only available to company accounts.
           </p>
         </div>
@@ -277,12 +277,12 @@ export default function AIStudioPage() {
 
   return (
     <>
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-7xl mx-auto space-y-6">
         {/* Header with save/discard */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50">AI Studio</h1>
-            <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">AI Studio</h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
               Knowledge base, model, and behavior
             </p>
           </div>
@@ -292,14 +292,14 @@ export default function AIStudioPage() {
                 <button
                   onClick={() => resetChanges()}
                   disabled={settingsLoading}
-                  className="px-4 py-2 text-sm font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 border border-neutral-200 dark:border-neutral-800 rounded-full transition-all disabled:opacity-50 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                  className="px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 border border-neutral-200 dark:border-white/[0.06] rounded-full transition-all disabled:opacity-50 hover:bg-neutral-50 dark:hover:bg-white/[0.04]"
                 >
                   Discard
                 </button>
                 <button
                   onClick={handleSaveAIConfig}
                   disabled={settingsLoading}
-                  className="px-5 py-2 text-sm font-semibold text-white bg-primary-600 hover:bg-primary-500 rounded-full transition-all disabled:opacity-50 flex items-center gap-2 min-w-[80px] justify-center"
+                  className="px-5 py-2 text-sm font-semibold text-white bg-primary-600 hover:bg-teal-500 dark:hover:bg-teal-500/25 dark:border dark:border-teal-500/30 rounded-full transition-all disabled:opacity-50 flex items-center gap-2 min-w-[80px] justify-center"
                 >
                   {settingsLoading ? (
                     <IOSLoader size="sm" color="white" />
@@ -336,7 +336,7 @@ export default function AIStudioPage() {
 
         {/* Section tabs */}
         <div className="flex justify-center">
-          <div className="inline-flex items-center border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 rounded-full p-1 gap-0.5">
+          <div className="inline-flex items-center border border-neutral-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] rounded-full p-1 gap-0.5">
             {sections.map((section) => {
               const isActive = activeSection === section.id;
               return (
@@ -345,8 +345,8 @@ export default function AIStudioPage() {
                   onClick={() => setActiveSection(section.id)}
                   className={`flex items-center gap-2 px-5 py-2 text-[13px] font-medium rounded-full transition-all duration-200 ${
                     isActive
-                      ? "bg-primary-600 text-white shadow-sm shadow-primary-600/25"
-                      : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                      ? "bg-primary-600 text-white dark:bg-teal-500/20 dark:text-teal-100 dark:border dark:border-teal-500/30 shadow-sm shadow-primary-600/25 dark:shadow-none"
+                      : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-neutral-50 dark:hover:bg-white/[0.04]"
                   }`}
                 >
                   {section.icon}
@@ -364,7 +364,7 @@ export default function AIStudioPage() {
               <div className="flex items-center gap-3">
                 {docCount > 0 && (
                   <div className="flex items-center gap-2">
-                    <div className="w-28 h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden">
+                    <div className="w-28 h-1.5 bg-slate-200 dark:bg-white/[0.04] rounded-full overflow-hidden">
                       <div
                         className="h-full bg-accent-500 rounded-full transition-all duration-500"
                         style={{
@@ -372,7 +372,7 @@ export default function AIStudioPage() {
                         }}
                       />
                     </div>
-                    <span className="text-xs text-neutral-500 dark:text-neutral-400 tabular-nums font-medium">
+                    <span className="text-xs text-slate-500 dark:text-slate-400 tabular-nums font-medium">
                       {processedCount}/{docCount} ready
                     </span>
                   </div>
@@ -380,7 +380,7 @@ export default function AIStudioPage() {
               </div>
               <button
                 onClick={() => setIsDrawerOpen(true)}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-600 hover:bg-primary-500 text-white text-sm font-semibold transition-all active:scale-[0.97]"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-600 hover:bg-teal-500 dark:hover:bg-teal-500/25 dark:border dark:border-teal-500/30 text-white text-sm font-semibold transition-all active:scale-[0.97]"
               >
                 <Icons.Plus className="h-3.5 w-3.5" />
                 Add content
@@ -396,11 +396,11 @@ export default function AIStudioPage() {
             {isFree && <UpgradeNudge feature="Model & Tone" />}
 
             {/* Model selection */}
-            <div className="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
-              <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
+            <div className="bg-white dark:bg-white/[0.02] rounded-xl border border-neutral-200 dark:border-white/[0.06] overflow-hidden">
+              <div className="px-5 py-4 border-b border-slate-100 dark:border-white/[0.06] flex items-center justify-between">
                 <div>
-                  <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Language Model</h2>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+                  <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Language Model</h2>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     Choose the AI model that powers your chatbot
                   </p>
                 </div>
@@ -416,33 +416,33 @@ export default function AIStudioPage() {
                       onClick={() => !isFree && updateField("defaultModel", model.id)}
                       className={`group w-full flex items-center gap-3.5 px-4 py-3 rounded-lg text-left transition-all duration-150 ${
                         isSelected
-                          ? "bg-primary-50 dark:bg-primary-900/20 ring-1 ring-primary-500/20"
-                          : "hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                          ? "bg-teal-50/60 dark:bg-teal-500/[0.06] ring-1 ring-teal-500/30 dark:ring-teal-500/25"
+                          : "hover:bg-slate-50 dark:hover:bg-white/[0.04]"
                       } ${isFree && !isSelected ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       <div className={`w-[18px] h-[18px] rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
-                        isSelected ? "border-primary-600 bg-primary-600" : "border-neutral-300 dark:border-neutral-700"
+                        isSelected ? "border-teal-500 bg-teal-500 dark:border-teal-400 dark:bg-teal-400" : "border-slate-300 dark:border-white/[0.15]"
                       }`}>
-                        {isSelected && <div className="w-[7px] h-[7px] rounded-full bg-white dark:bg-neutral-900" />}
+                        {isSelected && <div className="w-[7px] h-[7px] rounded-full bg-white" />}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className={`text-[13px] font-semibold ${isSelected ? "text-primary-700 dark:text-primary-300" : "text-neutral-900 dark:text-neutral-50"}`}>
+                          <span className={`text-[13px] font-semibold ${isSelected ? "text-teal-700 dark:text-teal-200" : "text-slate-900 dark:text-white"}`}>
                             {model.name}
                           </span>
-                          <span className="text-[10px] text-neutral-400 dark:text-neutral-500 font-medium uppercase tracking-wider">
+                          <span className="text-[10px] text-slate-400 dark:text-slate-400 font-medium uppercase tracking-wider">
                             {model.provider}
                           </span>
                           {model.tag && (
-                            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-accent-100 text-accent-700 dark:text-accent-300">
+                            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-500/15 text-teal-700 dark:text-teal-300 border border-teal-200/60 dark:border-teal-500/20">
                               {model.tag}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">{model.desc}</p>
+                        <p className="text-xs text-slate-400 dark:text-slate-400 mt-0.5">{model.desc}</p>
                       </div>
                       <span className={`text-[11px] font-mono tabular-nums hidden sm:block transition-colors ${
-                        isSelected ? "text-primary-500" : "text-neutral-300 dark:text-neutral-600"
+                        isSelected ? "text-teal-600 dark:text-teal-400" : "text-slate-300 dark:text-slate-600"
                       }`}>
                         {model.speed}
                       </span>
@@ -453,11 +453,11 @@ export default function AIStudioPage() {
             </div>
 
             {/* Tone selection */}
-            <div className="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
-              <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
+            <div className="bg-white dark:bg-white/[0.02] rounded-xl border border-neutral-200 dark:border-white/[0.06] overflow-hidden">
+              <div className="px-5 py-4 border-b border-slate-100 dark:border-white/[0.06] flex items-center justify-between">
                 <div>
-                  <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Tone</h2>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+                  <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Tone</h2>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     Set the personality and voice of your chatbot
                   </p>
                 </div>
@@ -474,20 +474,20 @@ export default function AIStudioPage() {
                       onClick={() => !isFree && updateField("tone", tone.id)}
                       className={`group flex flex-col items-center gap-2 py-4 px-3 rounded-xl border transition-all duration-150 ${
                         isSelected
-                          ? `${tone.color.bg} ${tone.color.border}`
-                          : "border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
+                          ? "bg-teal-50/60 dark:bg-teal-500/[0.06] border-teal-300 dark:border-teal-500/40 ring-2 ring-teal-500/15 dark:ring-teal-500/20"
+                          : "border-slate-200 hover:border-slate-300 dark:border-white/[0.06] dark:hover:border-white/[0.10] hover:bg-slate-50 dark:hover:bg-white/[0.04]"
                       } ${isFree && !isSelected ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${
-                        isSelected ? `${tone.color.bgActive}` : "bg-neutral-100 dark:bg-neutral-800"
+                        isSelected ? "bg-teal-100 dark:bg-teal-500/15 ring-1 ring-inset ring-teal-200 dark:ring-teal-500/25" : "bg-slate-100 dark:bg-white/[0.04]"
                       }`}>
-                        <IconComponent className={`h-[18px] w-[18px] transition-colors ${isSelected ? tone.color.text : "text-neutral-400 dark:text-neutral-500"}`} />
+                        <IconComponent className={`h-[18px] w-[18px] transition-colors ${isSelected ? "text-teal-600 dark:text-teal-300" : "text-slate-500 dark:text-slate-400"}`} />
                       </div>
                       <div className="text-center">
-                        <span className={`text-[13px] font-semibold block transition-colors ${isSelected ? tone.color.text : "text-neutral-800 dark:text-neutral-100"}`}>
+                        <span className={`text-[13px] font-semibold block transition-colors ${isSelected ? "text-teal-700 dark:text-teal-200" : "text-slate-800 dark:text-slate-100"}`}>
                           {tone.label}
                         </span>
-                        <p className="text-[11px] text-neutral-400 dark:text-neutral-500 mt-0.5 leading-tight">{tone.desc}</p>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-tight">{tone.desc}</p>
                       </div>
                     </button>
                   );
@@ -502,11 +502,11 @@ export default function AIStudioPage() {
           <div className="space-y-4">
             {isFree && <UpgradeNudge feature="Custom instructions" />}
 
-            <div className="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
-              <div className="px-6 py-4 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
+            <div className="bg-white dark:bg-white/[0.02] rounded-xl border border-neutral-200 dark:border-white/[0.06] overflow-hidden">
+              <div className="px-6 py-4 border-b border-slate-100 dark:border-white/[0.06] flex items-center justify-between">
                 <div>
-                  <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Additional Instructions</h2>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+                  <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Additional Instructions</h2>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     These instructions are appended to the default system prompt — your base prompt is always preserved
                   </p>
                 </div>
@@ -515,7 +515,7 @@ export default function AIStudioPage() {
                   {!isFree && formData.systemPrompt && (
                     <button
                       onClick={() => updateField("systemPrompt", "")}
-                      className="flex items-center gap-1.5 text-xs font-medium text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 px-2.5 py-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
+                      className="flex items-center gap-1.5 text-xs font-medium text-slate-400 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400 px-2.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-white/[0.04] transition-all"
                     >
                       <Icons.RotateCcw className="h-3 w-3" />
                       Clear
@@ -532,14 +532,14 @@ export default function AIStudioPage() {
                     ? "Upgrade to Pro to add custom instructions..."
                     : `Add custom instructions for your chatbot...\n\nExamples:\n- "Always recommend our premium plan when relevant"\n- "Never discuss competitor products"\n- "Include a link to our docs when answering technical questions"`}
                   rows={10}
-                  className={`w-full rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/50 text-neutral-800 dark:text-neutral-100 placeholder-neutral-300 dark:placeholder-neutral-600 px-4 py-3.5 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 focus:bg-white dark:focus:bg-neutral-900 resize-y transition-all ${isFree ? "bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-500 cursor-not-allowed resize-none" : ""}`}
+                  className={`w-full rounded-lg border border-neutral-200 dark:border-white/[0.06] bg-neutral-50/50 dark:bg-white/[0.02] text-slate-800 dark:text-slate-100 placeholder-slate-300 dark:placeholder-slate-600 px-4 py-3.5 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 focus:bg-white dark:focus:bg-white/[0.04] resize-y transition-all ${isFree ? "bg-neutral-100 dark:bg-white/[0.04] text-slate-400 dark:text-slate-400 cursor-not-allowed resize-none" : ""}`}
                 />
               </div>
             </div>
 
-            <div className="flex items-start gap-3 bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3">
-              <Icons.AlertCircle className="h-4 w-4 text-neutral-400 dark:text-neutral-500 flex-shrink-0 mt-0.5" />
-              <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            <div className="flex items-start gap-3 bg-neutral-50 dark:bg-transparent border border-neutral-200 dark:border-white/[0.06] rounded-xl px-4 py-3">
+              <Icons.AlertCircle className="h-4 w-4 text-slate-400 dark:text-slate-400 flex-shrink-0 mt-0.5" />
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                 Your chatbot already has a comprehensive default prompt that handles greetings, knowledge-base-only answers, follow-ups, and more. Anything you write here gets added on top — use it for company-specific rules and preferences.
               </p>
             </div>

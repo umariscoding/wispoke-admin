@@ -54,8 +54,8 @@ const MinimalInput = React.forwardRef<HTMLInputElement, MinimalInputProps>(
               props.onBlur?.(e);
             }}
             className={`
-              peer w-full px-4 pt-6 pb-2.5 bg-white dark:bg-neutral-900 border rounded-lg
-              border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-50 placeholder-transparent
+              peer w-full px-4 pt-6 pb-2.5 bg-white dark:bg-white/[0.02] border rounded-lg
+              border-neutral-300 dark:border-white/[0.10] text-slate-900 dark:text-white placeholder-transparent
               focus:ring-2 focus:ring-primary-600/20 focus:border-primary-500 focus:outline-none
               transition-all duration-150
               ${error ? "border-error-400 focus:ring-error-500/20 focus:border-error-400" : ""}
@@ -70,8 +70,8 @@ const MinimalInput = React.forwardRef<HTMLInputElement, MinimalInputProps>(
               absolute left-4 transition-all duration-150 pointer-events-none
               ${
                 focused || hasValue
-                  ? `top-2 text-xs font-medium ${error ? "text-error-500 dark:text-error-400" : focused ? "text-primary-600 dark:text-primary-400" : "text-neutral-500 dark:text-neutral-400"}`
-                  : `top-1/2 -translate-y-1/2 text-sm text-neutral-400 dark:text-neutral-500`
+                  ? `top-2 text-xs font-medium ${error ? "text-error-500 dark:text-error-400" : focused ? "text-primary-600 dark:text-primary-400" : "text-slate-500 dark:text-slate-400"}`
+                  : `top-1/2 -translate-y-1/2 text-sm text-slate-400 dark:text-slate-400`
               }
             `}
           >
@@ -82,7 +82,7 @@ const MinimalInput = React.forwardRef<HTMLInputElement, MinimalInputProps>(
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 focus:outline-none transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400 focus:outline-none transition-colors"
               tabIndex={-1}
             >
               {showPassword ? <Eye size={16} /> : <EyeOff size={16} />}
@@ -98,7 +98,7 @@ const MinimalInput = React.forwardRef<HTMLInputElement, MinimalInputProps>(
 
     return (
       <div className="space-y-1.5 mb-1">
-        <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
           {label}
         </label>
         <div className="relative">
@@ -108,8 +108,8 @@ const MinimalInput = React.forwardRef<HTMLInputElement, MinimalInputProps>(
             type={inputType}
             onChange={handleChange}
             className={`
-              w-full px-4 py-2.5 bg-white dark:bg-neutral-900 border rounded-lg
-              border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-50 placeholder-neutral-400 dark:placeholder-neutral-500
+              w-full px-4 py-2.5 bg-white dark:bg-white/[0.02] border rounded-lg
+              border-neutral-300 dark:border-white/[0.10] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500
               focus:ring-2 focus:ring-primary-600/20 focus:border-primary-500 focus:outline-none
               transition-all duration-150
               ${error ? "border-error-400 focus:ring-error-500/20 focus:border-error-400" : ""}
@@ -123,7 +123,7 @@ const MinimalInput = React.forwardRef<HTMLInputElement, MinimalInputProps>(
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 focus:outline-none transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-400 focus:outline-none transition-colors"
               tabIndex={-1}
             >
               {showPassword ? <Eye size={16} /> : <EyeOff size={16} />}

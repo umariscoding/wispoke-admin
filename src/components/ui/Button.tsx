@@ -22,13 +22,13 @@ const Button = memo(
 
       const variants = {
         primary:
-          "bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-sm hover:shadow-md",
+          "bg-primary-600 hover:bg-primary-700 dark:hover:bg-teal-500/25 dark:border dark:border-teal-500/30 text-white rounded-full shadow-sm hover:shadow-md",
         secondary:
-          "bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 rounded-full",
+          "bg-neutral-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.04] text-slate-700 dark:text-slate-300 border border-neutral-200 dark:border-white/[0.06] rounded-full",
         outline:
-          "border border-neutral-300 dark:border-neutral-700 bg-transparent hover:bg-primary-50 dark:hover:bg-primary-900/20 text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-400 rounded-full",
+          "border border-neutral-300 dark:border-white/[0.10] bg-transparent hover:bg-primary-50 dark:hover:bg-primary-900/20 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-400 rounded-full",
         ghost:
-          "hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 rounded-full",
+          "hover:bg-slate-100 dark:hover:bg-white/[0.04] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-full",
         destructive:
           "bg-error-600 text-white hover:bg-error-700 rounded-full shadow-sm",
       };

@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { companyApi } from "@/utils/company/api";
-import { Icons } from "@/components/ui";
+import { Icons, IOSContentLoader} from "@/components/ui";
 import IOSLoader from "@/components/ui/IOSLoader";
 import ConversationDrawer from "@/components/conversations/ConversationDrawer";
 
@@ -106,23 +106,21 @@ export default function ConversationsPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <IOSLoader size="md" color="primary" />
-      </div>
+      <IOSContentLoader isLoading={true} message="Loading..." />
     );
   }
 
   return (
     <>
-      <div className="max-w-6xl mx-auto pb-8 space-y-5">
+      <div className="max-w-7xl mx-auto pb-8 space-y-5">
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 tracking-tight">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Conversations
           </h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
             Embed widget chat history.{" "}
-            <span className="text-neutral-700 dark:text-neutral-300 font-medium">{total}</span> total
+            <span className="text-slate-700 dark:text-slate-300 font-medium">{total}</span> total
           </p>
         </div>
 
@@ -142,26 +140,26 @@ export default function ConversationsPage() {
         {/* Search */}
         <div className="flex flex-wrap items-center justify-end gap-3">
           <div className="relative">
-            <Icons.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 dark:text-neutral-500" />
+            <Icons.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-400" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search messages..."
-              className="pl-9 pr-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-sm placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all w-72"
+              className="pl-9 pr-4 py-2 rounded-lg border border-slate-200 dark:border-white/[0.10] bg-white dark:bg-white/[0.04] text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/30 dark:focus:ring-teal-500/40 focus:border-teal-400 dark:focus:border-teal-500/50 transition-all w-72"
             />
           </div>
         </div>
 
         {/* Table */}
-        <div className="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+        <div className="bg-white dark:bg-white/[0.02] rounded-xl border border-neutral-200 dark:border-white/[0.06] overflow-hidden">
           {visible.length === 0 ? (
             <EmptyState search={search} hasAny={total > 0} />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-neutral-100 dark:border-neutral-800 bg-neutral-50/40 dark:bg-neutral-950/40">
+                  <tr className="border-b border-slate-100 dark:border-white/[0.06] bg-neutral-50/40 dark:bg-white/[0.02]">
                     <Th>Visitor</Th>
                     <Th>First message</Th>
                     <Th>Started</Th>
@@ -169,7 +167,7 @@ export default function ConversationsPage() {
                     <Th align="right">{""}</Th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+                <tbody className="divide-y divide-neutral-100 dark:divide-white/[0.06]">
                   {visible.map((c) => (
                     <ConversationRow
                       key={c.chat_id}
@@ -214,7 +212,7 @@ function Th({
 }) {
   return (
     <th
-      className={`px-5 py-2.5 text-[10px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-[0.06em] ${
+      className={`px-5 py-2.5 text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-[0.06em] ${
         align === "right" ? "text-right" : "text-left"
       }`}
     >
@@ -235,18 +233,18 @@ function ConversationRow({
   return (
     <tr
       onClick={onOpen}
-      className="group cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+      className="group cursor-pointer hover:bg-neutral-50 dark:hover:bg-white/[0.04] transition-colors"
     >
       <td className="px-5 py-3.5">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center flex-shrink-0">
-            <Icons.User className="h-3.5 w-3.5 text-neutral-500 dark:text-neutral-400" />
+          <div className="w-8 h-8 rounded-full bg-neutral-100 dark:bg-white/[0.04] flex items-center justify-center flex-shrink-0">
+            <Icons.User className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
           </div>
           <div className="min-w-0">
-            <p className="text-sm font-medium text-neutral-900 dark:text-neutral-50 truncate max-w-[180px] font-mono">
+            <p className="text-sm font-medium text-slate-900 dark:text-white truncate max-w-[180px] font-mono">
               {visitorLabel}
             </p>
-            <p className="text-[11px] text-neutral-400 dark:text-neutral-500 truncate max-w-[180px]">
+            <p className="text-[11px] text-slate-400 dark:text-slate-400 truncate max-w-[180px]">
               {conversation.session_id
                 ? conversation.session_id.slice(0, 8)
                 : "no session"}
@@ -255,13 +253,13 @@ function ConversationRow({
         </div>
       </td>
       <td className="px-5 py-3.5">
-        <p className="text-sm text-neutral-700 dark:text-neutral-300 truncate max-w-[360px]">
+        <p className="text-sm text-slate-700 dark:text-slate-300 truncate max-w-[360px]">
           {conversation.preview || (
-            <span className="text-neutral-400 dark:text-neutral-500 italic">No messages yet</span>
+            <span className="text-slate-400 dark:text-slate-400 italic">No messages yet</span>
           )}
         </p>
       </td>
-      <td className="px-5 py-3.5 text-neutral-700 dark:text-neutral-300 whitespace-nowrap">
+      <td className="px-5 py-3.5 text-slate-700 dark:text-slate-300 whitespace-nowrap">
         {fmtRelative(conversation.started_at)}
       </td>
       <td className="px-5 py-3.5 text-right">
@@ -270,7 +268,7 @@ function ConversationRow({
         </span>
       </td>
       <td className="px-5 py-3.5 text-right">
-        <span className="inline-flex items-center gap-1 text-xs font-medium text-neutral-500 dark:text-neutral-400 group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors">
+        <span className="inline-flex items-center gap-1 text-xs font-medium text-slate-500 dark:text-slate-400 group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors">
           View
           <Icons.ChevronRight className="h-3.5 w-3.5" />
         </span>
@@ -294,11 +292,11 @@ function EmptyState({
   }
   return (
     <div className="px-5 py-20 text-center">
-      <div className="mx-auto h-11 w-11 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-3">
-        <Icons.MessageCircle className="h-5 w-5 text-neutral-400 dark:text-neutral-500" />
+      <div className="mx-auto h-11 w-11 rounded-full bg-neutral-100 dark:bg-white/[0.04] flex items-center justify-center mb-3">
+        <Icons.MessageCircle className="h-5 w-5 text-slate-400 dark:text-slate-400" />
       </div>
-      <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{title}</p>
-      <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-1 max-w-xs mx-auto">{hint}</p>
+      <p className="text-sm font-medium text-slate-700 dark:text-slate-300">{title}</p>
+      <p className="text-xs text-slate-400 dark:text-slate-400 mt-1 max-w-xs mx-auto">{hint}</p>
     </div>
   );
 }
@@ -323,21 +321,21 @@ function PaginationFooter({
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 border-t border-neutral-100 dark:border-neutral-800 bg-neutral-50/40 dark:bg-neutral-950/40 text-xs text-neutral-500 dark:text-neutral-400">
+    <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 border-t border-slate-100 dark:border-white/[0.06] bg-neutral-50/40 dark:bg-white/[0.02] text-xs text-slate-500 dark:text-slate-400">
       <div className="flex items-center gap-3">
         <span>
-          <span className="font-semibold text-neutral-700 dark:text-neutral-300">
+          <span className="font-semibold text-slate-700 dark:text-slate-300">
             {startNum}–{endNum}
           </span>{" "}
-          of <span className="font-semibold text-neutral-700 dark:text-neutral-300">{total}</span>
+          of <span className="font-semibold text-slate-700 dark:text-slate-300">{total}</span>
         </span>
-        <span className="text-neutral-300 dark:text-neutral-600">·</span>
+        <span className="text-slate-300 dark:text-slate-600">·</span>
         <label className="flex items-center gap-1.5">
           <span>Rows</span>
           <select
             value={pageSize}
             onChange={(e) => setPageSize(parseInt(e.target.value))}
-            className="rounded-md border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400"
+            className="rounded-md border border-slate-200 dark:border-white/[0.10] bg-white dark:bg-white/[0.04] px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/30 dark:focus:ring-teal-500/40 focus:border-teal-400 dark:focus:border-teal-500/50"
           >
             {PAGE_SIZE_OPTIONS.map((n) => (
               <option key={n} value={n}>
@@ -350,17 +348,17 @@ function PaginationFooter({
 
       <div className="flex items-center gap-1">
         <PageBtn onClick={() => setPage(1)} disabled={page === 1} title="First page">
-          <Icons.ChevronLeft className="h-3.5 w-3.5 text-neutral-600 dark:text-neutral-400" />
-          <Icons.ChevronLeft className="h-3.5 w-3.5 text-neutral-600 dark:text-neutral-400 -ml-2.5" />
+          <Icons.ChevronLeft className="h-3.5 w-3.5 text-slate-600 dark:text-slate-400" />
+          <Icons.ChevronLeft className="h-3.5 w-3.5 text-slate-600 dark:text-slate-400 -ml-2.5" />
         </PageBtn>
         <PageBtn
           onClick={() => setPage((p) => Math.max(1, p - 1))}
           disabled={page === 1}
           title="Previous page"
         >
-          <Icons.ChevronLeft className="h-3.5 w-3.5 text-neutral-600 dark:text-neutral-400" />
+          <Icons.ChevronLeft className="h-3.5 w-3.5 text-slate-600 dark:text-slate-400" />
         </PageBtn>
-        <span className="px-3 font-medium text-neutral-700 dark:text-neutral-300 tabular-nums">
+        <span className="px-3 font-medium text-slate-700 dark:text-slate-300 tabular-nums">
           {page} / {totalPages}
         </span>
         <PageBtn
@@ -368,15 +366,15 @@ function PaginationFooter({
           disabled={page >= totalPages}
           title="Next page"
         >
-          <Icons.ChevronRight className="h-3.5 w-3.5 text-neutral-600 dark:text-neutral-400" />
+          <Icons.ChevronRight className="h-3.5 w-3.5 text-slate-600 dark:text-slate-400" />
         </PageBtn>
         <PageBtn
           onClick={() => setPage(totalPages)}
           disabled={page >= totalPages}
           title="Last page"
         >
-          <Icons.ChevronRight className="h-3.5 w-3.5 text-neutral-600 dark:text-neutral-400" />
-          <Icons.ChevronRight className="h-3.5 w-3.5 text-neutral-600 dark:text-neutral-400 -ml-2.5" />
+          <Icons.ChevronRight className="h-3.5 w-3.5 text-slate-600 dark:text-slate-400" />
+          <Icons.ChevronRight className="h-3.5 w-3.5 text-slate-600 dark:text-slate-400 -ml-2.5" />
         </PageBtn>
       </div>
     </div>
@@ -399,7 +397,7 @@ function PageBtn({
       onClick={onClick}
       disabled={disabled}
       title={title}
-      className="inline-flex items-center px-1.5 py-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-md transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:cursor-not-allowed"
+      className="inline-flex items-center px-1.5 py-1.5 hover:bg-slate-100 dark:hover:bg-white/[0.04] rounded-md transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:cursor-not-allowed"
     >
       {children}
     </button>

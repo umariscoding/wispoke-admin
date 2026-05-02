@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCompanyAppSelector } from "@/hooks/company/useCompanyAuth";
 import { ROUTES } from "@/constants/APP_CONSTANTS";
-import IOSLoader from "@/components/ui/IOSLoader";
+import { IOSContentLoader } from "@/components/ui";
 
 interface CompanyProtectedRouteProps {
   children: React.ReactNode;
@@ -32,23 +32,10 @@ export const CompanyProtectedRoute: React.FC<CompanyProtectedRouteProps> = ({
   }, [companyAuth.isAuthenticated, companyAuth.loading, fallbackRoute, router]);
 
   // Show loading during initial auth check or while auth is loading
-  if (companyAuth.loading || isInitialLoad) {
+  if (companyAuth.loading || isInitialLoad || !companyAuth.isAuthenticated) {
     return (
-      <div className="min-h-screen bg-white dark:bg-neutral-900 flex items-center justify-center">
-        <div className="text-center">
-          <IOSLoader size="xl" color="primary" className="mx-auto mb-4" />
-        </div>
-      </div>
-    );
-  }
-
-  // Check authentication
-  if (!companyAuth.isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-white dark:bg-neutral-900 flex items-center justify-center">
-        <div className="text-center">
-          <IOSLoader size="xl" color="primary" className="mx-auto mb-4" />
-        </div>
+      <div className="min-h-screen bg-white dark:bg-sidebar-bg">
+        <IOSContentLoader isLoading={true} message="Loading..." />
       </div>
     );
   }

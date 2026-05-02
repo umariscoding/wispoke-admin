@@ -199,36 +199,43 @@ export default function CompanyAuthPage() {
   };
 
   const inputBase =
-    "w-full px-4 py-2.5 bg-white dark:bg-neutral-900 border rounded-full text-neutral-900 dark:text-neutral-50 placeholder-neutral-400 dark:placeholder-neutral-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500/50 transition-all";
-  const inputOk = "border-neutral-200 dark:border-neutral-800";
+    "w-full px-4 py-2.5 bg-white dark:bg-white/[0.02] border rounded-full text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500/50 transition-all";
+  const inputOk = "border-neutral-200 dark:border-white/[0.06]";
   const inputErr = "border-error-500/50";
 
   return (
-    <div className="min-h-screen lg:h-screen flex lg:overflow-hidden bg-neutral-50 dark:bg-neutral-950">
+    <div className="min-h-screen lg:h-screen flex lg:overflow-hidden bg-neutral-50 dark:bg-transparent">
       {/* ====== LEFT — Light form panel (scrolls independently on lg) ====== */}
-      <div className="flex-1 lg:w-[50%] lg:overflow-y-auto bg-neutral-50 dark:bg-neutral-950">
+      <div className="flex-1 lg:w-[50%] lg:overflow-y-auto bg-neutral-50 dark:bg-transparent">
         <div className="flex flex-col justify-center min-h-screen lg:min-h-full py-10 sm:py-12 px-5 sm:px-12 lg:pl-16 lg:pr-12">
           <div className="mx-auto w-full max-w-sm">
-            {/* Logo */}
+            {/* Logo — swap source for dark mode */}
             <div className="mb-8 sm:mb-10">
               <Image
                 src="/wordmark.svg"
                 alt={APP_CONFIG.NAME}
                 width={200}
                 height={64}
-                className="h-9 sm:h-11 w-auto"
+                className="h-9 sm:h-11 w-auto block dark:hidden"
+              />
+              <Image
+                src="/wordmark-white.svg"
+                alt={APP_CONFIG.NAME}
+                width={200}
+                height={64}
+                className="h-9 sm:h-11 w-auto hidden dark:block"
               />
             </div>
 
             {/* Tab switch */}
             <div className="mb-7 sm:mb-8">
-              <div className="flex bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-full p-1">
+              <div className="flex bg-neutral-100 dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.06] rounded-full p-1">
                 <button
                   onClick={() => setIsLogin(true)}
                   className={`flex-1 py-2 px-4 text-sm font-medium rounded-full transition-all duration-150 ${
                     isLogin
-                      ? "bg-primary-600 text-white shadow-sm"
-                      : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300"
+                      ? "bg-primary-600 text-white dark:bg-teal-500/20 dark:text-teal-100 dark:border dark:border-teal-500/30 shadow-sm dark:shadow-none"
+                      : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
                   }`}
                 >
                   Sign In
@@ -237,8 +244,8 @@ export default function CompanyAuthPage() {
                   onClick={() => setIsLogin(false)}
                   className={`flex-1 py-2 px-4 text-sm font-medium rounded-full transition-all duration-150 ${
                     !isLogin
-                      ? "bg-primary-600 text-white shadow-sm"
-                      : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300"
+                      ? "bg-primary-600 text-white dark:bg-teal-500/20 dark:text-teal-100 dark:border dark:border-teal-500/30 shadow-sm dark:shadow-none"
+                      : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
                   }`}
                 >
                   Create Account
@@ -248,10 +255,10 @@ export default function CompanyAuthPage() {
 
             {/* Heading */}
             <div className="mb-6">
-              <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-50 tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
                 {isLogin ? "Welcome back" : "Get started"}
               </h2>
-              <p className="mt-1.5 text-sm text-neutral-500 dark:text-neutral-400">
+              <p className="mt-1.5 text-sm text-slate-500 dark:text-slate-400">
                 {isLogin
                   ? "Sign in to your dashboard"
                   : "Create your account to start building"}
@@ -277,7 +284,7 @@ export default function CompanyAuthPage() {
               <>
                 <form onSubmit={handleLoginSubmit} className="space-y-5">
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Email</label>
+                    <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Email</label>
                     <input
                       name="email"
                       type="email"
@@ -291,7 +298,7 @@ export default function CompanyAuthPage() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Password</label>
+                    <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Password</label>
                     <input
                       name="password"
                       type="password"
@@ -319,10 +326,10 @@ export default function CompanyAuthPage() {
 
                 <div className="relative my-6">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-neutral-200 dark:border-neutral-800" />
+                    <div className="w-full border-t border-neutral-200 dark:border-white/[0.06]" />
                   </div>
                   <div className="relative flex justify-center text-xs">
-                    <span className="bg-neutral-50 dark:bg-neutral-950 px-3 text-neutral-400 dark:text-neutral-500">or</span>
+                    <span className="bg-neutral-50 dark:bg-transparent px-3 text-slate-400 dark:text-slate-400">or</span>
                   </div>
                 </div>
 
@@ -345,7 +352,7 @@ export default function CompanyAuthPage() {
               <>
                 <form onSubmit={handleSignupSubmit} className="space-y-5">
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Company Name</label>
+                    <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Company Name</label>
                     <input
                       name="name"
                       type="text"
@@ -359,7 +366,7 @@ export default function CompanyAuthPage() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Email</label>
+                    <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Email</label>
                     <input
                       name="email"
                       type="email"
@@ -373,7 +380,7 @@ export default function CompanyAuthPage() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Password</label>
+                    <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Password</label>
                     <input
                       name="password"
                       type="password"
@@ -401,10 +408,10 @@ export default function CompanyAuthPage() {
 
                 <div className="relative my-6">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-neutral-200 dark:border-neutral-800" />
+                    <div className="w-full border-t border-neutral-200 dark:border-white/[0.06]" />
                   </div>
                   <div className="relative flex justify-center text-xs">
-                    <span className="bg-neutral-50 dark:bg-neutral-950 px-3 text-neutral-400 dark:text-neutral-500">or</span>
+                    <span className="bg-neutral-50 dark:bg-transparent px-3 text-slate-400 dark:text-slate-400">or</span>
                   </div>
                 </div>
 
@@ -425,7 +432,7 @@ export default function CompanyAuthPage() {
               </>
             )}
 
-            <p className="mt-8 text-center text-xs text-neutral-400 dark:text-neutral-500">
+            <p className="mt-8 text-center text-xs text-slate-400 dark:text-slate-400">
               By continuing, you agree to our Terms of Service and Privacy Policy
             </p>
           </div>
@@ -443,7 +450,7 @@ export default function CompanyAuthPage() {
           className="absolute inset-0 pointer-events-none"
           aria-hidden="true"
           style={{
-            backgroundImage: "radial-gradient(circle, rgba(13,148,136,0.05) 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, var(--auth-grid-dot) 1px, transparent 1px)",
             backgroundSize: "32px 32px",
           }}
         />
@@ -485,9 +492,9 @@ export default function CompanyAuthPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
                   </svg>
                 </div>
-                <span className="text-[11px] font-medium text-neutral-400 dark:text-neutral-500">AI Response</span>
+                <span className="text-[11px] font-medium text-slate-400 dark:text-slate-400">AI Response</span>
               </div>
-              <p className="text-[11px] text-neutral-300 dark:text-neutral-600 leading-relaxed">
+              <p className="text-[11px] text-slate-300 dark:text-slate-600 leading-relaxed">
                 Your chatbot is live! Embed it on any page with one script tag.
               </p>
             </div>
@@ -496,7 +503,7 @@ export default function CompanyAuthPage() {
           {/* Messages stat */}
           <div className="absolute bottom-10 -left-6 animate-float-gentle" style={{ animationDelay: "2s" }}>
             <div className="bg-neutral-900/80 backdrop-blur-sm border border-neutral-800/80 rounded-xl p-3.5 shadow-xl">
-              <p className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-0.5">Messages today</p>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-0.5">Messages today</p>
               <p className="text-xl font-bold text-white tracking-tight">10,482</p>
             </div>
           </div>
@@ -505,7 +512,7 @@ export default function CompanyAuthPage() {
           <div className="absolute top-[30%] -left-8 animate-float-gentle" style={{ animationDelay: "4s" }}>
             <div className="bg-neutral-900/80 backdrop-blur-sm border border-neutral-800/80 rounded-xl px-3.5 py-2.5 shadow-xl flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-accent-400" />
-              <span className="text-xs font-medium text-neutral-300 dark:text-neutral-600">99.9% uptime</span>
+              <span className="text-xs font-medium text-slate-300 dark:text-slate-600">99.9% uptime</span>
             </div>
           </div>
 
@@ -515,7 +522,7 @@ export default function CompanyAuthPage() {
               <svg className="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
               </svg>
-              <span className="text-xs font-medium text-neutral-300 dark:text-neutral-600">12 docs indexed</span>
+              <span className="text-xs font-medium text-slate-300 dark:text-slate-600">12 docs indexed</span>
             </div>
           </div>
 
@@ -525,13 +532,13 @@ export default function CompanyAuthPage() {
               <svg className="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
               </svg>
-              <span className="text-xs font-medium text-neutral-300 dark:text-neutral-600">&lt;200ms response</span>
+              <span className="text-xs font-medium text-slate-300 dark:text-slate-600">&lt;200ms response</span>
             </div>
           </div>
         </div>
 
         {/* Copyright */}
-        <p className="absolute bottom-6 text-[11px] text-neutral-700 dark:text-neutral-300">
+        <p className="absolute bottom-6 text-[11px] text-slate-700 dark:text-slate-300">
           &copy; {new Date().getFullYear()} {APP_CONFIG.NAME}. All rights reserved.
         </p>
       </div>

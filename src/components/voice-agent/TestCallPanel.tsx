@@ -171,18 +171,18 @@ export default function TestCallPanel({ open, onClose }: Props) {
       }}
     >
       <div
-        className="bg-white dark:bg-neutral-900 w-full max-w-md h-full flex flex-col shadow-2xl border-l border-neutral-200 dark:border-neutral-800"
+        className="bg-white dark:bg-white/[0.02] w-full max-w-md h-full flex flex-col shadow-2xl border-l border-neutral-200 dark:border-white/[0.06]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-neutral-100 dark:border-neutral-800">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 dark:border-white/[0.06]">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-full bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center">
               <Icons.Phone className="h-4 w-4 text-primary-600 dark:text-primary-400" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Test Call</h3>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">Talk to your agent in the browser</p>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Test Call</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Talk to your agent in the browser</p>
             </div>
           </div>
           <button
@@ -191,47 +191,47 @@ export default function TestCallPanel({ open, onClose }: Props) {
               onClose();
             }}
             disabled={callState === "active"}
-            className="p-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="p-1.5 hover:bg-slate-100 dark:hover:bg-white/[0.04] rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             title={callState === "active" ? "End call first" : "Close"}
           >
-            <Icons.Close className="h-4 w-4 text-neutral-400 dark:text-neutral-500" />
+            <Icons.Close className="h-4 w-4 text-slate-400 dark:text-slate-400" />
           </button>
         </div>
 
         {/* Call control */}
-        <div className="px-5 py-6 border-b border-neutral-100 dark:border-neutral-800 flex flex-col items-center">
+        <div className="px-5 py-6 border-b border-slate-100 dark:border-white/[0.06] flex flex-col items-center">
           <div
             className={`relative w-20 h-20 rounded-full flex items-center justify-center mb-3 transition-all ${
               callState === "active"
-                ? "bg-primary-100"
+                ? "bg-primary-100 dark:bg-teal-500/15"
                 : callState === "connecting"
-                ? "bg-amber-100"
-                : "bg-neutral-100 dark:bg-neutral-800"
+                ? "bg-amber-100 dark:bg-amber-500/15"
+                : "bg-neutral-100 dark:bg-white/[0.04]"
             }`}
           >
             {callState === "active" && (
-              <span className="absolute inset-0 rounded-full bg-primary-500 animate-ping opacity-20" />
+              <span className="absolute inset-0 rounded-full bg-teal-500 dark:bg-teal-400 animate-ping opacity-20" />
             )}
             {callState === "active" ? (
               <Icons.Mic className="h-8 w-8 text-primary-600 dark:text-primary-400 relative z-10" />
             ) : callState === "connecting" ? (
               <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
             ) : (
-              <Icons.Phone className="h-8 w-8 text-neutral-400 dark:text-neutral-500" />
+              <Icons.Phone className="h-8 w-8 text-slate-400 dark:text-slate-400" />
             )}
           </div>
 
           {(callState === "active" || callState === "ended") && (
             <p
               className={`text-2xl font-mono font-semibold mb-1 ${
-                callState === "active" ? "text-primary-600 dark:text-primary-400" : "text-neutral-400 dark:text-neutral-500"
+                callState === "active" ? "text-primary-600 dark:text-primary-400" : "text-slate-400 dark:text-slate-400"
               }`}
             >
               {fmtTime(duration)}
             </p>
           )}
 
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
             {callState === "idle" && "Ready to test"}
             {callState === "connecting" && "Connecting..."}
             {callState === "active" && "Call in progress"}
@@ -241,7 +241,7 @@ export default function TestCallPanel({ open, onClose }: Props) {
           {callState === "active" ? (
             <button
               onClick={endCall}
-              className="w-12 h-12 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center transition-colors active:scale-95"
+              className="w-12 h-12 rounded-full bg-rose-500 hover:bg-rose-600 text-white flex items-center justify-center transition-colors active:scale-95"
               title="End call"
             >
               <Icons.Phone className="h-5 w-5 rotate-[135deg]" />
@@ -257,7 +257,7 @@ export default function TestCallPanel({ open, onClose }: Props) {
         {/* Transcript */}
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-2">
           {transcript.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full text-neutral-300 dark:text-neutral-600">
+            <div className="flex flex-col items-center justify-center h-full text-slate-300 dark:text-slate-600">
               <Icons.MessageCircle className="h-8 w-8 mb-2" />
               <p className="text-sm">Start a call to see transcript</p>
             </div>
@@ -272,14 +272,14 @@ export default function TestCallPanel({ open, onClose }: Props) {
                     e.role === "user"
                       ? "bg-primary-600 text-white rounded-br-md"
                       : e.role === "agent"
-                      ? "bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 rounded-bl-md"
-                      : "bg-neutral-50 dark:bg-neutral-950 text-neutral-500 dark:text-neutral-400 text-xs w-full text-center border border-neutral-100 dark:border-neutral-800"
+                      ? "bg-neutral-100 dark:bg-white/[0.04] text-slate-800 dark:text-slate-100 rounded-bl-md"
+                      : "bg-neutral-50 dark:bg-transparent text-slate-500 dark:text-slate-400 text-xs w-full text-center border border-slate-100 dark:border-white/[0.06]"
                   }`}
                 >
                   {e.role !== "system" && (
                     <p
                       className={`text-[10px] font-medium mb-0.5 ${
-                        e.role === "user" ? "text-primary-200" : "text-neutral-400 dark:text-neutral-500"
+                        e.role === "user" ? "text-primary-200" : "text-slate-400 dark:text-slate-400"
                       }`}
                     >
                       {e.role === "user" ? "You" : "Agent"}

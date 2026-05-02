@@ -32,13 +32,13 @@ const MinimalButton = React.forwardRef<HTMLButtonElement, MinimalButtonProps>(
 
     const variants = {
       primary:
-        "bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-sm hover:shadow-md active:scale-[0.98]",
+        "bg-primary-600 hover:bg-primary-700 dark:hover:bg-teal-500/25 dark:border dark:border-teal-500/30 text-white rounded-full shadow-sm hover:shadow-md active:scale-[0.98]",
       secondary:
-        "bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full border border-neutral-200 dark:border-neutral-800 active:scale-[0.98]",
+        "bg-neutral-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.04] text-slate-700 dark:text-slate-300 rounded-full border border-neutral-200 dark:border-white/[0.06] active:scale-[0.98]",
       ghost:
-        "bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 rounded-full",
+        "bg-transparent hover:bg-slate-100 dark:hover:bg-white/[0.04] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-full",
       outline:
-        "bg-transparent border border-neutral-300 dark:border-neutral-700 hover:border-primary-400 text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-full",
+        "bg-transparent border border-neutral-300 dark:border-white/[0.10] hover:border-primary-400 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-full",
     };
 
     const sizes = {

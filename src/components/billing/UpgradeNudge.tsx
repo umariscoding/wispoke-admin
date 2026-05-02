@@ -12,9 +12,9 @@ interface UpgradeNudgeProps {
  */
 export default function UpgradeNudge({ feature }: UpgradeNudgeProps) {
   return (
-    <div className="flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
+    <div className="flex items-center gap-3 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-xl px-4 py-3">
       <Icons.Crown className="h-4 w-4 text-amber-500 flex-shrink-0" />
-      <p className="text-sm text-amber-700 flex-1">
+      <p className="text-sm text-amber-700 dark:text-amber-300 flex-1">
         {feature ? `${feature} is` : "This is"} a Pro feature.{" "}
         <a
           href="/settings"

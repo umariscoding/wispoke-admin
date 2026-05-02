@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { companyApi } from "@/utils/company/api";
-import { Icons } from "@/components/ui";
+import { Icons, IOSContentLoader} from "@/components/ui";
 import IOSLoader from "@/components/ui/IOSLoader";
 import WeeklyScheduleEditor, {
   type ScheduleSlot,
@@ -82,24 +82,22 @@ export default function AvailabilityPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <IOSLoader size="md" color="primary" />
-      </div>
+      <IOSContentLoader isLoading={true} message="Loading..." />
     );
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 pb-8">
+    <div className="max-w-7xl mx-auto space-y-6 pb-8">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 tracking-tight">Availability</h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Availability</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
             Set the hours your voice agent can book appointments.
           </p>
         </div>
         <div className="flex items-center gap-2.5">
           {saveSuccess && (
-            <div className="flex items-center gap-1.5 text-sm font-medium text-emerald-600">
+            <div className="flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400">
               <Icons.CheckCircle className="h-4 w-4" />
               Saved
             </div>
@@ -107,7 +105,7 @@ export default function AvailabilityPage() {
           <button
             onClick={save}
             disabled={saving || !hasChanges}
-            className="px-5 py-2 text-sm font-semibold text-white bg-primary-600 hover:bg-primary-500 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 min-w-[80px] justify-center"
+            className="px-5 py-2 text-sm font-semibold text-white bg-primary-600 hover:bg-teal-500 dark:hover:bg-teal-500/25 dark:border dark:border-teal-500/30 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 min-w-[80px] justify-center"
           >
             {saving ? <IOSLoader size="sm" color="white" /> : "Save"}
           </button>
@@ -116,10 +114,10 @@ export default function AvailabilityPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Weekly schedule — wider on the left */}
-        <section className="lg:col-span-3 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
-          <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800">
-            <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Weekly hours</h2>
-            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+        <section className="lg:col-span-3 bg-white dark:bg-white/[0.02] rounded-xl border border-neutral-200 dark:border-white/[0.06] overflow-hidden">
+          <div className="px-5 py-4 border-b border-slate-100 dark:border-white/[0.06]">
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Weekly hours</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Toggle each day on or off. Add multiple time ranges for split shifts.
             </p>
           </div>
@@ -127,10 +125,10 @@ export default function AvailabilityPage() {
         </section>
 
         {/* Date overrides */}
-        <section className="lg:col-span-2 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
-          <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800">
-            <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Blocked dates</h2>
-            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+        <section className="lg:col-span-2 bg-white dark:bg-white/[0.02] rounded-xl border border-neutral-200 dark:border-white/[0.06] overflow-hidden">
+          <div className="px-5 py-4 border-b border-slate-100 dark:border-white/[0.06]">
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Blocked dates</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Holidays, time off, or any day you&apos;re unavailable.
             </p>
           </div>
