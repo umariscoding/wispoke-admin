@@ -7,6 +7,8 @@ import { SmallWebRTCTransport } from "@pipecat-ai/small-webrtc-transport";
 import Button from "@/components/ui/Button";
 import { Icons } from "@/components/ui";
 import { API_CONFIG } from "@/constants/api";
+import { usePlan } from "@/hooks/usePlan";
+import UpgradePrompt from "@/components/billing/UpgradePrompt";
 
 interface TranscriptEntry {
   role: "agent" | "user" | "system";
@@ -23,6 +25,7 @@ interface Props {
 const fmtTime = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
 export default function TestCallPanel({ open, onClose }: Props) {
+  const { isFree } = usePlan();
   const [callState, setCallState] = useState<CallState>("idle");
   const [transcript, setTranscript] = useState<TranscriptEntry[]>([]);
   const [duration, setDuration] = useState(0);
@@ -198,7 +201,15 @@ export default function TestCallPanel({ open, onClose }: Props) {
           </button>
         </div>
 
-        {/* Call control */}
+        {/* Pro gate */}
+        {isFree ? (
+          <div className="px-5 py-6 border-b border-slate-100 dark:border-white/[0.06]">
+            <UpgradePrompt
+              feature="Voice Agent"
+              description="Upgrade to Pro to test calls in your browser and receive Twilio calls."
+            />
+          </div>
+        ) : (
         <div className="px-5 py-6 border-b border-slate-100 dark:border-white/[0.06] flex flex-col items-center">
           <div
             className={`relative w-20 h-20 rounded-full flex items-center justify-center mb-3 transition-all ${
@@ -253,6 +264,7 @@ export default function TestCallPanel({ open, onClose }: Props) {
             </Button>
           )}
         </div>
+        )}
 
         {/* Transcript */}
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-2">

@@ -8,6 +8,9 @@ import IOSLoader from "@/components/ui/IOSLoader";
 import VoiceModelPicker from "@/components/voice-agent/VoiceModelPicker";
 import AppointmentFieldsBuilder from "@/components/voice-agent/AppointmentFieldsBuilder";
 import TestCallPanel from "@/components/voice-agent/TestCallPanel";
+import UpgradeNudge from "@/components/billing/UpgradeNudge";
+import ProBadge from "@/components/billing/ProBadge";
+import { usePlan } from "@/hooks/usePlan";
 
 interface VoiceSettings {
   is_enabled: boolean;
@@ -36,6 +39,7 @@ const inputCls =
 const labelCls = "text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1.5 block";
 
 export default function VoiceAgentPage() {
+  const { isFree } = usePlan();
   const [s, setS] = useState<VoiceSettings | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -137,16 +141,25 @@ export default function VoiceAgentPage() {
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 pt-6 pb-4 border-b border-slate-100 dark:border-white/[0.06] flex-shrink-0 bg-neutral-50 dark:bg-transparent">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Voice Agent</h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Voice Agent</h1>
+            {isFree && <ProBadge />}
+          </div>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
             AI phone agent that answers calls and books appointments.
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <StatusPill enabled={s.is_enabled} onToggle={(v) => update("is_enabled", v)} />
+          <StatusPill
+            enabled={s.is_enabled}
+            onToggle={(v) => update("is_enabled", v)}
+            disabled={isFree}
+          />
           <button
-            onClick={() => setShowTest(true)}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 border border-neutral-200 dark:border-white/[0.06] bg-white rounded-full transition-colors hover:bg-slate-100 dark:hover:bg-white/[0.04]"
+            onClick={() => !isFree && setShowTest(true)}
+            disabled={isFree}
+            title={isFree ? "Voice agent is a Pro feature" : "Test in your browser"}
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 border border-neutral-200 dark:border-white/[0.06] bg-white rounded-full transition-colors hover:bg-slate-100 dark:hover:bg-white/[0.04] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
           >
             <Icons.Phone className="h-3.5 w-3.5" /> Try it
           </button>
@@ -183,40 +196,50 @@ export default function VoiceAgentPage() {
           ref={scrollRef}
           className="flex-1 min-w-0 overflow-y-auto py-6 pb-32 space-y-6"
         >
-          <AgentSection
-            ref={(el) => {
-              sectionRefs.current.agent = el;
-            }}
-            settings={s}
-            onUpdate={update}
-          />
-          <VoiceSection
-            ref={(el) => {
-              sectionRefs.current.voice = el;
-            }}
-            voiceModel={s.voice_model}
-            onUpdate={update}
-          />
-          <FieldsSection
-            ref={(el) => {
-              sectionRefs.current.fields = el;
-            }}
-            fields={s.appointment_fields}
-            onUpdate={update}
-          />
-          <PhoneSection
-            ref={(el) => {
-              sectionRefs.current.phone = el;
-            }}
-            settings={s}
-            onUpdate={update}
-            apiBase={apiBase}
-          />
+          {isFree && <UpgradeNudge feature="Voice agent" />}
+          <div
+            className={
+              isFree
+                ? "space-y-6 opacity-50 pointer-events-none select-none"
+                : "space-y-6"
+            }
+            aria-disabled={isFree}
+          >
+            <AgentSection
+              ref={(el) => {
+                sectionRefs.current.agent = el;
+              }}
+              settings={s}
+              onUpdate={update}
+            />
+            <VoiceSection
+              ref={(el) => {
+                sectionRefs.current.voice = el;
+              }}
+              voiceModel={s.voice_model}
+              onUpdate={update}
+            />
+            <FieldsSection
+              ref={(el) => {
+                sectionRefs.current.fields = el;
+              }}
+              fields={s.appointment_fields}
+              onUpdate={update}
+            />
+            <PhoneSection
+              ref={(el) => {
+                sectionRefs.current.phone = el;
+              }}
+              settings={s}
+              onUpdate={update}
+              apiBase={apiBase}
+            />
+          </div>
         </div>
       </div>
 
       {/* Sticky save bar — pinned to viewport bottom, only when there are changes. */}
-      {hasChanges && (
+      {hasChanges && !isFree && (
         <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-30 bg-neutral-900 text-white rounded-full shadow-2xl shadow-black/20 flex items-center gap-3 pl-5 pr-2 py-2 border border-white/10">
           <span className="text-xs font-medium">Unsaved changes</span>
           <button
@@ -277,15 +300,18 @@ interface UpdateFn {
 const StatusPill = React.memo(function StatusPill({
   enabled,
   onToggle,
+  disabled = false,
 }: {
   enabled: boolean;
   onToggle: (v: boolean) => void;
+  disabled?: boolean;
 }) {
   return (
     <div
       className={`flex items-center gap-2.5 pl-3 pr-1 py-1 rounded-full border transition-colors ${
         enabled ? "border-primary-200 dark:border-primary-900/40 bg-primary-50 dark:bg-primary-900/20" : "border-neutral-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02]"
-      }`}
+      } ${disabled ? "opacity-50 pointer-events-none" : ""}`}
+      title={disabled ? "Voice agent is a Pro feature" : undefined}
     >
       <span
         className={`text-[10px] font-semibold uppercase tracking-wider ${
