@@ -33,7 +33,13 @@ const LogoutButton: React.FC = () => {
     <button
       onClick={handleLogout}
       disabled={isLoggingOut}
-      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-150 disabled:opacity-40"
+      className="
+        inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm
+        text-slate-500 dark:text-slate-400
+        hover:text-slate-700 dark:hover:text-slate-200
+        hover:bg-slate-100 dark:hover:bg-white/[0.04]
+        transition-all duration-150 disabled:opacity-40
+      "
     >
       {isLoggingOut ? (
         <IOSLoader size="sm" color="primary" />
@@ -52,7 +58,8 @@ const Header: React.FC<HeaderProps> = ({
   onMenuToggle,
   showMobileMenuButton = true,
 }) => {
-  const companyAuth = useCompanyAppSelector((state) => state.companyAuth);
+  // Reading auth context to keep the hook in scope (used elsewhere; left for parity).
+  useCompanyAppSelector((state) => state.companyAuth);
 
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
@@ -64,8 +71,8 @@ const Header: React.FC<HeaderProps> = ({
     <header
       className={`
         sticky top-0 z-20 h-14 flex items-center px-6
-        bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md
-        border-b border-neutral-200/60 dark:border-neutral-800/60
+        bg-white/80 dark:bg-sidebar-bg/80 backdrop-blur-md
+        border-b border-slate-200/60 dark:border-white/[0.06]
         ${className}
       `}
     >
@@ -73,12 +80,19 @@ const Header: React.FC<HeaderProps> = ({
         {showMobileMenuButton && (
           <button
             onClick={onMenuToggle}
-            className="md:hidden p-2 -ml-1 rounded-full text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            className="
+              md:hidden p-2 -ml-1 rounded-full
+              text-slate-500 dark:text-slate-400
+              hover:text-slate-700 dark:hover:text-slate-200
+              hover:bg-slate-100 dark:hover:bg-white/[0.04]
+              transition-colors
+            "
           >
             <Icons.Menu className="h-5 w-5" />
           </button>
         )}
-        <span className="hidden sm:block text-sm text-neutral-400 dark:text-neutral-500">
+        <span className="hidden sm:flex items-center gap-2 text-sm text-slate-400 dark:text-slate-500">
+          <span className="hidden md:block w-1 h-1 rounded-full bg-teal-400/70" />
           {today}
         </span>
       </div>

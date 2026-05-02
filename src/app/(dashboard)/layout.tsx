@@ -31,7 +31,7 @@ export default function DashboardLayout({
               <Sidebar isOpen={sidebarOpen} onClose={handleSidebarClose} />
             </div>
 
-            <div className="flex-1 ml-72 bg-neutral-50 dark:bg-neutral-950 h-screen overflow-y-auto smooth-scroll-container">
+            <div className="flex-1 ml-72 bg-neutral-50 dark:bg-sidebar-bg h-screen overflow-y-auto smooth-scroll-container">
               <Header
                 onMenuToggle={handleMenuToggle}
                 showMobileMenuButton={true}
