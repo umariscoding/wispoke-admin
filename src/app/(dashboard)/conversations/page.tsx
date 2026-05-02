@@ -58,7 +58,6 @@ export default function ConversationsPage() {
   const [conversations, setConversations] = useState<ConversationListItem[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const [page, setPage] = useState(1);
@@ -67,7 +66,6 @@ export default function ConversationsPage() {
   const [drawerChatId, setDrawerChatId] = useState<string | null>(null);
 
   const fetchConversations = useCallback(async () => {
-    setRefreshing(true);
     setError(null);
     try {
       const r = await companyApi.get<ConversationsListResponse>(
@@ -81,7 +79,6 @@ export default function ConversationsPage() {
       setError(err?.response?.data?.detail || "Failed to load conversations");
     } finally {
       setLoading(false);
-      setRefreshing(false);
     }
   }, [page, pageSize]);
 
@@ -119,24 +116,14 @@ export default function ConversationsPage() {
     <>
       <div className="max-w-6xl mx-auto pb-8 space-y-5">
         {/* Header */}
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">
-              Conversations
-            </h1>
-            <p className="text-sm text-neutral-500 mt-0.5">
-              Embed widget chat history.{" "}
-              <span className="text-neutral-700 font-medium">{total}</span> total
-            </p>
-          </div>
-          <button
-            onClick={fetchConversations}
-            disabled={refreshing}
-            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-neutral-700 border border-neutral-200 bg-white rounded-full transition-colors hover:bg-neutral-100 disabled:opacity-50"
-          >
-            <Icons.Refresh className={`h-3.5 w-3.5 ${refreshing ? "animate-spin" : ""}`} />
-            Refresh
-          </button>
+        <div>
+          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">
+            Conversations
+          </h1>
+          <p className="text-sm text-neutral-500 mt-0.5">
+            Embed widget chat history.{" "}
+            <span className="text-neutral-700 font-medium">{total}</span> total
+          </p>
         </div>
 
         {error && (
