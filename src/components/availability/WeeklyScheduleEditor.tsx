@@ -90,20 +90,20 @@ export default function WeeklyScheduleEditor({ schedule, onChange }: Props) {
   };
 
   return (
-    <div className="divide-y divide-neutral-100">
+    <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
       {groups.map(({ day, ranges }) => {
         const enabled = ranges.some((r) => r.is_active);
         return (
           <div key={day} className="px-5 py-4 flex items-start gap-4">
             <div className="w-28 flex items-center gap-3 pt-1.5">
               <Toggle checked={enabled} onChange={(v) => toggleDay(day, v)} size="sm" />
-              <span className={`text-sm ${enabled ? "font-medium text-neutral-900" : "text-neutral-400"}`}>
+              <span className={`text-sm ${enabled ? "font-medium text-neutral-900 dark:text-neutral-50" : "text-neutral-400 dark:text-neutral-500"}`}>
                 {DAYS_FULL[day]}
               </span>
             </div>
             <div className="flex-1 space-y-2">
               {!enabled || ranges.length === 0 ? (
-                <span className="text-sm text-neutral-400 inline-block pt-2">Closed</span>
+                <span className="text-sm text-neutral-400 dark:text-neutral-500 inline-block pt-2">Closed</span>
               ) : (
                 ranges.map((r, idx) => (
                   <div key={idx} className="flex items-center gap-2">
@@ -111,14 +111,14 @@ export default function WeeklyScheduleEditor({ schedule, onChange }: Props) {
                       type="time"
                       value={r.start_time}
                       onChange={(e) => updateRange(day, idx, { start_time: e.target.value })}
-                      className="rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all"
+                      className="rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all"
                     />
-                    <span className="text-sm text-neutral-400">to</span>
+                    <span className="text-sm text-neutral-400 dark:text-neutral-500">to</span>
                     <input
                       type="time"
                       value={r.end_time}
                       onChange={(e) => updateRange(day, idx, { end_time: e.target.value })}
-                      className="rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all"
+                      className="rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all"
                     />
                     {ranges.length > 1 && (
                       <button
@@ -126,7 +126,7 @@ export default function WeeklyScheduleEditor({ schedule, onChange }: Props) {
                         className="p-1.5 hover:bg-red-50 rounded-lg group"
                         title="Remove range"
                       >
-                        <Icons.Trash className="h-3.5 w-3.5 text-neutral-300 group-hover:text-red-500" />
+                        <Icons.Trash className="h-3.5 w-3.5 text-neutral-300 dark:text-neutral-600 group-hover:text-red-500" />
                       </button>
                     )}
                   </div>
@@ -137,19 +137,19 @@ export default function WeeklyScheduleEditor({ schedule, onChange }: Props) {
               {enabled && (
                 <button
                   onClick={() => addRange(day)}
-                  className="p-1.5 hover:bg-neutral-100 rounded-lg transition-colors"
+                  className="p-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
                   title="Add another range"
                 >
-                  <Icons.Plus className="h-3.5 w-3.5 text-neutral-500" />
+                  <Icons.Plus className="h-3.5 w-3.5 text-neutral-500 dark:text-neutral-400" />
                 </button>
               )}
               {enabled && ranges.length > 0 && (
                 <button
                   onClick={() => setCopyMenuFor(copyMenuFor === day ? null : day)}
-                  className="p-1.5 hover:bg-neutral-100 rounded-lg transition-colors"
+                  className="p-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
                   title="Copy to other days"
                 >
-                  <Icons.Copy className="h-3.5 w-3.5 text-neutral-500" />
+                  <Icons.Copy className="h-3.5 w-3.5 text-neutral-500 dark:text-neutral-400" />
                 </button>
               )}
               {copyMenuFor === day && (
@@ -181,9 +181,9 @@ function CopyMenu({
   return (
     <>
       <div className="fixed inset-0 z-40" onClick={onClose} />
-      <div className="absolute right-0 top-9 z-50 w-56 bg-white border border-neutral-200 rounded-xl shadow-lg overflow-hidden">
-        <div className="px-3 py-2 border-b border-neutral-100">
-          <p className="text-xs font-semibold text-neutral-700">Copy to...</p>
+      <div className="absolute right-0 top-9 z-50 w-56 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-lg overflow-hidden">
+        <div className="px-3 py-2 border-b border-neutral-100 dark:border-neutral-800">
+          <p className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Copy to...</p>
         </div>
         <div className="py-1">
           {DAYS_FULL.map((name, day) => {
@@ -192,7 +192,7 @@ function CopyMenu({
             return (
               <label
                 key={day}
-                className="flex items-center gap-2 px-3 py-1.5 hover:bg-neutral-50 cursor-pointer text-sm"
+                className="flex items-center gap-2 px-3 py-1.5 hover:bg-neutral-50 dark:hover:bg-neutral-800 cursor-pointer text-sm"
               >
                 <input
                   type="checkbox"
@@ -202,14 +202,14 @@ function CopyMenu({
                       prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
                     )
                   }
-                  className="w-3.5 h-3.5 rounded border-neutral-300 text-primary-600 focus:ring-primary-500/20"
+                  className="w-3.5 h-3.5 rounded border-neutral-300 dark:border-neutral-700 text-primary-600 dark:text-primary-400 focus:ring-primary-500/20"
                 />
-                <span className="text-neutral-700">{name}</span>
+                <span className="text-neutral-700 dark:text-neutral-300">{name}</span>
               </label>
             );
           })}
         </div>
-        <div className="px-3 py-2 border-t border-neutral-100 flex justify-end gap-2">
+        <div className="px-3 py-2 border-t border-neutral-100 dark:border-neutral-800 flex justify-end gap-2">
           <Button variant="ghost" size="sm" onClick={onClose}>
             Cancel
           </Button>

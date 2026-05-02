@@ -87,7 +87,7 @@ const TextUpload: React.FC<TextUploadProps> = ({
               placeholder="e.g., company-policy.txt"
               required
               disabled={loading}
-              className={`w-full rounded-xl border px-4 py-3 text-sm bg-white text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all ${
+              className={`w-full rounded-xl border px-4 py-3 text-sm bg-white dark:bg-neutral-900 text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all ${
                 errors.filename
                   ? "border-red-500/60 focus:ring-red-500"
                   : "border-slate-200/80 hover:border-slate-300"
@@ -115,7 +115,7 @@ const TextUpload: React.FC<TextUploadProps> = ({
             onChange={handleContentChange}
             placeholder="Paste or type your content here..."
             rows={8}
-            className={`w-full rounded-xl border px-4 py-3 text-sm bg-white text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all resize-none ${
+            className={`w-full rounded-xl border px-4 py-3 text-sm bg-white dark:bg-neutral-900 text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all resize-none ${
               errors.content
                 ? "border-red-500/60 focus:ring-red-500"
                 : "border-slate-200/80 hover:border-slate-300"

@@ -14,9 +14,9 @@ const STATUS_BAR: Record<Appointment["status"], string> = {
 };
 
 const STATUS_LABEL: Record<Appointment["status"], string> = {
-  confirmed: "bg-primary-100 text-primary-700",
+  confirmed: "bg-primary-100 text-primary-700 dark:text-primary-300",
   completed: "bg-emerald-100 text-emerald-700",
-  cancelled: "bg-neutral-100 text-neutral-500",
+  cancelled: "bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400",
   no_show: "bg-red-100 text-red-700",
 };
 
@@ -32,7 +32,7 @@ function ModalShell({ children, onClose }: { children: React.ReactNode; onClose:
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl border border-neutral-200 shadow-xl w-full max-w-md mx-4 overflow-hidden"
+        className="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xl w-full max-w-md mx-4 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {children}
@@ -56,8 +56,8 @@ export function AppointmentDetailModal({ appointment: a, onClose, onUpdateStatus
       <div className="px-5 py-4">
         <div className="flex items-start justify-between mb-3">
           <div>
-            <h3 className="text-base font-bold text-neutral-900">{a.caller_name || "Unknown"}</h3>
-            <p className="text-xs text-neutral-500 mt-0.5">
+            <h3 className="text-base font-bold text-neutral-900 dark:text-neutral-50">{a.caller_name || "Unknown"}</h3>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
               {new Date(a.scheduled_date + "T00:00:00").toLocaleDateString("en-US", {
                 weekday: "long",
                 month: "long",
@@ -65,39 +65,39 @@ export function AppointmentDetailModal({ appointment: a, onClose, onUpdateStatus
               })}
             </p>
           </div>
-          <button onClick={onClose} className="p-1 hover:bg-neutral-100 rounded-lg">
-            <Icons.Close className="h-4 w-4 text-neutral-400" />
+          <button onClick={onClose} className="p-1 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg">
+            <Icons.Close className="h-4 w-4 text-neutral-400 dark:text-neutral-500" />
           </button>
         </div>
         <div className="space-y-2 text-sm">
           <div className="flex items-center gap-2.5">
-            <Icons.Clock className="h-3.5 w-3.5 text-neutral-400" />
-            <span className="text-neutral-700">
+            <Icons.Clock className="h-3.5 w-3.5 text-neutral-400 dark:text-neutral-500" />
+            <span className="text-neutral-700 dark:text-neutral-300">
               {a.start_time.slice(0, 5)} – {a.end_time.slice(0, 5)} ({a.duration_min} min)
             </span>
           </div>
           {a.caller_phone && (
             <div className="flex items-center gap-2.5">
-              <Icons.Phone className="h-3.5 w-3.5 text-neutral-400" />
-              <span className="text-neutral-700">{a.caller_phone}</span>
+              <Icons.Phone className="h-3.5 w-3.5 text-neutral-400 dark:text-neutral-500" />
+              <span className="text-neutral-700 dark:text-neutral-300">{a.caller_phone}</span>
             </div>
           )}
           {a.caller_email && (
             <div className="flex items-center gap-2.5">
-              <Icons.Mail className="h-3.5 w-3.5 text-neutral-400" />
-              <span className="text-neutral-700">{a.caller_email}</span>
+              <Icons.Mail className="h-3.5 w-3.5 text-neutral-400 dark:text-neutral-500" />
+              <span className="text-neutral-700 dark:text-neutral-300">{a.caller_email}</span>
             </div>
           )}
           {a.service_type && (
             <div className="flex items-center gap-2.5">
-              <Icons.Briefcase className="h-3.5 w-3.5 text-neutral-400" />
-              <span className="text-neutral-700">{a.service_type}</span>
+              <Icons.Briefcase className="h-3.5 w-3.5 text-neutral-400 dark:text-neutral-500" />
+              <span className="text-neutral-700 dark:text-neutral-300">{a.service_type}</span>
             </div>
           )}
           {a.notes && (
             <div className="flex items-start gap-2.5">
-              <Icons.FileText className="h-3.5 w-3.5 text-neutral-400 mt-0.5" />
-              <span className="text-neutral-600">{a.notes}</span>
+              <Icons.FileText className="h-3.5 w-3.5 text-neutral-400 dark:text-neutral-500 mt-0.5" />
+              <span className="text-neutral-600 dark:text-neutral-400">{a.notes}</span>
             </div>
           )}
           <div className="flex items-center gap-2.5 pt-1">
@@ -106,7 +106,7 @@ export function AppointmentDetailModal({ appointment: a, onClose, onUpdateStatus
             >
               {a.status.replace("_", " ")}
             </span>
-            <span className="text-xs text-neutral-400">
+            <span className="text-xs text-neutral-400 dark:text-neutral-500">
               via {a.source === "voice_agent" ? "Phone" : a.source}
             </span>
           </div>
@@ -143,7 +143,7 @@ export function AppointmentDetailModal({ appointment: a, onClose, onUpdateStatus
           className="p-2 hover:bg-red-50 rounded-lg group"
           title="Delete"
         >
-          <Icons.Trash className="h-3.5 w-3.5 text-neutral-300 group-hover:text-red-500 transition-colors" />
+          <Icons.Trash className="h-3.5 w-3.5 text-neutral-300 dark:text-neutral-600 group-hover:text-red-500 transition-colors" />
         </button>
       </div>
     </ModalShell>
@@ -206,15 +206,15 @@ export function NewAppointmentModal({
   };
 
   const inputCls =
-    "w-full rounded-xl border border-neutral-200 bg-neutral-50 px-3.5 py-2.5 text-sm placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 focus:bg-white transition-all";
-  const labelCls = "text-xs font-semibold text-neutral-600 mb-1.5 block";
+    "w-full rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 px-3.5 py-2.5 text-sm placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 focus:bg-white dark:focus:bg-neutral-900 transition-all";
+  const labelCls = "text-xs font-semibold text-neutral-600 dark:text-neutral-400 mb-1.5 block";
 
   return (
     <ModalShell onClose={onClose}>
-      <div className="px-5 py-4 flex items-center justify-between border-b border-neutral-100">
-        <h3 className="text-sm font-bold text-neutral-900">New Appointment</h3>
-        <button onClick={onClose} className="p-1 hover:bg-neutral-100 rounded-lg">
-          <Icons.Close className="h-4 w-4 text-neutral-400" />
+      <div className="px-5 py-4 flex items-center justify-between border-b border-neutral-100 dark:border-neutral-800">
+        <h3 className="text-sm font-bold text-neutral-900 dark:text-neutral-50">New Appointment</h3>
+        <button onClick={onClose} className="p-1 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg">
+          <Icons.Close className="h-4 w-4 text-neutral-400 dark:text-neutral-500" />
         </button>
       </div>
       <div className="px-5 py-4 space-y-3">

@@ -41,24 +41,24 @@ export default function AppointmentFieldsBuilder({ value, onChange }: Props) {
           <div
             key={f.key}
             className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border transition-colors ${
-              enabled ? "border-primary-200 bg-primary-50/40" : "border-neutral-200 bg-white"
+              enabled ? "border-primary-200 dark:border-primary-900/40 bg-primary-50/40 dark:bg-primary-900/20" : "border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900"
             }`}
           >
             <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${
-              enabled ? "bg-primary-100" : "bg-neutral-100"
+              enabled ? "bg-primary-100" : "bg-neutral-100 dark:bg-neutral-800"
             }`}>
-              <Icons.User className={`h-3.5 w-3.5 ${enabled ? "text-primary-700" : "text-neutral-400"}`} />
+              <Icons.User className={`h-3.5 w-3.5 ${enabled ? "text-primary-700 dark:text-primary-300" : "text-neutral-400 dark:text-neutral-500"}`} />
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-neutral-900">{f.label}</span>
+                <span className="text-sm font-medium text-neutral-900 dark:text-neutral-50">{f.label}</span>
                 {f.required && (
-                  <span className="text-[10px] uppercase tracking-wider text-neutral-400 font-semibold">
+                  <span className="text-[10px] uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-semibold">
                     Recommended
                   </span>
                 )}
               </div>
-              <p className="text-xs text-neutral-500">{f.desc}</p>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">{f.desc}</p>
             </div>
             <Toggle checked={enabled} onChange={() => toggle(f.key)} size="sm" />
           </div>

@@ -42,7 +42,7 @@ const Toggle: React.FC<ToggleProps> = ({
       disabled={disabled || loading}
       className={`
         ${config.track}
-        ${checked ? `${colors.on} shadow-lg ${colors.glow}` : "bg-neutral-200/80"}
+        ${checked ? `${colors.on} shadow-lg ${colors.glow}` : "bg-neutral-200/80 dark:bg-neutral-800/80"}
         relative inline-flex shrink-0 cursor-pointer rounded-full
         transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
         focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary-500/40
@@ -55,7 +55,7 @@ const Toggle: React.FC<ToggleProps> = ({
       <span
         className={`
           ${config.thumb}
-          pointer-events-none inline-block rounded-full bg-white
+          pointer-events-none inline-block rounded-full bg-white dark:bg-neutral-900
           transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]
           ${checked ? "shadow-md" : "shadow-sm"}
         `.trim()}
@@ -67,7 +67,7 @@ const Toggle: React.FC<ToggleProps> = ({
       >
         {loading && (
           <span className="absolute inset-0 flex items-center justify-center">
-            <span className="block w-2.5 h-2.5 border-[1.5px] border-neutral-300 border-t-neutral-600 rounded-full animate-spin" />
+            <span className="block w-2.5 h-2.5 border-[1.5px] border-neutral-300 dark:border-neutral-700 border-t-neutral-600 rounded-full animate-spin" />
           </span>
         )}
       </span>
@@ -80,12 +80,12 @@ const Toggle: React.FC<ToggleProps> = ({
         <div className="flex items-center justify-between gap-3">
           <div className="flex flex-col">
             {label && (
-              <Switch.Label className="text-sm font-medium text-neutral-900 cursor-pointer select-none">
+              <Switch.Label className="text-sm font-medium text-neutral-900 dark:text-neutral-50 cursor-pointer select-none">
                 {label}
               </Switch.Label>
             )}
             {description && (
-              <Switch.Description className="text-[13px] text-neutral-500 mt-0.5">
+              <Switch.Description className="text-[13px] text-neutral-500 dark:text-neutral-400 mt-0.5">
                 {description}
               </Switch.Description>
             )}

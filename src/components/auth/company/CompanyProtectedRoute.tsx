@@ -34,7 +34,7 @@ export const CompanyProtectedRoute: React.FC<CompanyProtectedRouteProps> = ({
   // Show loading during initial auth check or while auth is loading
   if (companyAuth.loading || isInitialLoad) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-neutral-900 flex items-center justify-center">
         <div className="text-center">
           <IOSLoader size="xl" color="primary" className="mx-auto mb-4" />
         </div>
@@ -45,7 +45,7 @@ export const CompanyProtectedRoute: React.FC<CompanyProtectedRouteProps> = ({
   // Check authentication
   if (!companyAuth.isAuthenticated) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-neutral-900 flex items-center justify-center">
         <div className="text-center">
           <IOSLoader size="xl" color="primary" className="mx-auto mb-4" />
         </div>

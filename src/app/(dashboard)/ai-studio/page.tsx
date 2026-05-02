@@ -244,13 +244,13 @@ export default function AIStudioPage() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center px-4">
         <div className="text-center space-y-4">
-          <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-neutral-100">
-            <Icons.Shield className="h-8 w-8 text-neutral-400" />
+          <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-neutral-100 dark:bg-neutral-800">
+            <Icons.Shield className="h-8 w-8 text-neutral-400 dark:text-neutral-500" />
           </div>
-          <h1 className="text-xl font-bold text-neutral-900">
+          <h1 className="text-xl font-bold text-neutral-900 dark:text-neutral-50">
             Access Restricted
           </h1>
-          <p className="text-sm text-neutral-500 max-w-sm">
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-sm">
             This section is only available to company accounts.
           </p>
         </div>
@@ -281,8 +281,8 @@ export default function AIStudioPage() {
         {/* Header with save/discard */}
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-neutral-900">AI Studio</h1>
-            <p className="text-sm text-neutral-500 mt-1">
+            <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50">AI Studio</h1>
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
               Knowledge base, model, and behavior
             </p>
           </div>
@@ -292,7 +292,7 @@ export default function AIStudioPage() {
                 <button
                   onClick={() => resetChanges()}
                   disabled={settingsLoading}
-                  className="px-4 py-2 text-sm font-medium text-neutral-500 hover:text-neutral-700 border border-neutral-200 rounded-full transition-all disabled:opacity-50 hover:bg-neutral-50"
+                  className="px-4 py-2 text-sm font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 border border-neutral-200 dark:border-neutral-800 rounded-full transition-all disabled:opacity-50 hover:bg-neutral-50 dark:hover:bg-neutral-800"
                 >
                   Discard
                 </button>
@@ -310,7 +310,7 @@ export default function AIStudioPage() {
               </>
             )}
             {saveSuccess && (
-              <div className="flex items-center gap-1.5 text-sm font-medium text-accent-600">
+              <div className="flex items-center gap-1.5 text-sm font-medium text-accent-600 dark:text-accent-400">
                 <Icons.CheckCircle className="h-4 w-4" />
                 Saved
               </div>
@@ -320,14 +320,14 @@ export default function AIStudioPage() {
 
         {/* Error notification */}
         {error && (
-          <div className="flex items-center gap-3 bg-error-50 border border-error-200 rounded-xl p-4">
-            <Icons.AlertCircle className="h-4 w-4 text-error-600 flex-shrink-0" />
-            <p className="text-sm text-error-700 flex-1">
+          <div className="flex items-center gap-3 bg-error-50 dark:bg-error-900/20 border border-error-200 dark:border-error-900/40 rounded-xl p-4">
+            <Icons.AlertCircle className="h-4 w-4 text-error-600 dark:text-error-400 flex-shrink-0" />
+            <p className="text-sm text-error-700 dark:text-error-300 flex-1">
               {typeof error === "string" ? error : "Something went wrong."}
             </p>
             <button
               onClick={() => dispatch(clearError())}
-              className="text-error-400 hover:text-error-600 transition-colors p-1 rounded-full hover:bg-error-100"
+              className="text-error-400 hover:text-error-600 dark:hover:text-error-400 transition-colors p-1 rounded-full hover:bg-error-100"
             >
               <Icons.Close className="h-4 w-4" />
             </button>
@@ -336,7 +336,7 @@ export default function AIStudioPage() {
 
         {/* Section tabs */}
         <div className="flex justify-center">
-          <div className="inline-flex items-center border border-neutral-200 bg-white rounded-full p-1 gap-0.5">
+          <div className="inline-flex items-center border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 rounded-full p-1 gap-0.5">
             {sections.map((section) => {
               const isActive = activeSection === section.id;
               return (
@@ -346,7 +346,7 @@ export default function AIStudioPage() {
                   className={`flex items-center gap-2 px-5 py-2 text-[13px] font-medium rounded-full transition-all duration-200 ${
                     isActive
                       ? "bg-primary-600 text-white shadow-sm shadow-primary-600/25"
-                      : "text-neutral-500 hover:text-neutral-800 hover:bg-neutral-50"
+                      : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-800"
                   }`}
                 >
                   {section.icon}
@@ -364,7 +364,7 @@ export default function AIStudioPage() {
               <div className="flex items-center gap-3">
                 {docCount > 0 && (
                   <div className="flex items-center gap-2">
-                    <div className="w-28 h-1.5 bg-neutral-200 rounded-full overflow-hidden">
+                    <div className="w-28 h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-accent-500 rounded-full transition-all duration-500"
                         style={{
@@ -372,7 +372,7 @@ export default function AIStudioPage() {
                         }}
                       />
                     </div>
-                    <span className="text-xs text-neutral-500 tabular-nums font-medium">
+                    <span className="text-xs text-neutral-500 dark:text-neutral-400 tabular-nums font-medium">
                       {processedCount}/{docCount} ready
                     </span>
                   </div>
@@ -396,11 +396,11 @@ export default function AIStudioPage() {
             {isFree && <UpgradeNudge feature="Model & Tone" />}
 
             {/* Model selection */}
-            <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
-              <div className="px-5 py-4 border-b border-neutral-100 flex items-center justify-between">
+            <div className="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+              <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
                 <div>
-                  <h2 className="text-sm font-semibold text-neutral-900">Language Model</h2>
-                  <p className="text-xs text-neutral-500 mt-0.5">
+                  <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Language Model</h2>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
                     Choose the AI model that powers your chatbot
                   </p>
                 </div>
@@ -416,33 +416,33 @@ export default function AIStudioPage() {
                       onClick={() => !isFree && updateField("defaultModel", model.id)}
                       className={`group w-full flex items-center gap-3.5 px-4 py-3 rounded-lg text-left transition-all duration-150 ${
                         isSelected
-                          ? "bg-primary-50 ring-1 ring-primary-500/20"
-                          : "hover:bg-neutral-50"
+                          ? "bg-primary-50 dark:bg-primary-900/20 ring-1 ring-primary-500/20"
+                          : "hover:bg-neutral-50 dark:hover:bg-neutral-800"
                       } ${isFree && !isSelected ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       <div className={`w-[18px] h-[18px] rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
-                        isSelected ? "border-primary-600 bg-primary-600" : "border-neutral-300"
+                        isSelected ? "border-primary-600 bg-primary-600" : "border-neutral-300 dark:border-neutral-700"
                       }`}>
-                        {isSelected && <div className="w-[7px] h-[7px] rounded-full bg-white" />}
+                        {isSelected && <div className="w-[7px] h-[7px] rounded-full bg-white dark:bg-neutral-900" />}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className={`text-[13px] font-semibold ${isSelected ? "text-primary-700" : "text-neutral-900"}`}>
+                          <span className={`text-[13px] font-semibold ${isSelected ? "text-primary-700 dark:text-primary-300" : "text-neutral-900 dark:text-neutral-50"}`}>
                             {model.name}
                           </span>
-                          <span className="text-[10px] text-neutral-400 font-medium uppercase tracking-wider">
+                          <span className="text-[10px] text-neutral-400 dark:text-neutral-500 font-medium uppercase tracking-wider">
                             {model.provider}
                           </span>
                           {model.tag && (
-                            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-accent-100 text-accent-700">
+                            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-accent-100 text-accent-700 dark:text-accent-300">
                               {model.tag}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-neutral-400 mt-0.5">{model.desc}</p>
+                        <p className="text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">{model.desc}</p>
                       </div>
                       <span className={`text-[11px] font-mono tabular-nums hidden sm:block transition-colors ${
-                        isSelected ? "text-primary-500" : "text-neutral-300"
+                        isSelected ? "text-primary-500" : "text-neutral-300 dark:text-neutral-600"
                       }`}>
                         {model.speed}
                       </span>
@@ -453,11 +453,11 @@ export default function AIStudioPage() {
             </div>
 
             {/* Tone selection */}
-            <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
-              <div className="px-5 py-4 border-b border-neutral-100 flex items-center justify-between">
+            <div className="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+              <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
                 <div>
-                  <h2 className="text-sm font-semibold text-neutral-900">Tone</h2>
-                  <p className="text-xs text-neutral-500 mt-0.5">
+                  <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Tone</h2>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
                     Set the personality and voice of your chatbot
                   </p>
                 </div>
@@ -475,19 +475,19 @@ export default function AIStudioPage() {
                       className={`group flex flex-col items-center gap-2 py-4 px-3 rounded-xl border transition-all duration-150 ${
                         isSelected
                           ? `${tone.color.bg} ${tone.color.border}`
-                          : "border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50"
+                          : "border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
                       } ${isFree && !isSelected ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${
-                        isSelected ? `${tone.color.bgActive}` : "bg-neutral-100"
+                        isSelected ? `${tone.color.bgActive}` : "bg-neutral-100 dark:bg-neutral-800"
                       }`}>
-                        <IconComponent className={`h-[18px] w-[18px] transition-colors ${isSelected ? tone.color.text : "text-neutral-400"}`} />
+                        <IconComponent className={`h-[18px] w-[18px] transition-colors ${isSelected ? tone.color.text : "text-neutral-400 dark:text-neutral-500"}`} />
                       </div>
                       <div className="text-center">
-                        <span className={`text-[13px] font-semibold block transition-colors ${isSelected ? tone.color.text : "text-neutral-800"}`}>
+                        <span className={`text-[13px] font-semibold block transition-colors ${isSelected ? tone.color.text : "text-neutral-800 dark:text-neutral-100"}`}>
                           {tone.label}
                         </span>
-                        <p className="text-[11px] text-neutral-400 mt-0.5 leading-tight">{tone.desc}</p>
+                        <p className="text-[11px] text-neutral-400 dark:text-neutral-500 mt-0.5 leading-tight">{tone.desc}</p>
                       </div>
                     </button>
                   );
@@ -502,11 +502,11 @@ export default function AIStudioPage() {
           <div className="space-y-4">
             {isFree && <UpgradeNudge feature="Custom instructions" />}
 
-            <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
-              <div className="px-6 py-4 border-b border-neutral-100 flex items-center justify-between">
+            <div className="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+              <div className="px-6 py-4 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
                 <div>
-                  <h2 className="text-sm font-semibold text-neutral-900">Additional Instructions</h2>
-                  <p className="text-xs text-neutral-500 mt-0.5">
+                  <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Additional Instructions</h2>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
                     These instructions are appended to the default system prompt — your base prompt is always preserved
                   </p>
                 </div>
@@ -515,7 +515,7 @@ export default function AIStudioPage() {
                   {!isFree && formData.systemPrompt && (
                     <button
                       onClick={() => updateField("systemPrompt", "")}
-                      className="flex items-center gap-1.5 text-xs font-medium text-neutral-400 hover:text-neutral-600 px-2.5 py-1.5 rounded-full hover:bg-neutral-100 transition-all"
+                      className="flex items-center gap-1.5 text-xs font-medium text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 px-2.5 py-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
                     >
                       <Icons.RotateCcw className="h-3 w-3" />
                       Clear
@@ -532,14 +532,14 @@ export default function AIStudioPage() {
                     ? "Upgrade to Pro to add custom instructions..."
                     : `Add custom instructions for your chatbot...\n\nExamples:\n- "Always recommend our premium plan when relevant"\n- "Never discuss competitor products"\n- "Include a link to our docs when answering technical questions"`}
                   rows={10}
-                  className={`w-full rounded-lg border border-neutral-200 bg-neutral-50/50 text-neutral-800 placeholder-neutral-300 px-4 py-3.5 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 focus:bg-white resize-y transition-all ${isFree ? "bg-neutral-100 text-neutral-400 cursor-not-allowed resize-none" : ""}`}
+                  className={`w-full rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/50 text-neutral-800 dark:text-neutral-100 placeholder-neutral-300 dark:placeholder-neutral-600 px-4 py-3.5 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 focus:bg-white dark:focus:bg-neutral-900 resize-y transition-all ${isFree ? "bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-500 cursor-not-allowed resize-none" : ""}`}
                 />
               </div>
             </div>
 
-            <div className="flex items-start gap-3 bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-3">
-              <Icons.AlertCircle className="h-4 w-4 text-neutral-400 flex-shrink-0 mt-0.5" />
-              <p className="text-xs text-neutral-500 leading-relaxed">
+            <div className="flex items-start gap-3 bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3">
+              <Icons.AlertCircle className="h-4 w-4 text-neutral-400 dark:text-neutral-500 flex-shrink-0 mt-0.5" />
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
                 Your chatbot already has a comprehensive default prompt that handles greetings, knowledge-base-only answers, follow-ups, and more. Anything you write here gets added on top — use it for company-specific rules and preferences.
               </p>
             </div>

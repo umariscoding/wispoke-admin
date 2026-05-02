@@ -36,7 +36,7 @@ const STATUS_STYLE: Record<
   { bg: string; bar: string; text: string; dot: string }
 > = {
   confirmed: {
-    bg: "bg-primary-50 hover:bg-primary-100",
+    bg: "bg-primary-50 dark:bg-primary-900/20 hover:bg-primary-100",
     bar: "bg-primary-600",
     text: "text-primary-900",
     dot: "bg-primary-600",
@@ -48,9 +48,9 @@ const STATUS_STYLE: Record<
     dot: "bg-emerald-600",
   },
   cancelled: {
-    bg: "bg-neutral-50 hover:bg-neutral-100",
+    bg: "bg-neutral-50 dark:bg-neutral-950 hover:bg-neutral-100 dark:hover:bg-neutral-800",
     bar: "bg-neutral-300",
-    text: "text-neutral-500 line-through",
+    text: "text-neutral-500 dark:text-neutral-400 line-through",
     dot: "bg-neutral-300",
   },
   no_show: {
@@ -262,33 +262,33 @@ export default function AppointmentsCalendar({
   const goToday = () => setWeekStart(startOfWeek(new Date()));
 
   return (
-    <div className="bg-white rounded-2xl border border-neutral-200 overflow-hidden flex flex-col">
+    <div className="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden flex flex-col">
       {/* ─── Toolbar ──────────────────────────────────────────── */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-200 flex-shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-200 dark:border-neutral-800 flex-shrink-0">
         <div className="flex items-center gap-1">
           <button
             onClick={goToday}
-            className="px-3 py-1.5 text-xs font-semibold text-neutral-700 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
+            className="px-3 py-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
           >
             Today
           </button>
           <div className="flex items-center ml-1">
             <button
               onClick={() => navWeek(-1)}
-              className="p-1.5 hover:bg-neutral-100 rounded-md transition-colors"
+              className="p-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-md transition-colors"
               title="Previous week"
             >
-              <Icons.ChevronLeft className="h-4 w-4 text-neutral-600" />
+              <Icons.ChevronLeft className="h-4 w-4 text-neutral-600 dark:text-neutral-400" />
             </button>
             <button
               onClick={() => navWeek(1)}
-              className="p-1.5 hover:bg-neutral-100 rounded-md transition-colors"
+              className="p-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-md transition-colors"
               title="Next week"
             >
-              <Icons.ChevronRight className="h-4 w-4 text-neutral-600" />
+              <Icons.ChevronRight className="h-4 w-4 text-neutral-600 dark:text-neutral-400" />
             </button>
           </div>
-          <h2 className="text-sm font-semibold text-neutral-900 ml-2">{headerLabel}</h2>
+          <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50 ml-2">{headerLabel}</h2>
         </div>
 
         <div className="flex items-center gap-2">
@@ -297,7 +297,7 @@ export default function AppointmentsCalendar({
       </div>
 
       {/* ─── Day headers ──────────────────────────────────────── */}
-      <div className="flex border-b border-neutral-200 flex-shrink-0">
+      <div className="flex border-b border-neutral-200 dark:border-neutral-800 flex-shrink-0">
         <div style={{ width: TIME_COL_WIDTH }} className="flex-shrink-0" />
         <div className="flex flex-1">
           {week.map((d) => {
@@ -307,13 +307,13 @@ export default function AppointmentsCalendar({
             return (
               <div
                 key={ds}
-                className={`flex-1 min-w-0 border-l border-neutral-200 py-2 text-center ${
-                  isToday ? "bg-primary-50/40" : ""
+                className={`flex-1 min-w-0 border-l border-neutral-200 dark:border-neutral-800 py-2 text-center ${
+                  isToday ? "bg-primary-50/40 dark:bg-primary-900/20" : ""
                 }`}
               >
                 <p
                   className={`text-[10px] font-semibold tracking-wider ${
-                    isToday ? "text-primary-700" : "text-neutral-500"
+                    isToday ? "text-primary-700 dark:text-primary-300" : "text-neutral-500 dark:text-neutral-400"
                   }`}
                 >
                   {DAY_LABELS[d.getDay()]}
@@ -326,7 +326,7 @@ export default function AppointmentsCalendar({
                   ) : (
                     <span
                       className={`text-base font-semibold ${
-                        isPast ? "text-neutral-400" : "text-neutral-800"
+                        isPast ? "text-neutral-400 dark:text-neutral-500" : "text-neutral-800 dark:text-neutral-100"
                       }`}
                     >
                       {d.getDate()}
@@ -348,7 +348,7 @@ export default function AppointmentsCalendar({
           {/* Time gutter — labels nudged down so the first one isn't clipped. */}
           <div
             style={{ width: TIME_COL_WIDTH }}
-            className="flex-shrink-0 relative border-r border-neutral-200"
+            className="flex-shrink-0 relative border-r border-neutral-200 dark:border-neutral-800"
           >
             {hours.map((h, i) => (
               <div
@@ -356,7 +356,7 @@ export default function AppointmentsCalendar({
                 className="absolute right-2"
                 style={{ top: GRID_TOP_PAD + i * HOUR_HEIGHT - 6 }}
               >
-                <span className="text-[10px] font-semibold text-neutral-500 select-none">
+                <span className="text-[10px] font-semibold text-neutral-500 dark:text-neutral-400 select-none">
                   {fmtHour(h)}
                 </span>
               </div>
@@ -422,8 +422,8 @@ const DayColumn = React.memo(function DayColumn({
 
   return (
     <div
-      className={`flex-1 min-w-0 relative border-l border-neutral-200 ${
-        isToday ? "bg-primary-50/20" : ""
+      className={`flex-1 min-w-0 relative border-l border-neutral-200 dark:border-neutral-800 ${
+        isToday ? "bg-primary-50/20 dark:bg-primary-900/20" : ""
       }`}
     >
       {/* Closed regions — one striped block per contiguous span so the
@@ -449,7 +449,7 @@ const DayColumn = React.memo(function DayColumn({
         return (
           <div
             key={h}
-            className="absolute left-0 right-0 border-t border-neutral-200"
+            className="absolute left-0 right-0 border-t border-neutral-200 dark:border-neutral-800"
             style={{ top: GRID_TOP_PAD + i * HOUR_HEIGHT, height: HOUR_HEIGHT }}
           >
             <button
@@ -461,7 +461,7 @@ const DayColumn = React.memo(function DayColumn({
             />
             <button
               onClick={() => onSlotClick?.(ds, `${String(h).padStart(2, "0")}:30`)}
-              className={`absolute inset-x-0 bottom-0 h-1/2 border-t border-dashed border-neutral-200/70 transition-colors ${
+              className={`absolute inset-x-0 bottom-0 h-1/2 border-t border-dashed border-neutral-200/70 dark:border-neutral-800/70 transition-colors ${
                 available ? "hover:bg-primary-100/70" : "cursor-not-allowed"
               }`}
               disabled={!available}
@@ -557,7 +557,7 @@ function Legend() {
       {items.map((it) => (
         <div key={it.label} className="flex items-center gap-1.5">
           <span className={`w-2 h-2 rounded-full ${it.dot}`} />
-          <span className="text-[11px] font-medium text-neutral-500">{it.label}</span>
+          <span className="text-[11px] font-medium text-neutral-500 dark:text-neutral-400">{it.label}</span>
         </div>
       ))}
     </div>

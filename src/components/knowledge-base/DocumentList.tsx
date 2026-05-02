@@ -40,7 +40,7 @@ const getStatusColor = (status: Document["embeddings_status"]) => {
     case "failed":
       return "bg-red-100 text-red-700";
     default:
-      return "bg-neutral-100 text-neutral-700";
+      return "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300";
   }
 };
 
@@ -48,10 +48,10 @@ const getFileTypeIcon = (contentType: string) => {
   if (contentType.includes("pdf"))
     return <Icons.FileText className="h-5 w-5 text-red-600" />;
   if (contentType.includes("word") || contentType.includes("document"))
-    return <Icons.FileText className="h-5 w-5 text-primary-600" />;
+    return <Icons.FileText className="h-5 w-5 text-primary-600 dark:text-primary-400" />;
   if (contentType.includes("text"))
     return <Icons.Document className="h-5 w-5 text-green-600" />;
-  return <Icons.Document className="h-5 w-5 text-neutral-600" />;
+  return <Icons.Document className="h-5 w-5 text-neutral-600 dark:text-neutral-400" />;
 };
 
 const DocumentList: React.FC<DocumentListProps> = ({ className = "" }) => {
@@ -169,7 +169,7 @@ const DocumentList: React.FC<DocumentListProps> = ({ className = "" }) => {
       {/* Pagination Size Selector */}
       {filteredDocuments.length > 0 && (
         <div className="flex justify-end mb-4">
-          <div className="flex items-center gap-2 px-3 py-2.5 border border-slate-200/80 bg-white/50 backdrop-blur-sm rounded-lg">
+          <div className="flex items-center gap-2 px-3 py-2.5 border border-slate-200/80 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm rounded-lg">
             <span className="text-xs font-semibold text-slate-600 whitespace-nowrap">
               Show:
             </span>
@@ -252,7 +252,7 @@ const DocumentList: React.FC<DocumentListProps> = ({ className = "" }) => {
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-slate-200/60">
+              <tbody className="bg-white dark:bg-neutral-900 divide-y divide-slate-200/60">
                 {currentDocuments.map((document, index) => (
                   <tr
                     key={document.doc_id}
@@ -267,7 +267,7 @@ const DocumentList: React.FC<DocumentListProps> = ({ className = "" }) => {
                           {getFileTypeIcon(document.content_type)}
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-sm font-semibold text-slate-900 truncate max-w-xs group-hover:text-primary-700 transition-colors">
+                          <p className="text-sm font-semibold text-slate-900 truncate max-w-xs group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors">
                             {document.filename}
                           </p>
                         </div>
@@ -347,7 +347,7 @@ const DocumentList: React.FC<DocumentListProps> = ({ className = "" }) => {
             of <span className="font-bold text-slate-900">{filteredDocuments.length}</span> documents
           </div>
 
-          <nav className="flex items-center space-x-1 bg-white/60 rounded-lg p-1 border border-slate-200/50">
+          <nav className="flex items-center space-x-1 bg-white/60 dark:bg-neutral-900/60 rounded-lg p-1 border border-slate-200/50">
             {/* Previous Button */}
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

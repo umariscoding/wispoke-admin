@@ -21,9 +21,9 @@ const IOSLoader: React.FC<IOSLoaderProps> = ({
   };
 
   const colors = {
-    primary: "border-primary-200 border-t-primary-600",
+    primary: "border-primary-200 dark:border-primary-900/40 border-t-primary-600",
     white: "border-white/20 border-t-white",
-    dark: "border-neutral-200 border-t-neutral-700",
+    dark: "border-neutral-200 dark:border-neutral-800 border-t-neutral-700",
   };
 
   return (

@@ -92,8 +92,8 @@ export default function AvailabilityPage() {
     <div className="max-w-5xl mx-auto space-y-6 pb-8">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">Availability</h1>
-          <p className="text-sm text-neutral-500 mt-0.5">
+          <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 tracking-tight">Availability</h1>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
             Set the hours your voice agent can book appointments.
           </p>
         </div>
@@ -116,10 +116,10 @@ export default function AvailabilityPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Weekly schedule — wider on the left */}
-        <section className="lg:col-span-3 bg-white rounded-xl border border-neutral-200 overflow-hidden">
-          <div className="px-5 py-4 border-b border-neutral-100">
-            <h2 className="text-sm font-semibold text-neutral-900">Weekly hours</h2>
-            <p className="text-xs text-neutral-500 mt-0.5">
+        <section className="lg:col-span-3 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+          <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800">
+            <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Weekly hours</h2>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
               Toggle each day on or off. Add multiple time ranges for split shifts.
             </p>
           </div>
@@ -127,10 +127,10 @@ export default function AvailabilityPage() {
         </section>
 
         {/* Date overrides */}
-        <section className="lg:col-span-2 bg-white rounded-xl border border-neutral-200 overflow-hidden">
-          <div className="px-5 py-4 border-b border-neutral-100">
-            <h2 className="text-sm font-semibold text-neutral-900">Blocked dates</h2>
-            <p className="text-xs text-neutral-500 mt-0.5">
+        <section className="lg:col-span-2 bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
+          <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800">
+            <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Blocked dates</h2>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
               Holidays, time off, or any day you&apos;re unavailable.
             </p>
           </div>

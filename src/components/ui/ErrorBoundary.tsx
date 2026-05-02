@@ -70,7 +70,7 @@ class ErrorBoundary extends Component<Props, State> {
             <div className="bg-secondary-50 rounded-lg shadow-lg p-6 text-center border border-secondary-200">
               <div className="w-16 h-16 bg-error-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
-                  className="w-8 h-8 text-error-600"
+                  className="w-8 h-8 text-error-600 dark:text-error-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -98,7 +98,7 @@ class ErrorBoundary extends Component<Props, State> {
                   <summary className="cursor-pointer font-medium text-secondary-700 mb-2">
                     Error Details (Development)
                   </summary>
-                  <pre className="text-xs text-error-600 whitespace-pre-wrap overflow-auto">
+                  <pre className="text-xs text-error-600 dark:text-error-400 whitespace-pre-wrap overflow-auto">
                     {this.state.error.toString()}
                     {this.state.errorInfo?.componentStack}
                   </pre>

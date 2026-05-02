@@ -53,12 +53,12 @@ const ChatsChart: React.FC<ChatsChartProps> = ({
   const total = chartData.reduce((sum, p) => sum + p["New Chats"], 0);
 
   return (
-    <div className={`bg-white rounded-xl border border-slate-200/80 p-5 hover:border-slate-300 hover:shadow-md hover:shadow-slate-200/50 transition-all duration-200 ${className}`}>
+    <div className={`bg-white dark:bg-neutral-900 rounded-xl border border-slate-200/80 p-5 hover:border-slate-300 hover:shadow-md hover:shadow-slate-200/50 transition-all duration-200 ${className}`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-accent-50">
-            <Icons.MessageSquare className="h-4 w-4 text-accent-600" />
+          <div className="p-2 rounded-lg bg-accent-50 dark:bg-accent-900/20">
+            <Icons.MessageSquare className="h-4 w-4 text-accent-600 dark:text-accent-400" />
           </div>
           <div>
             <h3 className="text-sm font-semibold text-slate-800 tracking-[-0.01em]">Chat Activity</h3>

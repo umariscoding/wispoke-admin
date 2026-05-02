@@ -145,9 +145,9 @@ export default function BillingSection() {
     <div className="mb-4 space-y-3">
       {/* Status banners */}
       {billingActivating && (
-        <div className="flex items-center gap-3 bg-primary-50 border border-primary-200 rounded-xl px-4 py-3">
+        <div className="flex items-center gap-3 bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-900/40 rounded-xl px-4 py-3">
           <IOSLoader size="sm" color="primary" />
-          <p className="text-sm text-primary-700 font-medium">
+          <p className="text-sm text-primary-700 dark:text-primary-300 font-medium">
             Activating your Pro account...
           </p>
         </div>
@@ -182,13 +182,13 @@ export default function BillingSection() {
       )}
 
       {/* Billing card */}
-      <div className="bg-white rounded-2xl border border-neutral-200 overflow-hidden">
+      <div className="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
         <div className="px-5 pt-5 pb-4">
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-6 h-6 rounded-full bg-neutral-100 flex items-center justify-center">
-              <Icons.CreditCard className="h-3.5 w-3.5 text-neutral-500" />
+            <div className="w-6 h-6 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+              <Icons.CreditCard className="h-3.5 w-3.5 text-neutral-500 dark:text-neutral-400" />
             </div>
-            <span className="text-xs font-bold uppercase tracking-widest text-neutral-400">
+            <span className="text-xs font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
               Billing
             </span>
           </div>
@@ -200,16 +200,16 @@ export default function BillingSection() {
                 className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${
                   isPro
                     ? "bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-orange-500/25"
-                    : "bg-neutral-100"
+                    : "bg-neutral-100 dark:bg-neutral-800"
                 }`}
               >
                 <Icons.Crown
-                  className={`h-4 w-4 ${isPro ? "text-white" : "text-neutral-400"}`}
+                  className={`h-4 w-4 ${isPro ? "text-white" : "text-neutral-400 dark:text-neutral-500"}`}
                 />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-neutral-900">
+                  <span className="text-sm font-bold text-neutral-900 dark:text-neutral-50">
                     {isPro ? "Pro" : "Free"} Plan
                   </span>
                   {isPro && !isCancelled && (
@@ -223,7 +223,7 @@ export default function BillingSection() {
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-neutral-500 mt-0.5">
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
                   {isFree && "Upgrade to unlock all features"}
                   {isPro && !isCancelled && subscriptionRenewsAt && (
                     <>Renews {new Date(subscriptionRenewsAt).toLocaleDateString()}</>
@@ -237,7 +237,7 @@ export default function BillingSection() {
             </div>
 
             {isPro && !isCancelled && (
-              <span className="text-xs font-bold text-neutral-900 bg-neutral-100 px-3 py-1.5 rounded-full">
+              <span className="text-xs font-bold text-neutral-900 dark:text-neutral-50 bg-neutral-100 dark:bg-neutral-800 px-3 py-1.5 rounded-full">
                 $99/mo
               </span>
             )}
@@ -245,12 +245,12 @@ export default function BillingSection() {
 
           {/* Free plan — upgrade CTA */}
           {isFree && (
-            <div className="bg-gradient-to-br from-neutral-50 to-primary-50/30 border border-neutral-200 rounded-xl p-4">
+            <div className="bg-gradient-to-br from-neutral-50 to-primary-50/30 border border-neutral-200 dark:border-neutral-800 rounded-xl p-4">
               <div className="space-y-2.5 mb-4">
                 {PRO_FEATURES.map((feature) => (
                   <div key={feature} className="flex items-center gap-2.5">
                     <Icons.CheckCircle className="h-3.5 w-3.5 text-primary-500 flex-shrink-0" />
-                    <span className="text-xs text-neutral-600">{feature}</span>
+                    <span className="text-xs text-neutral-600 dark:text-neutral-400">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -276,7 +276,7 @@ export default function BillingSection() {
           {isPro && !isCancelled && (
             <button
               onClick={() => setShowCancelConfirm(true)}
-              className="text-xs text-neutral-400 hover:text-red-500 transition-colors"
+              className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-red-500 transition-colors"
             >
               Cancel subscription
             </button>
@@ -327,7 +327,7 @@ export default function BillingSection() {
                 <button
                   onClick={() => setShowCancelConfirm(false)}
                   disabled={billingLoading}
-                  className="px-3.5 py-1.5 text-xs font-medium text-neutral-500 hover:text-neutral-700 rounded-full border border-neutral-200 hover:bg-neutral-50 transition-all disabled:opacity-40"
+                  className="px-3.5 py-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300 rounded-full border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all disabled:opacity-40"
                 >
                   Keep subscription
                 </button>

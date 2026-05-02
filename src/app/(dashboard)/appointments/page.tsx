@@ -100,19 +100,19 @@ export default function AppointmentsPage() {
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">Appointments</h1>
-          <p className="text-sm text-neutral-500 mt-0.5">
+          <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 tracking-tight">Appointments</h1>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
             {counts.all} total
             {counts.confirmed > 0 && (
               <>
                 {" · "}
-                <span className="text-primary-600 font-medium">{counts.confirmed} upcoming</span>
+                <span className="text-primary-600 dark:text-primary-400 font-medium">{counts.confirmed} upcoming</span>
               </>
             )}
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex items-center border border-neutral-200 rounded-full p-0.5 gap-0.5 bg-white">
+          <div className="flex items-center border border-neutral-200 dark:border-neutral-800 rounded-full p-0.5 gap-0.5 bg-white dark:bg-neutral-900">
             {(["calendar", "table"] as View[]).map((v) => (
               <button
                 key={v}
@@ -120,7 +120,7 @@ export default function AppointmentsPage() {
                 className={`px-3 py-1 text-xs font-semibold rounded-full transition-all capitalize flex items-center gap-1.5 ${
                   view === v
                     ? "bg-primary-600 text-white shadow-sm shadow-primary-600/25"
-                    : "text-neutral-500 hover:text-neutral-800"
+                    : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-100"
                 }`}
               >
                 {v === "calendar" ? (
@@ -144,7 +144,7 @@ export default function AppointmentsPage() {
       {/* Filter bar — only shown for table view */}
       {view === "table" && (
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="inline-flex items-center border border-neutral-200 bg-white rounded-full p-1 gap-0.5">
+          <div className="inline-flex items-center border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 rounded-full p-1 gap-0.5">
             {FILTERS.map((f) => (
               <button
                 key={f.key}
@@ -152,7 +152,7 @@ export default function AppointmentsPage() {
                 className={`px-4 py-1.5 text-xs font-medium rounded-full transition-all ${
                   filter === f.key
                     ? "bg-primary-600 text-white shadow-sm shadow-primary-600/25"
-                    : "text-neutral-500 hover:text-neutral-800 hover:bg-neutral-50"
+                    : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-800"
                 }`}
               >
                 {f.label}
@@ -161,13 +161,13 @@ export default function AppointmentsPage() {
             ))}
           </div>
           <div className="relative">
-            <Icons.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+            <Icons.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400 dark:text-neutral-500" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search name, phone, service..."
-              className="pl-9 pr-4 py-2 rounded-lg border border-neutral-200 bg-white text-sm placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all w-64"
+              className="pl-9 pr-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-sm placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all w-64"
             />
           </div>
         </div>
@@ -181,7 +181,7 @@ export default function AppointmentsPage() {
           onSlotClick={(date, time) => setAdding({ date, time })}
         />
       ) : (
-        <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
+        <div className="bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
           <AppointmentsTable
             appointments={filtered}
             emptyHint={search ? "No results found" : "No appointments yet"}

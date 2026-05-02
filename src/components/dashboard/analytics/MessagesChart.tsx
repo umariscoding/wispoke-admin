@@ -53,7 +53,7 @@ const MessagesChart: React.FC<MessagesChartProps> = ({
   const total = chartData.reduce((sum, p) => sum + p["Total Messages"], 0);
 
   return (
-    <div className={`bg-white rounded-xl border border-slate-200/80 p-5 hover:border-slate-300 hover:shadow-md hover:shadow-slate-200/50 transition-all duration-200 ${className}`}>
+    <div className={`bg-white dark:bg-neutral-900 rounded-xl border border-slate-200/80 p-5 hover:border-slate-300 hover:shadow-md hover:shadow-slate-200/50 transition-all duration-200 ${className}`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">

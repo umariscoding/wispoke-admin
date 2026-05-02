@@ -98,12 +98,12 @@ export default function Home() {
   }, [wordIndex]);
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900 overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50 overflow-x-hidden">
       {/* ═══════════ NAV ═══════════ */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-white/80 backdrop-blur-2xl shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+            ? "bg-white/80 dark:bg-neutral-900/80 backdrop-blur-2xl shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
             : ""
         }`}
       >
@@ -128,7 +128,7 @@ export default function Home() {
               <a
                 key={label}
                 href={href}
-                className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
+                className="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 transition-colors"
               >
                 {label}
               </a>
@@ -147,7 +147,7 @@ export default function Home() {
               <>
                 <Link
                   href={ROUTES.COMPANY_LOGIN}
-                  className="hidden sm:inline-flex items-center justify-center text-sm font-medium text-neutral-600 border border-neutral-200 hover:border-neutral-300 rounded-full h-10 px-5 transition-colors"
+                  className="hidden sm:inline-flex items-center justify-center text-sm font-medium text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 rounded-full h-10 px-5 transition-colors"
                 >
                   Login
                 </Link>
@@ -172,16 +172,16 @@ export default function Home() {
           aria-hidden="true"
         >
           <div className="absolute top-24 -left-8 w-28 h-28 sm:w-44 sm:h-44 bg-primary-100/40 rounded-3xl rotate-12" />
-          <div className="absolute top-16 right-4 sm:right-12 w-32 h-20 sm:w-56 sm:h-36 bg-primary-50/50 rounded-3xl -rotate-6" />
+          <div className="absolute top-16 right-4 sm:right-12 w-32 h-20 sm:w-56 sm:h-36 bg-primary-50/50 dark:bg-primary-900/20 rounded-3xl -rotate-6" />
           <div className="absolute bottom-[40%] left-[20%] w-32 h-32 sm:w-52 sm:h-52 bg-primary-100/25 rounded-3xl rotate-45" />
-          <div className="absolute top-[30%] right-[22%] w-20 h-36 sm:w-36 sm:h-64 bg-primary-50/35 rounded-3xl -rotate-12" />
+          <div className="absolute top-[30%] right-[22%] w-20 h-36 sm:w-36 sm:h-64 bg-primary-50/35 dark:bg-primary-900/20 rounded-3xl -rotate-12" />
           <div className="absolute bottom-[30%] right-6 sm:right-16 w-24 h-24 sm:w-40 sm:h-40 bg-primary-100/30 rounded-3xl rotate-6" />
-          <div className="absolute bottom-[20%] left-[8%] w-20 h-20 sm:w-32 sm:h-32 bg-primary-50/30 rounded-3xl -rotate-45" />
+          <div className="absolute bottom-[20%] left-[8%] w-20 h-20 sm:w-32 sm:h-32 bg-primary-50/30 dark:bg-primary-900/20 rounded-3xl -rotate-45" />
         </div>
 
         {/* Hero text */}
         <div className="relative max-w-4xl mx-auto text-center px-5 sm:px-6">
-          <h1 className="animate-slide-up text-[2.5rem] sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] sm:leading-[1.1] text-neutral-900 mb-5 sm:mb-6">
+          <h1 className="animate-slide-up text-[2.5rem] sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] sm:leading-[1.1] text-neutral-900 dark:text-neutral-50 mb-5 sm:mb-6">
             Your AI support,
             <br />
             deployed on
@@ -210,7 +210,7 @@ export default function Home() {
             </span>
           </h1>
 
-          <p className="animate-slide-up-d1 text-base sm:text-xl text-neutral-500 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2">
+          <p className="animate-slide-up-d1 text-base sm:text-xl text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2">
             Upload your knowledge base, customize the widget, embed on any site
             with one line of code.
           </p>
@@ -233,7 +233,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href={ROUTES.COMPANY_LOGIN}
-                  className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors"
+                  className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors"
                 >
                   Already have an account?{" "}
                   <span className="underline">Sign in</span>
@@ -260,7 +260,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════ TRUST ═══════════ */}
-      <section className="relative py-10 sm:py-14 px-5 sm:px-6 border-y border-neutral-100">
+      <section className="relative py-10 sm:py-14 px-5 sm:px-6 border-y border-neutral-100 dark:border-neutral-800">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-center gap-5 sm:gap-14 flex-wrap">
             {[
@@ -268,7 +268,7 @@ export default function Home() {
               { icon: "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z", text: "No credit card required" },
               { icon: "M6 18L18 6M6 6l12 12", text: "Cancel anytime" },
             ].map((item) => (
-              <div key={item.text} className="flex items-center gap-2 text-neutral-400">
+              <div key={item.text} className="flex items-center gap-2 text-neutral-400 dark:text-neutral-500">
                 <svg className="w-4 h-4 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
                 </svg>
@@ -283,19 +283,19 @@ export default function Home() {
       <section className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="scroll-reveal">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-10 sm:mb-16 max-w-xl">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 mb-10 sm:mb-16 max-w-xl">
               Everything you need to deploy AI&nbsp;support
             </h2>
           </div>
 
           <div className="scroll-reveal grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 lg:auto-rows-[240px]">
             {/* Large card — product screenshot */}
-            <div className="lg:col-span-2 lg:row-span-2 bg-neutral-50 rounded-3xl overflow-hidden relative flex flex-col lg:min-h-0">
+            <div className="lg:col-span-2 lg:row-span-2 bg-neutral-50 dark:bg-neutral-950 rounded-3xl overflow-hidden relative flex flex-col lg:min-h-0">
               <div className="p-6 sm:p-8 lg:p-10 relative z-10">
-                <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-neutral-500 border border-neutral-200 rounded-full px-3 py-1 mb-4 sm:mb-5">
+                <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-800 rounded-full px-3 py-1 mb-4 sm:mb-5">
                   Platform
                 </span>
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-900 max-w-sm leading-snug">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-900 dark:text-neutral-50 max-w-sm leading-snug">
                   Full visibility into every conversation
                 </h3>
               </div>
@@ -315,28 +315,28 @@ export default function Home() {
             </div>
 
             {/* Top-right — stat card */}
-            <div className="bg-neutral-50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between gap-6 min-h-[200px]">
-              <div className="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center">
-                <svg className="w-5 h-5 text-neutral-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <div className="bg-neutral-50 dark:bg-neutral-950 rounded-3xl p-6 sm:p-8 flex flex-col justify-between gap-6 min-h-[200px]">
+              <div className="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+                <svg className="w-5 h-5 text-neutral-900 dark:text-neutral-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <div>
-                <p className="text-4xl font-black text-neutral-900 tracking-tight">&lt;10 min</p>
-                <p className="text-sm text-neutral-500 mt-1">Average setup time from signup to live chatbot</p>
+                <p className="text-4xl font-black text-neutral-900 dark:text-neutral-50 tracking-tight">&lt;10 min</p>
+                <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Average setup time from signup to live chatbot</p>
               </div>
             </div>
 
             {/* Bottom-right — accent card */}
-            <div className="bg-primary-50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between gap-6 min-h-[180px]">
-              <p className="text-lg font-bold text-neutral-900 leading-snug">
+            <div className="bg-primary-50 dark:bg-primary-900/20 rounded-3xl p-6 sm:p-8 flex flex-col justify-between gap-6 min-h-[180px]">
+              <p className="text-lg font-bold text-neutral-900 dark:text-neutral-50 leading-snug">
                 Train your chatbot on your own data.
               </p>
               <div className="flex flex-wrap gap-2 mt-4">
                 {["PDF", "DOCX", "URL", "TXT", "MD"].map((t) => (
                   <span
                     key={t}
-                    className="text-[10px] font-bold tracking-wider text-primary-700 bg-primary-100 rounded-full px-3 py-1"
+                    className="text-[10px] font-bold tracking-wider text-primary-700 dark:text-primary-300 bg-primary-100 rounded-full px-3 py-1"
                   >
                     {t}
                   </span>
@@ -353,19 +353,19 @@ export default function Home() {
           <div className="scroll-reveal grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left: text list */}
             <div>
-              <span className="text-xs font-medium uppercase tracking-widest text-neutral-400 mb-4 block">
+              <span className="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-4 block">
                 Features
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-8 sm:mb-12">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 mb-8 sm:mb-12">
                 Upload knowledge,
                 <br />
                 deploy instantly
               </h2>
-              <div className="divide-y divide-neutral-200">
+              <div className="divide-y divide-neutral-200 dark:divide-neutral-800">
                 {featureList.map((f) => (
                   <p
                     key={f}
-                    className="py-4 sm:py-5 text-base sm:text-lg text-neutral-700 font-medium"
+                    className="py-4 sm:py-5 text-base sm:text-lg text-neutral-700 dark:text-neutral-300 font-medium"
                   >
                     {f}
                   </p>
@@ -376,12 +376,12 @@ export default function Home() {
             {/* Right: floating UI cards */}
             <div className="relative hidden lg:block min-h-[500px]">
               {/* Card 1: Knowledge Base */}
-              <div className="absolute top-0 left-8 w-[320px] bg-white rounded-2xl border border-neutral-200 shadow-xl shadow-neutral-200/50 overflow-hidden z-10">
-                <div className="px-5 py-3 border-b border-neutral-100 flex items-center justify-between">
-                  <span className="text-sm font-semibold text-neutral-900">
+              <div className="absolute top-0 left-8 w-[320px] bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xl shadow-neutral-200/50 overflow-hidden z-10">
+                <div className="px-5 py-3 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
+                  <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">
                     Knowledge Base
                   </span>
-                  <span className="text-[10px] font-medium text-primary-600 bg-primary-50 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-medium text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 px-2 py-0.5 rounded-full">
                     + Upload
                   </span>
                 </div>
@@ -393,12 +393,12 @@ export default function Home() {
                   ].map((f) => (
                     <div
                       key={f.name}
-                      className="flex items-center gap-2.5 bg-neutral-50 rounded-lg px-3 py-2"
+                      className="flex items-center gap-2.5 bg-neutral-50 dark:bg-neutral-950 rounded-lg px-3 py-2"
                     >
                       <div
                         className={`w-4 h-4 rounded flex-shrink-0 ${f.done ? "bg-primary-100" : "bg-amber-100"}`}
                       />
-                      <span className="text-xs text-neutral-700 flex-1 truncate">
+                      <span className="text-xs text-neutral-700 dark:text-neutral-300 flex-1 truncate">
                         {f.name}
                       </span>
                       <span
@@ -412,9 +412,9 @@ export default function Home() {
               </div>
 
               {/* Card 2: Chat conversation */}
-              <div className="absolute top-32 right-0 w-[300px] bg-white rounded-2xl border border-neutral-200 shadow-xl shadow-neutral-200/50 overflow-hidden z-20 rotate-2">
-                <div className="px-5 py-3 border-b border-neutral-100">
-                  <span className="text-sm font-semibold text-neutral-900">
+              <div className="absolute top-32 right-0 w-[300px] bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-xl shadow-neutral-200/50 overflow-hidden z-20 rotate-2">
+                <div className="px-5 py-3 border-b border-neutral-100 dark:border-neutral-800">
+                  <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">
                     Live Chat
                   </span>
                 </div>
@@ -425,7 +425,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="flex justify-start">
-                    <div className="bg-neutral-100 text-neutral-700 text-xs px-3 py-2 rounded-xl rounded-bl-sm max-w-[80%]">
+                    <div className="bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 text-xs px-3 py-2 rounded-xl rounded-bl-sm max-w-[80%]">
                       Full refunds within 30 days of purchase.
                       <span className="block text-[9px] text-primary-500 mt-1 font-medium">
                         Source: refund-policy.pdf
@@ -436,12 +436,12 @@ export default function Home() {
               </div>
 
               {/* Card 3: Floating status pill */}
-              <div className="absolute bottom-16 left-16 bg-white rounded-full border border-neutral-200 shadow-lg px-4 py-2.5 flex items-center gap-2 z-30 -rotate-3">
+              <div className="absolute bottom-16 left-16 bg-white dark:bg-neutral-900 rounded-full border border-neutral-200 dark:border-neutral-800 shadow-lg px-4 py-2.5 flex items-center gap-2 z-30 -rotate-3">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                <span className="text-xs font-semibold text-neutral-700">
+                <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
                   Chatbot Live
                 </span>
-                <span className="text-[10px] text-neutral-400">
+                <span className="text-[10px] text-neutral-400 dark:text-neutral-500">
                   94% resolution
                 </span>
               </div>
@@ -451,16 +451,16 @@ export default function Home() {
       </section>
 
       {/* ═══════════ EMBED WIDGET ═══════════ */}
-      <section className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6 bg-neutral-50/70 overflow-hidden">
+      <section className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6 bg-neutral-50/70 dark:bg-neutral-950/70 overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="scroll-reveal text-center mb-12 sm:mb-16">
-            <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-neutral-500 border border-neutral-200 rounded-full px-3 py-1 mb-5">
+            <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-800 rounded-full px-3 py-1 mb-5">
               Embed Widget
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4 sm:mb-5">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4 sm:mb-5">
               Your brand, your chatbot
             </h2>
-            <p className="text-neutral-500 text-base sm:text-lg max-w-xl mx-auto">
+            <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg max-w-xl mx-auto">
               Customize colors, templates, welcome messages, and see changes
               live before you publish.
             </p>
@@ -480,17 +480,17 @@ export default function Home() {
             </div>
 
             {/* Floating feature pills */}
-            <div className="absolute -left-4 top-[30%] bg-white rounded-full shadow-lg border border-neutral-100 px-4 py-2 flex items-center gap-2 hidden lg:flex">
+            <div className="absolute -left-4 top-[30%] bg-white dark:bg-neutral-900 rounded-full shadow-lg border border-neutral-100 dark:border-neutral-800 px-4 py-2 flex items-center gap-2 hidden lg:flex">
               <span className="w-2 h-2 rounded-full bg-primary-500" />
-              <span className="text-xs font-semibold text-neutral-700">3 chat templates</span>
+              <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">3 chat templates</span>
             </div>
-            <div className="absolute -right-4 top-[20%] bg-white rounded-full shadow-lg border border-neutral-100 px-4 py-2 flex items-center gap-2 hidden lg:flex">
+            <div className="absolute -right-4 top-[20%] bg-white dark:bg-neutral-900 rounded-full shadow-lg border border-neutral-100 dark:border-neutral-800 px-4 py-2 flex items-center gap-2 hidden lg:flex">
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span className="text-xs font-semibold text-neutral-700">Live preview</span>
+              <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Live preview</span>
             </div>
-            <div className="absolute -right-2 bottom-[25%] bg-white rounded-full shadow-lg border border-neutral-100 px-4 py-2 flex items-center gap-2 hidden lg:flex">
+            <div className="absolute -right-2 bottom-[25%] bg-white dark:bg-neutral-900 rounded-full shadow-lg border border-neutral-100 dark:border-neutral-800 px-4 py-2 flex items-center gap-2 hidden lg:flex">
               <span className="w-2 h-2 rounded-full bg-amber-500" />
-              <span className="text-xs font-semibold text-neutral-700">Quick replies</span>
+              <span className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">Quick replies</span>
             </div>
           </div>
         </div>
@@ -500,10 +500,10 @@ export default function Home() {
       <section id="platform" className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="scroll-reveal text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4 sm:mb-5">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4 sm:mb-5">
               Deploy everywhere
             </h2>
-            <p className="text-neutral-500 text-base sm:text-lg max-w-md mx-auto">
+            <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg max-w-md mx-auto">
               One script tag. Any platform. Your chatbot works wherever your
               customers are.
             </p>
@@ -521,51 +521,51 @@ export default function Home() {
             </div>
 
             {/* WordPress */}
-            <div className="bg-neutral-50 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 transition-colors">
-              <svg className="w-8 h-8 text-neutral-900" viewBox="0 0 24 24" fill="currentColor">
+            <div className="bg-neutral-50 dark:bg-neutral-950 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+              <svg className="w-8 h-8 text-neutral-900 dark:text-neutral-50" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.026-.78-.07-1.11m-7.981.105c.647-.03 1.232-.105 1.232-.105.582-.075.514-.93-.067-.899 0 0-1.755.135-2.88.135-1.064 0-2.85-.15-2.85-.15-.585-.03-.661.855-.075.885 0 0 .54.061 1.125.09l1.68 4.605-2.37 7.08L5.354 6.9c.649-.03 1.234-.1 1.234-.1.585-.075.516-.93-.065-.896 0 0-1.746.138-2.874.138-.2 0-.438-.008-.69-.015C4.911 3.15 8.235 1.215 12 1.215c2.809 0 5.365 1.072 7.286 2.833-.046-.003-.091-.009-.141-.009-1.06 0-1.812.923-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .915-.354 1.994-.821 3.479l-1.075 3.585-3.9-11.61.001.014zM12 22.784c-1.059 0-2.081-.153-3.048-.437l3.237-9.406 3.315 9.087c.024.053.05.101.078.149-1.12.393-2.325.609-3.582.609M1.211 12c0-1.564.336-3.05.935-4.39L7.29 21.709C3.694 19.96 1.212 16.271 1.211 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/>
               </svg>
-              <span className="text-xs font-semibold text-neutral-600">WordPress</span>
+              <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">WordPress</span>
             </div>
 
             {/* Shopify */}
-            <div className="bg-neutral-50 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 transition-colors">
-              <svg className="w-8 h-8 text-neutral-900" viewBox="0 0 24 24" fill="currentColor">
+            <div className="bg-neutral-50 dark:bg-neutral-950 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+              <svg className="w-8 h-8 text-neutral-900 dark:text-neutral-50" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M15.337 23.979l7.216-1.561s-2.604-17.613-2.625-17.73c-.018-.116-.114-.192-.211-.192s-1.929-.136-1.929-.136-1.275-1.274-1.439-1.411c-.045-.037-.075-.057-.121-.074l-.914 21.104h.023zM11.71 11.305s-.81-.424-1.774-.424c-1.447 0-1.504.906-1.504 1.141 0 1.232 3.24 1.715 3.24 4.629 0 2.295-1.44 3.76-3.406 3.76-2.354 0-3.54-1.465-3.54-1.465l.646-2.086s1.245 1.066 2.28 1.066c.675 0 .975-.545.975-.932 0-1.619-2.654-1.694-2.654-4.359-.034-2.237 1.571-4.416 4.827-4.416 1.257 0 1.875.361 1.875.361l-.945 2.715-.02.01zM11.17.83c.136 0 .271.038.405.135-.984.465-2.064 1.639-2.508 3.992-.656.213-1.293.405-1.889.578C7.697 3.75 8.951.84 11.17.84V.83z"/>
               </svg>
-              <span className="text-xs font-semibold text-neutral-600">Shopify</span>
+              <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">Shopify</span>
             </div>
 
             {/* React */}
-            <div className="bg-neutral-50 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 transition-colors">
-              <svg className="w-8 h-8 text-neutral-900" viewBox="0 0 24 24" fill="currentColor">
+            <div className="bg-neutral-50 dark:bg-neutral-950 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+              <svg className="w-8 h-8 text-neutral-900 dark:text-neutral-50" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"/>
               </svg>
-              <span className="text-xs font-semibold text-neutral-600">React</span>
+              <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">React</span>
             </div>
 
             {/* Webflow */}
-            <div className="bg-neutral-50 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 transition-colors">
-              <svg className="w-8 h-8 text-neutral-900" viewBox="0 0 24 24" fill="currentColor">
+            <div className="bg-neutral-50 dark:bg-neutral-950 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+              <svg className="w-8 h-8 text-neutral-900 dark:text-neutral-50" viewBox="0 0 24 24" fill="currentColor">
                 <path d="m24 4.515-7.658 14.97H9.149l3.205-6.204h-.144C9.566 16.713 5.621 18.973 0 19.485v-6.118s3.596-.213 5.71-2.435H0V4.515h6.417v5.278l.144-.001 2.622-5.277h4.854v5.244h.144l2.72-5.244H24Z"/>
               </svg>
-              <span className="text-xs font-semibold text-neutral-600">Webflow</span>
+              <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">Webflow</span>
             </div>
 
             {/* Next.js */}
-            <div className="bg-neutral-50 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 transition-colors">
-              <svg className="w-8 h-8 text-neutral-900" viewBox="0 0 24 24" fill="currentColor">
+            <div className="bg-neutral-50 dark:bg-neutral-950 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+              <svg className="w-8 h-8 text-neutral-900 dark:text-neutral-50" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18.665 21.978C16.758 23.255 14.465 24 12 24 5.377 24 0 18.623 0 12S5.377 0 12 0s12 5.377 12 12c0 3.583-1.574 6.801-4.067 9.001L9.219 7.2H7.2v9.596h1.615V9.251l9.85 12.727Zm-3.332-8.533 1.6 2.061V7.2h-1.6v6.245Z"/>
               </svg>
-              <span className="text-xs font-semibold text-neutral-600">Next.js</span>
+              <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">Next.js</span>
             </div>
 
             {/* HTML5 */}
-            <div className="bg-neutral-50 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 transition-colors">
-              <svg className="w-8 h-8 text-neutral-900" viewBox="0 0 24 24" fill="currentColor">
+            <div className="bg-neutral-50 dark:bg-neutral-950 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 aspect-square hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+              <svg className="w-8 h-8 text-neutral-900 dark:text-neutral-50" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/>
               </svg>
-              <span className="text-xs font-semibold text-neutral-600">HTML5</span>
+              <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">HTML5</span>
             </div>
           </div>
         </div>
@@ -576,16 +576,16 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="scroll-reveal">
-              <span className="text-xs font-medium uppercase tracking-widest text-neutral-400 mb-4 block">
+              <span className="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-4 block">
                 Integration
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4">
                 One line of code
               </h2>
-              <p className="text-neutral-500 leading-relaxed mb-8 max-w-md text-base sm:text-lg">
+              <p className="text-neutral-500 dark:text-neutral-400 leading-relaxed mb-8 max-w-md text-base sm:text-lg">
                 Add your chatbot to any website with a single script tag.
               </p>
-              <ul className="space-y-3 text-sm text-neutral-500">
+              <ul className="space-y-3 text-sm text-neutral-500 dark:text-neutral-400">
                 {[
                   "Loads asynchronously — zero performance impact",
                   "Fully responsive across all devices",
@@ -594,7 +594,7 @@ export default function Home() {
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
                     <svg
-                      className="w-4 h-4 text-primary-600 mt-0.5 flex-shrink-0"
+                      className="w-4 h-4 text-primary-600 dark:text-primary-400 mt-0.5 flex-shrink-0"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -616,16 +616,16 @@ export default function Home() {
               className="scroll-reveal relative"
               style={{ transitionDelay: "0.15s" }}
             >
-              <div className="rounded-2xl overflow-hidden shadow-2xl shadow-neutral-300/40 border border-neutral-200">
+              <div className="rounded-2xl overflow-hidden shadow-2xl shadow-neutral-300/40 border border-neutral-200 dark:border-neutral-800">
                 <div className="bg-neutral-800 px-4 py-3 flex items-center gap-3">
                   <div className="flex gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
                     <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
                     <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
                   </div>
-                  <span className="text-xs text-neutral-500">index.html</span>
+                  <span className="text-xs text-neutral-500 dark:text-neutral-400">index.html</span>
                 </div>
-                <div className="bg-neutral-900 p-4 sm:p-6 font-mono text-xs sm:text-sm text-neutral-400 leading-relaxed overflow-x-auto">
+                <div className="bg-neutral-900 p-4 sm:p-6 font-mono text-xs sm:text-sm text-neutral-400 dark:text-neutral-500 leading-relaxed overflow-x-auto">
                   <pre className="whitespace-pre">
                     {`<`}
                     <span className="text-sky-300">script</span>
@@ -657,7 +657,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════ VALUE PROPS ═══════════ */}
-      <section className="relative py-12 sm:py-16 px-5 sm:px-6 border-y border-neutral-100">
+      <section className="relative py-12 sm:py-16 px-5 sm:px-6 border-y border-neutral-100 dark:border-neutral-800">
         <div className="scroll-reveal max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
           {[
             { title: "10 min setup", desc: "From signup to live chatbot" },
@@ -665,8 +665,8 @@ export default function Home() {
             { title: "Your data, your AI", desc: "100% company data isolation" },
           ].map((item) => (
             <div key={item.title}>
-              <p className="text-lg font-bold text-neutral-900">{item.title}</p>
-              <p className="text-sm text-neutral-400 mt-1">{item.desc}</p>
+              <p className="text-lg font-bold text-neutral-900 dark:text-neutral-50">{item.title}</p>
+              <p className="text-sm text-neutral-400 dark:text-neutral-500 mt-1">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -676,10 +676,10 @@ export default function Home() {
       <section id="pricing" className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <div className="scroll-reveal text-center mb-12 sm:mb-20">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4 sm:mb-5">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4 sm:mb-5">
               Start free, scale when ready
             </h2>
-            <p className="text-neutral-500 text-base sm:text-lg max-w-lg mx-auto">
+            <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg max-w-lg mx-auto">
               No credit card required. Upgrade anytime to unlock the full
               platform.
             </p>
@@ -687,20 +687,20 @@ export default function Home() {
 
           <div className="scroll-reveal grid lg:grid-cols-5 gap-5 sm:gap-6 items-start">
             {/* Free — compact */}
-            <div className="lg:col-span-2 rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 lg:p-10">
-              <p className="text-sm font-bold text-neutral-900 mb-1">Free</p>
-              <p className="text-xs text-neutral-400 mb-6">
+            <div className="lg:col-span-2 rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-8 lg:p-10">
+              <p className="text-sm font-bold text-neutral-900 dark:text-neutral-50 mb-1">Free</p>
+              <p className="text-xs text-neutral-400 dark:text-neutral-500 mb-6">
                 For trying things out
               </p>
               <div className="flex items-baseline gap-1 mb-8">
-                <span className="text-5xl font-black tracking-tight text-neutral-900">
+                <span className="text-5xl font-black tracking-tight text-neutral-900 dark:text-neutral-50">
                   $0
                 </span>
-                <span className="text-neutral-400 text-sm">/month</span>
+                <span className="text-neutral-400 dark:text-neutral-500 text-sm">/month</span>
               </div>
               <Link
                 href={ROUTES.COMPANY_REGISTER}
-                className="w-full inline-flex items-center justify-center text-sm font-semibold text-neutral-700 border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 rounded-full h-12 transition-colors mb-8"
+                className="w-full inline-flex items-center justify-center text-sm font-semibold text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-full h-12 transition-colors mb-8"
               >
                 Get started
               </Link>
@@ -713,7 +713,7 @@ export default function Home() {
                 ].map((f) => (
                   <div key={f} className="flex items-start gap-3">
                     <svg
-                      className="w-4 h-4 text-neutral-400 mt-0.5 flex-shrink-0"
+                      className="w-4 h-4 text-neutral-400 dark:text-neutral-500 mt-0.5 flex-shrink-0"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -725,7 +725,7 @@ export default function Home() {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span className="text-sm text-neutral-600">{f}</span>
+                    <span className="text-sm text-neutral-600 dark:text-neutral-400">{f}</span>
                   </div>
                 ))}
               </div>
@@ -747,18 +747,18 @@ export default function Home() {
                     Recommended
                   </span>
                 </div>
-                <p className="text-xs text-neutral-500 mb-6">
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-6">
                   Everything you need to run AI support
                 </p>
                 <div className="flex items-baseline gap-1 mb-8">
                   <span className="text-5xl font-black tracking-tight text-white">
                     $99
                   </span>
-                  <span className="text-neutral-500 text-sm">/month</span>
+                  <span className="text-neutral-500 dark:text-neutral-400 text-sm">/month</span>
                 </div>
                 <Link
                   href={isLoggedIn ? ROUTES.SETTINGS : ROUTES.COMPANY_REGISTER}
-                  className="w-full inline-flex items-center justify-center text-sm font-semibold bg-white hover:bg-neutral-100 text-neutral-900 rounded-full h-12 transition-colors mb-10"
+                  className="w-full inline-flex items-center justify-center text-sm font-semibold bg-white dark:bg-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-900 dark:text-neutral-50 rounded-full h-12 transition-colors mb-10"
                 >
                   {isLoggedIn ? "Upgrade to Pro" : "Start free, upgrade later"}
                 </Link>
@@ -766,7 +766,7 @@ export default function Home() {
                 {/* Feature groups */}
                 <div className="grid sm:grid-cols-2 gap-x-8 sm:gap-x-10 gap-y-6 sm:gap-y-8">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-3">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-3">
                       Knowledge Base
                     </p>
                     <div className="space-y-2.5">
@@ -788,14 +788,14 @@ export default function Home() {
                               d="M5 13l4 4L19 7"
                             />
                           </svg>
-                          <span className="text-sm text-neutral-300">{f}</span>
+                          <span className="text-sm text-neutral-300 dark:text-neutral-600">{f}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-3">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-3">
                       AI Configuration
                     </p>
                     <div className="space-y-2.5">
@@ -818,14 +818,14 @@ export default function Home() {
                               d="M5 13l4 4L19 7"
                             />
                           </svg>
-                          <span className="text-sm text-neutral-300">{f}</span>
+                          <span className="text-sm text-neutral-300 dark:text-neutral-600">{f}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-3">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-3">
                       Chat Widget
                     </p>
                     <div className="space-y-2.5">
@@ -849,14 +849,14 @@ export default function Home() {
                               d="M5 13l4 4L19 7"
                             />
                           </svg>
-                          <span className="text-sm text-neutral-300">{f}</span>
+                          <span className="text-sm text-neutral-300 dark:text-neutral-600">{f}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-3">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-3">
                       Users & Portal
                     </p>
                     <div className="space-y-2.5">
@@ -879,7 +879,7 @@ export default function Home() {
                               d="M5 13l4 4L19 7"
                             />
                           </svg>
-                          <span className="text-sm text-neutral-300">{f}</span>
+                          <span className="text-sm text-neutral-300 dark:text-neutral-600">{f}</span>
                         </div>
                       ))}
                     </div>
@@ -895,26 +895,26 @@ export default function Home() {
       <section id="faq" className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6">
         <div className="max-w-3xl mx-auto">
           <div className="scroll-reveal text-center mb-12 sm:mb-16">
-            <span className="text-xs font-medium uppercase tracking-widest text-neutral-400 mb-4 block">
+            <span className="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-4 block">
               FAQ
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4">
               Common questions
             </h2>
           </div>
 
-          <div className="scroll-reveal divide-y divide-neutral-200">
+          <div className="scroll-reveal divide-y divide-neutral-200 dark:divide-neutral-800">
             {faqs.map((faq, i) => (
               <div key={i}>
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full flex items-center justify-between py-5 text-left cursor-pointer group"
                 >
-                  <span className="text-[0.9375rem] font-medium text-neutral-700 group-hover:text-neutral-900 transition-colors pr-4">
+                  <span className="text-[0.9375rem] font-medium text-neutral-700 dark:text-neutral-300 group-hover:text-neutral-900 dark:group-hover:text-neutral-50 transition-colors pr-4">
                     {faq.q}
                   </span>
                   <svg
-                    className={`w-5 h-5 text-neutral-300 flex-shrink-0 transition-transform duration-300 ${
+                    className={`w-5 h-5 text-neutral-300 dark:text-neutral-600 flex-shrink-0 transition-transform duration-300 ${
                       openFaq === i ? "rotate-180" : ""
                     }`}
                     fill="none"
@@ -938,7 +938,7 @@ export default function Home() {
                 >
                   <div className="overflow-hidden">
                     <div className="pb-5">
-                      <p className="text-sm text-neutral-500 leading-relaxed">
+                      <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
                         {faq.a}
                       </p>
                     </div>
@@ -965,20 +965,20 @@ export default function Home() {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white max-w-2xl mx-auto mb-4 sm:mb-5">
                 Ready to launch your AI&nbsp;chatbot?
               </h2>
-              <p className="text-neutral-400 max-w-md mx-auto mb-8 sm:mb-10 text-base sm:text-lg">
+              <p className="text-neutral-400 dark:text-neutral-500 max-w-md mx-auto mb-8 sm:mb-10 text-base sm:text-lg">
                 Launch your AI-powered customer support in minutes.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
                   href={isLoggedIn ? ROUTES.DASHBOARD : ROUTES.COMPANY_REGISTER}
-                  className="inline-flex items-center justify-center text-sm sm:text-base font-semibold bg-white hover:bg-neutral-100 text-neutral-900 rounded-full h-12 sm:h-14 px-8 sm:px-10 transition-colors shadow-lg"
+                  className="inline-flex items-center justify-center text-sm sm:text-base font-semibold bg-white dark:bg-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-900 dark:text-neutral-50 rounded-full h-12 sm:h-14 px-8 sm:px-10 transition-colors shadow-lg"
                 >
                   {isLoggedIn ? "Go to Dashboard" : "Get started — it\u2019s free"}
                 </Link>
                 {!isLoggedIn && (
                   <Link
                     href={ROUTES.COMPANY_LOGIN}
-                    className="inline-flex items-center justify-center text-sm font-medium text-neutral-400 border border-neutral-700 hover:border-neutral-500 hover:text-white rounded-full h-11 sm:h-12 px-7 sm:px-8 transition-all"
+                    className="inline-flex items-center justify-center text-sm font-medium text-neutral-400 dark:text-neutral-500 border border-neutral-700 hover:border-neutral-500 hover:text-white rounded-full h-11 sm:h-12 px-7 sm:px-8 transition-all"
                   >
                     I have an account
                   </Link>
@@ -990,7 +990,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════ FOOTER ═══════════ */}
-      <footer className="border-t border-neutral-100 py-12 lg:py-16 px-5 sm:px-6">
+      <footer className="border-t border-neutral-100 dark:border-neutral-800 py-12 lg:py-16 px-5 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-8">
             <div className="sm:col-span-2 lg:col-span-1">
@@ -1003,41 +1003,41 @@ export default function Home() {
                   className="h-9 w-auto"
                 />
               </div>
-              <p className="text-sm text-neutral-400 leading-relaxed max-w-xs">
+              <p className="text-sm text-neutral-400 dark:text-neutral-500 leading-relaxed max-w-xs">
                 AI-powered customer support that scales with your business.
               </p>
             </div>
 
             <div>
-              <h4 className="text-sm font-semibold text-neutral-900 mb-4">Product</h4>
+              <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-4">Product</h4>
               <ul className="space-y-2.5">
-                <li><a href="#features" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Features</a></li>
-                <li><a href="#pricing" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Pricing</a></li>
-                <li><a href="#platform" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Platforms</a></li>
-                <li><a href="#faq" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">FAQ</a></li>
+                <li><a href="#features" className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors">Features</a></li>
+                <li><a href="#pricing" className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors">Pricing</a></li>
+                <li><a href="#platform" className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors">Platforms</a></li>
+                <li><a href="#faq" className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors">FAQ</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-sm font-semibold text-neutral-900 mb-4">Account</h4>
+              <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-4">Account</h4>
               <ul className="space-y-2.5">
-                <li><Link href={ROUTES.COMPANY_LOGIN} className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Login</Link></li>
-                <li><Link href={ROUTES.COMPANY_REGISTER} className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Sign up</Link></li>
-                <li><Link href={ROUTES.DASHBOARD} className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Dashboard</Link></li>
+                <li><Link href={ROUTES.COMPANY_LOGIN} className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors">Login</Link></li>
+                <li><Link href={ROUTES.COMPANY_REGISTER} className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors">Sign up</Link></li>
+                <li><Link href={ROUTES.DASHBOARD} className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors">Dashboard</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-sm font-semibold text-neutral-900 mb-4">Legal</h4>
+              <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-50 mb-4">Legal</h4>
               <ul className="space-y-2.5">
-                <li><Link href="/privacy" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Terms of Service</Link></li>
+                <li><Link href="/privacy" className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="text-sm text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400 transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
 
-          <div className="mt-12 pt-8 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-neutral-400">
+          <div className="mt-12 pt-8 border-t border-neutral-100 dark:border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-neutral-400 dark:text-neutral-500">
               &copy; {new Date().getFullYear()} {APP_CONFIG.NAME}. All rights
               reserved.
             </p>

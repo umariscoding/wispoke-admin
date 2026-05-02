@@ -34,11 +34,11 @@ const MinimalButton = React.forwardRef<HTMLButtonElement, MinimalButtonProps>(
       primary:
         "bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-sm hover:shadow-md active:scale-[0.98]",
       secondary:
-        "bg-neutral-100 hover:bg-neutral-200 text-neutral-700 rounded-full border border-neutral-200 active:scale-[0.98]",
+        "bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full border border-neutral-200 dark:border-neutral-800 active:scale-[0.98]",
       ghost:
-        "bg-transparent hover:bg-neutral-100 text-neutral-600 hover:text-neutral-900 rounded-full",
+        "bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-50 rounded-full",
       outline:
-        "bg-transparent border border-neutral-300 hover:border-primary-400 text-neutral-700 hover:text-primary-600 hover:bg-primary-50 rounded-full",
+        "bg-transparent border border-neutral-300 dark:border-neutral-700 hover:border-primary-400 text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-full",
     };
 
     const sizes = {

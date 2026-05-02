@@ -173,7 +173,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
               <button
                 type="button"
                 onClick={openFileDialog}
-                className="text-primary-600 hover:text-primary-700 font-semibold transition-colors underline underline-offset-2"
+                className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold transition-colors underline underline-offset-2"
                 disabled={loading}
               >
                 browse your files
@@ -224,7 +224,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="p-2 bg-primary-100/50 rounded-lg">
-                <Icons.Document className="h-5 w-5 text-primary-600" />
+                <Icons.Document className="h-5 w-5 text-primary-600 dark:text-primary-400" />
               </div>
               <h4 className="text-sm font-bold text-slate-900">
                 {selectedFiles.length}{" "}
@@ -244,7 +244,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 className="flex items-center justify-between p-3.5 bg-slate-50/60 border border-slate-200/60 rounded-xl hover:bg-slate-100/60 hover:border-slate-300/60 transition-all duration-200 group/file"
               >
                 <div className="flex items-center space-x-3 flex-1 min-w-0">
-                  <div className="p-2 bg-white rounded-lg group-hover/file:shadow-sm transition-all">
+                  <div className="p-2 bg-white dark:bg-neutral-900 rounded-lg group-hover/file:shadow-sm transition-all">
                     <Icons.Document className="h-4 w-4 text-slate-600" />
                   </div>
                   <div className="min-w-0 flex-1">
