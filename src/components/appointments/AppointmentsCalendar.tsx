@@ -36,28 +36,28 @@ const STATUS_STYLE: Record<
   { bg: string; bar: string; text: string; dot: string }
 > = {
   confirmed: {
-    bg: "bg-primary-50 hover:bg-primary-100",
+    bg: "bg-primary-50 dark:bg-primary-900/20 hover:bg-primary-100 dark:hover:bg-teal-500/15",
     bar: "bg-primary-600",
     text: "text-primary-900",
     dot: "bg-primary-600",
   },
   completed: {
-    bg: "bg-emerald-50 hover:bg-emerald-100",
+    bg: "bg-emerald-50 dark:bg-emerald-500/10 hover:bg-emerald-100 dark:bg-emerald-500/15",
     bar: "bg-emerald-600",
     text: "text-emerald-900",
     dot: "bg-emerald-600",
   },
   cancelled: {
-    bg: "bg-neutral-50 hover:bg-neutral-100",
-    bar: "bg-neutral-300",
-    text: "text-neutral-500 line-through",
-    dot: "bg-neutral-300",
+    bg: "bg-neutral-50 dark:bg-transparent hover:bg-slate-100 dark:hover:bg-white/[0.04]",
+    bar: "bg-slate-300 dark:bg-white/[0.10]",
+    text: "text-slate-500 dark:text-slate-400 line-through",
+    dot: "bg-slate-300 dark:bg-white/[0.10]",
   },
   no_show: {
-    bg: "bg-red-50 hover:bg-red-100",
-    bar: "bg-red-500",
-    text: "text-red-900",
-    dot: "bg-red-500",
+    bg: "bg-rose-50 dark:bg-rose-500/10 hover:bg-rose-100 dark:bg-rose-500/15",
+    bar: "bg-rose-500",
+    text: "text-rose-900",
+    dot: "bg-rose-500",
   },
 };
 
@@ -262,33 +262,33 @@ export default function AppointmentsCalendar({
   const goToday = () => setWeekStart(startOfWeek(new Date()));
 
   return (
-    <div className="bg-white rounded-2xl border border-neutral-200 overflow-hidden flex flex-col">
+    <div className="bg-white dark:bg-white/[0.02] rounded-2xl border border-neutral-200 dark:border-white/[0.06] overflow-hidden flex flex-col">
       {/* ─── Toolbar ──────────────────────────────────────────── */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-200 flex-shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-200 dark:border-white/[0.06] flex-shrink-0">
         <div className="flex items-center gap-1">
           <button
             onClick={goToday}
-            className="px-3 py-1.5 text-xs font-semibold text-neutral-700 border border-neutral-200 rounded-lg hover:bg-neutral-50 transition-colors"
+            className="px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300 border border-neutral-200 dark:border-white/[0.06] rounded-lg hover:bg-neutral-50 dark:hover:bg-white/[0.04] transition-colors"
           >
             Today
           </button>
           <div className="flex items-center ml-1">
             <button
               onClick={() => navWeek(-1)}
-              className="p-1.5 hover:bg-neutral-100 rounded-md transition-colors"
+              className="p-1.5 hover:bg-slate-100 dark:hover:bg-white/[0.04] rounded-md transition-colors"
               title="Previous week"
             >
-              <Icons.ChevronLeft className="h-4 w-4 text-neutral-600" />
+              <Icons.ChevronLeft className="h-4 w-4 text-slate-600 dark:text-slate-400" />
             </button>
             <button
               onClick={() => navWeek(1)}
-              className="p-1.5 hover:bg-neutral-100 rounded-md transition-colors"
+              className="p-1.5 hover:bg-slate-100 dark:hover:bg-white/[0.04] rounded-md transition-colors"
               title="Next week"
             >
-              <Icons.ChevronRight className="h-4 w-4 text-neutral-600" />
+              <Icons.ChevronRight className="h-4 w-4 text-slate-600 dark:text-slate-400" />
             </button>
           </div>
-          <h2 className="text-sm font-semibold text-neutral-900 ml-2">{headerLabel}</h2>
+          <h2 className="text-sm font-semibold text-slate-900 dark:text-white ml-2">{headerLabel}</h2>
         </div>
 
         <div className="flex items-center gap-2">
@@ -297,7 +297,7 @@ export default function AppointmentsCalendar({
       </div>
 
       {/* ─── Day headers ──────────────────────────────────────── */}
-      <div className="flex border-b border-neutral-200 flex-shrink-0">
+      <div className="flex border-b border-neutral-200 dark:border-white/[0.06] flex-shrink-0">
         <div style={{ width: TIME_COL_WIDTH }} className="flex-shrink-0" />
         <div className="flex flex-1">
           {week.map((d) => {
@@ -307,13 +307,13 @@ export default function AppointmentsCalendar({
             return (
               <div
                 key={ds}
-                className={`flex-1 min-w-0 border-l border-neutral-200 py-2 text-center ${
-                  isToday ? "bg-primary-50/40" : ""
+                className={`flex-1 min-w-0 border-l border-neutral-200 dark:border-white/[0.06] py-2 text-center ${
+                  isToday ? "bg-primary-50/40 dark:bg-primary-900/20" : ""
                 }`}
               >
                 <p
                   className={`text-[10px] font-semibold tracking-wider ${
-                    isToday ? "text-primary-700" : "text-neutral-500"
+                    isToday ? "text-primary-700 dark:text-primary-300" : "text-slate-500 dark:text-slate-400"
                   }`}
                 >
                   {DAY_LABELS[d.getDay()]}
@@ -326,7 +326,7 @@ export default function AppointmentsCalendar({
                   ) : (
                     <span
                       className={`text-base font-semibold ${
-                        isPast ? "text-neutral-400" : "text-neutral-800"
+                        isPast ? "text-slate-400 dark:text-slate-400" : "text-slate-800 dark:text-slate-100"
                       }`}
                     >
                       {d.getDate()}
@@ -348,7 +348,7 @@ export default function AppointmentsCalendar({
           {/* Time gutter — labels nudged down so the first one isn't clipped. */}
           <div
             style={{ width: TIME_COL_WIDTH }}
-            className="flex-shrink-0 relative border-r border-neutral-200"
+            className="flex-shrink-0 relative border-r border-neutral-200 dark:border-white/[0.06]"
           >
             {hours.map((h, i) => (
               <div
@@ -356,7 +356,7 @@ export default function AppointmentsCalendar({
                 className="absolute right-2"
                 style={{ top: GRID_TOP_PAD + i * HOUR_HEIGHT - 6 }}
               >
-                <span className="text-[10px] font-semibold text-neutral-500 select-none">
+                <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 select-none">
                   {fmtHour(h)}
                 </span>
               </div>
@@ -422,8 +422,8 @@ const DayColumn = React.memo(function DayColumn({
 
   return (
     <div
-      className={`flex-1 min-w-0 relative border-l border-neutral-200 ${
-        isToday ? "bg-primary-50/20" : ""
+      className={`flex-1 min-w-0 relative border-l border-neutral-200 dark:border-white/[0.06] ${
+        isToday ? "bg-primary-50/20 dark:bg-primary-900/20" : ""
       }`}
     >
       {/* Closed regions — one striped block per contiguous span so the
@@ -436,9 +436,9 @@ const DayColumn = React.memo(function DayColumn({
           style={{
             top: GRID_TOP_PAD + (from - FIRST_HOUR) * HOUR_HEIGHT,
             height: (to - from) * HOUR_HEIGHT,
-            backgroundColor: "#fafbfc",
+            backgroundColor: "var(--calendar-closed-bg)",
             backgroundImage:
-              "repeating-linear-gradient(-45deg, transparent 0 7px, rgba(15,23,42,0.07) 7px 8px)",
+              "repeating-linear-gradient(-45deg, transparent 0 7px, var(--calendar-closed-stripe) 7px 8px)",
           }}
         />
       ))}
@@ -449,20 +449,20 @@ const DayColumn = React.memo(function DayColumn({
         return (
           <div
             key={h}
-            className="absolute left-0 right-0 border-t border-neutral-200"
+            className="absolute left-0 right-0 border-t border-neutral-200 dark:border-white/[0.06]"
             style={{ top: GRID_TOP_PAD + i * HOUR_HEIGHT, height: HOUR_HEIGHT }}
           >
             <button
               onClick={() => onSlotClick?.(ds, `${String(h).padStart(2, "0")}:00`)}
               className={`absolute inset-x-0 top-0 h-1/2 transition-colors ${
-                available ? "hover:bg-primary-100/70" : "cursor-not-allowed"
+                available ? "hover:bg-primary-100/70 dark:hover:bg-teal-500/15" : "cursor-not-allowed"
               }`}
               disabled={!available}
             />
             <button
               onClick={() => onSlotClick?.(ds, `${String(h).padStart(2, "0")}:30`)}
-              className={`absolute inset-x-0 bottom-0 h-1/2 border-t border-dashed border-neutral-200/70 transition-colors ${
-                available ? "hover:bg-primary-100/70" : "cursor-not-allowed"
+              className={`absolute inset-x-0 bottom-0 h-1/2 border-t border-dashed border-neutral-200/70 dark:border-white/[0.06] transition-colors ${
+                available ? "hover:bg-primary-100/70 dark:hover:bg-teal-500/15" : "cursor-not-allowed"
               }`}
               disabled={!available}
             />
@@ -535,9 +535,9 @@ function NowIndicator({ top, columnIndex }: { top: number; columnIndex: number }
       className="absolute left-0 right-0 z-30 pointer-events-none"
       style={{ top: top - 1 }}
     >
-      <div className="relative h-0.5 bg-red-500/80">
+      <div className="relative h-0.5 bg-rose-500/80">
         <div
-          className="absolute -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-red-500 ring-2 ring-white"
+          className="absolute -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-rose-500 ring-2 ring-white"
           style={{ left: `calc(${leftPct}% - 5px)`, top: 1 }}
         />
       </div>
@@ -550,14 +550,14 @@ function Legend() {
   const items = [
     { label: "Confirmed", dot: "bg-primary-600" },
     { label: "Completed", dot: "bg-emerald-600" },
-    { label: "No-show", dot: "bg-red-500" },
+    { label: "No-show", dot: "bg-rose-500" },
   ];
   return (
     <div className="hidden sm:flex items-center gap-3 mr-1">
       {items.map((it) => (
         <div key={it.label} className="flex items-center gap-1.5">
           <span className={`w-2 h-2 rounded-full ${it.dot}`} />
-          <span className="text-[11px] font-medium text-neutral-500">{it.label}</span>
+          <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400">{it.label}</span>
         </div>
       ))}
     </div>

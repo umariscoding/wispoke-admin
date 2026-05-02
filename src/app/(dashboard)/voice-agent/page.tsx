@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { companyApi } from "@/utils/company/api";
 import Toggle from "@/components/ui/Toggle";
-import { Icons } from "@/components/ui";
+import { Icons, IOSContentLoader} from "@/components/ui";
 import IOSLoader from "@/components/ui/IOSLoader";
 import VoiceModelPicker from "@/components/voice-agent/VoiceModelPicker";
 import AppointmentFieldsBuilder from "@/components/voice-agent/AppointmentFieldsBuilder";
@@ -32,8 +32,8 @@ const SECTIONS = [
 type SectionId = (typeof SECTIONS)[number]["id"];
 
 const inputCls =
-  "w-full rounded-lg border border-neutral-200 bg-white text-neutral-900 placeholder-neutral-400 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-colors";
-const labelCls = "text-xs font-medium text-neutral-500 uppercase tracking-wider mb-1.5 block";
+  "w-full rounded-lg border border-neutral-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-colors";
+const labelCls = "text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1.5 block";
 
 export default function VoiceAgentPage() {
   const [s, setS] = useState<VoiceSettings | null>(null);
@@ -122,9 +122,7 @@ export default function VoiceAgentPage() {
 
   if (loading || !s) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <IOSLoader size="md" color="primary" />
-      </div>
+      <IOSContentLoader isLoading={true} message="Loading..." />
     );
   }
 
@@ -137,10 +135,10 @@ export default function VoiceAgentPage() {
       style={{ height: "calc(100vh - 64px)" }}
     >
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 pt-6 pb-4 border-b border-neutral-100 flex-shrink-0 bg-neutral-50">
+      <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 pt-6 pb-4 border-b border-slate-100 dark:border-white/[0.06] flex-shrink-0 bg-neutral-50 dark:bg-transparent">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">Voice Agent</h1>
-          <p className="text-sm text-neutral-500 mt-0.5">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Voice Agent</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
             AI phone agent that answers calls and books appointments.
           </p>
         </div>
@@ -148,7 +146,7 @@ export default function VoiceAgentPage() {
           <StatusPill enabled={s.is_enabled} onToggle={(v) => update("is_enabled", v)} />
           <button
             onClick={() => setShowTest(true)}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 border border-neutral-200 bg-white rounded-full transition-colors hover:bg-neutral-100"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 border border-neutral-200 dark:border-white/[0.06] bg-white rounded-full transition-colors hover:bg-slate-100 dark:hover:bg-white/[0.04]"
           >
             <Icons.Phone className="h-3.5 w-3.5" /> Try it
           </button>
@@ -156,7 +154,7 @@ export default function VoiceAgentPage() {
       </div>
 
       {/* Body — sidebar + scrollable form */}
-      <div className="flex-1 flex min-h-0 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex-1 flex min-h-0 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="hidden md:block w-44 flex-shrink-0 pt-6 pr-4 sticky top-0 self-start">
           <ul className="space-y-1">
             {SECTIONS.map((sec) => {
@@ -168,8 +166,8 @@ export default function VoiceAgentPage() {
                     onClick={() => scrollToSection(sec.id)}
                     className={`w-full text-left flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                       active
-                        ? "bg-primary-50 text-primary-700"
-                        : "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100/70"
+                        ? "bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300"
+                        : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:bg-white/[0.04]/70 dark:hover:bg-white/[0.04]"
                     }`}
                   >
                     <Icon className="h-3.5 w-3.5" />
@@ -223,14 +221,14 @@ export default function VoiceAgentPage() {
           <span className="text-xs font-medium">Unsaved changes</span>
           <button
             onClick={fetchSettings}
-            className="text-xs font-medium text-neutral-300 hover:text-white px-2 py-1 rounded-full"
+            className="text-xs font-medium text-slate-300 dark:text-slate-600 hover:text-white px-2 py-1 rounded-full"
           >
             Discard
           </button>
           <button
             onClick={save}
             disabled={saving}
-            className="px-4 py-1.5 text-xs font-semibold text-white bg-primary-600 hover:bg-primary-500 rounded-full transition-colors disabled:opacity-50 flex items-center gap-1.5 min-w-[64px] justify-center"
+            className="px-4 py-1.5 text-xs font-semibold text-white bg-primary-600 hover:bg-teal-500 dark:hover:bg-teal-500/25 dark:border dark:border-teal-500/30 rounded-full transition-colors disabled:opacity-50 flex items-center gap-1.5 min-w-[64px] justify-center"
           >
             {saving ? <IOSLoader size="sm" color="white" /> : "Save"}
           </button>
@@ -261,11 +259,11 @@ const SectionCard = React.forwardRef<
     <section
       ref={ref}
       data-section={id}
-      className="bg-white rounded-xl border border-neutral-200 overflow-hidden scroll-mt-4"
+      className="bg-white dark:bg-white/[0.02] rounded-xl border border-neutral-200 dark:border-white/[0.06] overflow-hidden scroll-mt-4"
     >
-      <div className="px-5 py-4 border-b border-neutral-100">
-        <h2 className="text-sm font-semibold text-neutral-900">{title}</h2>
-        <p className="text-xs text-neutral-500 mt-0.5">{subtitle}</p>
+      <div className="px-5 py-4 border-b border-slate-100 dark:border-white/[0.06]">
+        <h2 className="text-sm font-semibold text-slate-900 dark:text-white">{title}</h2>
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{subtitle}</p>
       </div>
       <div className="px-5 py-5">{children}</div>
     </section>
@@ -286,12 +284,12 @@ const StatusPill = React.memo(function StatusPill({
   return (
     <div
       className={`flex items-center gap-2.5 pl-3 pr-1 py-1 rounded-full border transition-colors ${
-        enabled ? "border-primary-200 bg-primary-50" : "border-neutral-200 bg-white"
+        enabled ? "border-primary-200 dark:border-primary-900/40 bg-primary-50 dark:bg-primary-900/20" : "border-neutral-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02]"
       }`}
     >
       <span
         className={`text-[10px] font-semibold uppercase tracking-wider ${
-          enabled ? "text-primary-700" : "text-neutral-400"
+          enabled ? "text-primary-700 dark:text-primary-300" : "text-slate-400 dark:text-slate-400"
         }`}
       >
         {enabled ? "Active" : "Inactive"}
@@ -346,7 +344,7 @@ const AgentSection = React.memo(
             </div>
             <div>
               <label className={labelCls}>Custom Instructions</label>
-              <p className="text-xs text-neutral-400 -mt-1 mb-1.5">
+              <p className="text-xs text-slate-400 dark:text-slate-400 -mt-1 mb-1.5">
                 Extra rules appended to the default agent prompt.
               </p>
               <textarea
@@ -470,11 +468,11 @@ const PhoneSection = React.memo(
             />
           </div>
           {s.twilio_phone_number && (
-            <div className="flex items-start gap-3 bg-primary-50 border border-primary-200 rounded-xl px-4 py-3">
-              <Icons.CheckCircle className="h-4 w-4 text-primary-600 flex-shrink-0 mt-0.5" />
+            <div className="flex items-start gap-3 bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-900/40 rounded-xl px-4 py-3">
+              <Icons.CheckCircle className="h-4 w-4 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5" />
               <div className="min-w-0">
-                <p className="text-xs text-primary-700 font-medium">Twilio webhook URL</p>
-                <code className="text-xs text-primary-700 font-mono select-all break-all">
+                <p className="text-xs text-primary-700 dark:text-primary-300 font-medium">Twilio webhook URL</p>
+                <code className="text-xs text-primary-700 dark:text-primary-300 font-mono select-all break-all">
                   {apiBase ? `${apiBase}/voice-agent/twilio/incoming` : "Set NEXT_PUBLIC_API_URL"}
                 </code>
               </div>

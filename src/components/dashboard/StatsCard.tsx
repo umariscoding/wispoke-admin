@@ -57,11 +57,11 @@ const StatsCard: React.FC<StatsCardProps> = ({
           <div className="animate-pulse">
             <div className="flex items-center justify-between">
               <div className="space-y-3 flex-1">
-                <div className="h-4 bg-neutral-200 rounded w-1/2"></div>
-                <div className="h-8 bg-neutral-200 rounded w-3/4"></div>
-                <div className="h-3 bg-neutral-200 rounded w-1/3"></div>
+                <div className="h-4 bg-slate-200 dark:bg-white/[0.04] rounded w-1/2"></div>
+                <div className="h-8 bg-slate-200 dark:bg-white/[0.04] rounded w-3/4"></div>
+                <div className="h-3 bg-slate-200 dark:bg-white/[0.04] rounded w-1/3"></div>
               </div>
-              <div className="h-12 w-12 bg-neutral-200 rounded-full"></div>
+              <div className="h-12 w-12 bg-slate-200 dark:bg-white/[0.04] rounded-full"></div>
             </div>
           </div>
         </div>
@@ -72,9 +72,9 @@ const StatsCard: React.FC<StatsCardProps> = ({
   const getChangeColorClass = (type: "increase" | "decrease" | "neutral") => {
     switch (type) {
       case "increase":
-        return "text-success-600";
+        return "text-success-600 dark:text-success-400";
       case "decrease":
-        return "text-error-600";
+        return "text-error-600 dark:text-error-400";
       case "neutral":
       default:
         return "text-text-secondary";
@@ -121,8 +121,8 @@ const StatsCard: React.FC<StatsCardProps> = ({
 
           {Icon && (
             <div className="flex-shrink-0">
-              <div className="p-3 bg-primary-100 rounded-xl shadow-inner">
-                <Icon className="h-6 w-6 text-primary-600" />
+              <div className="p-3 bg-primary-100 dark:bg-teal-500/15 rounded-xl shadow-inner">
+                <Icon className="h-6 w-6 text-primary-600 dark:text-primary-400" />
               </div>
             </div>
           )}

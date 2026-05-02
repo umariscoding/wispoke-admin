@@ -21,9 +21,10 @@ const IOSLoader: React.FC<IOSLoaderProps> = ({
   };
 
   const colors = {
-    primary: "border-primary-200 border-t-primary-600",
+    primary:
+      "border-teal-500/20 dark:border-white/[0.08] border-t-teal-600 dark:border-t-teal-400",
     white: "border-white/20 border-t-white",
-    dark: "border-neutral-200 border-t-neutral-700",
+    dark: "border-slate-200 dark:border-white/[0.08] border-t-slate-700 dark:border-t-slate-300",
   };
 
   return (
@@ -58,7 +59,7 @@ export const IOSContentLoader: React.FC<IOSContentLoaderProps> = ({
       className={`flex flex-col items-center justify-center min-h-[60vh] ${className}`}
     >
       <IOSLoader size="lg" color="primary" className="mb-3" />
-      <p className="text-sm text-text-secondary">{message}</p>
+      <p className="text-sm text-slate-600 dark:text-slate-400">{message}</p>
     </div>
   );
 };

@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Icons } from "@/components/ui";
+import { Icons, IOSContentLoader} from "@/components/ui";
 import IOSLoader from "@/components/ui/IOSLoader";
 import { useAppointments, type Appointment, type StatusFilter } from "@/hooks/useAppointments";
 import AppointmentsTable from "@/components/appointments/AppointmentsTable";
@@ -20,8 +20,8 @@ const AppointmentsCalendar = dynamic(
 
 function CalendarSkeleton() {
   return (
-    <div className="flex items-center justify-center" style={{ height: 600 }}>
-      <IOSLoader size="md" color="primary" />
+    <div style={{ height: 600 }}>
+      <IOSContentLoader isLoading={true} message="Loading calendar..." />
     </div>
   );
 }
@@ -89,9 +89,7 @@ export default function AppointmentsPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <IOSLoader size="md" color="primary" />
-      </div>
+      <IOSContentLoader isLoading={true} message="Loading..." />
     );
   }
 
@@ -100,27 +98,27 @@ export default function AppointmentsPage() {
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-900 tracking-tight">Appointments</h1>
-          <p className="text-sm text-neutral-500 mt-0.5">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Appointments</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
             {counts.all} total
             {counts.confirmed > 0 && (
               <>
                 {" · "}
-                <span className="text-primary-600 font-medium">{counts.confirmed} upcoming</span>
+                <span className="text-primary-600 dark:text-primary-400 font-medium">{counts.confirmed} upcoming</span>
               </>
             )}
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex items-center border border-neutral-200 rounded-full p-0.5 gap-0.5 bg-white">
+          <div className="flex items-center border border-neutral-200 dark:border-white/[0.06] rounded-full p-0.5 gap-0.5 bg-white dark:bg-white/[0.02]">
             {(["calendar", "table"] as View[]).map((v) => (
               <button
                 key={v}
                 onClick={() => setView(v)}
                 className={`px-3 py-1 text-xs font-semibold rounded-full transition-all capitalize flex items-center gap-1.5 ${
                   view === v
-                    ? "bg-primary-600 text-white shadow-sm shadow-primary-600/25"
-                    : "text-neutral-500 hover:text-neutral-800"
+                    ? "bg-primary-600 text-white dark:bg-teal-500/20 dark:text-teal-100 dark:border dark:border-teal-500/30 shadow-sm shadow-primary-600/25 dark:shadow-none"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100"
                 }`}
               >
                 {v === "calendar" ? (
@@ -134,7 +132,7 @@ export default function AppointmentsPage() {
           </div>
           <button
             onClick={() => setAdding({})}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-600 hover:bg-primary-500 text-white text-sm font-semibold transition-all active:scale-[0.97]"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-600 hover:bg-teal-500 dark:hover:bg-teal-500/25 dark:border dark:border-teal-500/30 text-white text-sm font-semibold transition-all active:scale-[0.97]"
           >
             <Icons.Plus className="h-3.5 w-3.5" /> New
           </button>
@@ -144,15 +142,15 @@ export default function AppointmentsPage() {
       {/* Filter bar — only shown for table view */}
       {view === "table" && (
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="inline-flex items-center border border-neutral-200 bg-white rounded-full p-1 gap-0.5">
+          <div className="inline-flex items-center border border-neutral-200 dark:border-white/[0.06] bg-white dark:bg-white/[0.02] rounded-full p-1 gap-0.5">
             {FILTERS.map((f) => (
               <button
                 key={f.key}
                 onClick={() => setFilter(f.key)}
                 className={`px-4 py-1.5 text-xs font-medium rounded-full transition-all ${
                   filter === f.key
-                    ? "bg-primary-600 text-white shadow-sm shadow-primary-600/25"
-                    : "text-neutral-500 hover:text-neutral-800 hover:bg-neutral-50"
+                    ? "bg-primary-600 text-white dark:bg-teal-500/20 dark:text-teal-100 dark:border dark:border-teal-500/30 shadow-sm shadow-primary-600/25 dark:shadow-none"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-neutral-50 dark:hover:bg-white/[0.04]"
                 }`}
               >
                 {f.label}
@@ -161,13 +159,13 @@ export default function AppointmentsPage() {
             ))}
           </div>
           <div className="relative">
-            <Icons.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+            <Icons.Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-400" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search name, phone, service..."
-              className="pl-9 pr-4 py-2 rounded-lg border border-neutral-200 bg-white text-sm placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 transition-all w-64"
+              className="pl-9 pr-4 py-2 rounded-lg border border-slate-200 dark:border-white/[0.10] bg-white dark:bg-white/[0.04] text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/30 dark:focus:ring-teal-500/40 focus:border-teal-400 dark:focus:border-teal-500/50 transition-all w-64"
             />
           </div>
         </div>
@@ -181,7 +179,7 @@ export default function AppointmentsPage() {
           onSlotClick={(date, time) => setAdding({ date, time })}
         />
       ) : (
-        <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
+        <div className="bg-white dark:bg-white/[0.02] rounded-xl border border-neutral-200 dark:border-white/[0.06] overflow-hidden">
           <AppointmentsTable
             appointments={filtered}
             emptyHint={search ? "No results found" : "No appointments yet"}

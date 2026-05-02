@@ -63,27 +63,29 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
     <>
       {/* Overlay with gradient backdrop */}
       <div
-        className="fixed inset-0 bg-black/60 z-40 transition-opacity duration-300"
+        className="fixed inset-0 bg-black/40 dark:bg-black/70 z-40 transition-opacity duration-300"
         onClick={onClose}
       />
 
-      {/* Drawer */}
-      <div className="fixed inset-y-0 right-0 w-full sm:w-[540px] bg-white z-50 flex flex-col overflow-hidden shadow-2xl animate-in slide-in-from-right duration-300">
-        {/* Header - Premium gradient background */}
-        <div className="relative overflow-hidden border-b border-slate-200/50">
-          {/* Decorative gradients */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-primary-600/10 via-transparent to-transparent blur-3xl pointer-events-none" />
+      {/* Drawer — solid panel in both modes */}
+      <div className="fixed inset-y-0 right-0 w-full sm:w-[540px] bg-white dark:bg-sidebar-bg border-l border-slate-200 dark:border-white/[0.06] z-50 flex flex-col overflow-hidden shadow-2xl shadow-slate-900/10 dark:shadow-black/60 animate-in slide-in-from-right duration-300">
+        {/* Header */}
+        <div className="relative overflow-hidden border-b border-slate-200/60 dark:border-white/[0.06]">
+          {/* Top hairline glow — same recipe as the sidebar */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-teal-500/20 to-transparent" />
+          {/* Decorative gradient */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-teal-500/10 dark:from-teal-500/[0.04] via-transparent to-transparent blur-3xl pointer-events-none" />
 
           <div className="relative px-6 sm:px-8 py-6 sm:py-7 flex items-start justify-between gap-4">
             <div className="flex items-start gap-4 flex-1">
-              <div className="p-3 rounded-xl bg-gradient-to-br from-primary-100 to-primary-50 shadow-lg shadow-primary-200/30 flex-shrink-0">
-                <Icons.CloudUpload className="h-6 w-6 text-primary-600" />
+              <div className="p-3 rounded-xl bg-teal-50 dark:bg-teal-500/10 ring-1 ring-inset ring-teal-200 dark:ring-teal-500/20 flex-shrink-0">
+                <Icons.CloudUpload className="h-6 w-6 text-teal-600 dark:text-teal-400" />
               </div>
               <div className="min-w-0 flex-1">
-                <h2 className="text-2xl font-bold text-slate-900 tracking-[-0.02em]">
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-[-0.02em]">
                   Add Content
                 </h2>
-                <p className="text-sm text-slate-600 mt-1.5 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed">
                   Upload files or add text to expand your knowledge base
                 </p>
               </div>
@@ -93,7 +95,7 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
             <button
               onClick={onClose}
               disabled={uploadState === "uploading"}
-              className="p-2.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
+              className="p-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/[0.04] rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
               aria-label="Close drawer"
             >
               <Icons.Close className="h-5 w-5" />
@@ -108,14 +110,14 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
               <>
                 {/* Mode Tabs - Centered */}
                 <div className="mb-8 flex justify-center">
-                  <div className="inline-flex gap-2 p-1.5 bg-slate-100/80 rounded-full">
+                  <div className="inline-flex gap-2 p-1.5 bg-slate-100/80 dark:bg-white/[0.04] rounded-full ring-1 ring-inset ring-slate-200/60 dark:ring-white/[0.06]">
                     <button
                       onClick={() => setUploadMode("file")}
                       disabled={loading}
                       className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
                         uploadMode === "file"
-                          ? "bg-white text-slate-900 shadow-md shadow-slate-200/50"
-                          : "text-slate-700 hover:text-slate-900"
+                          ? "bg-white dark:bg-white/[0.08] text-slate-900 dark:text-white shadow-md shadow-slate-200/50 dark:shadow-none ring-1 ring-slate-200/60 dark:ring-white/[0.08]"
+                          : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
                       }`}
                     >
                       <Icons.CloudUpload className="h-4 w-4" />
@@ -126,8 +128,8 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
                       disabled={loading}
                       className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
                         uploadMode === "text"
-                          ? "bg-white text-slate-900 shadow-md shadow-slate-200/50"
-                          : "text-slate-700 hover:text-slate-900"
+                          ? "bg-white dark:bg-white/[0.08] text-slate-900 dark:text-white shadow-md shadow-slate-200/50 dark:shadow-none ring-1 ring-slate-200/60 dark:ring-white/[0.08]"
+                          : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
                       }`}
                     >
                       <Icons.Document className="h-4 w-4" />
@@ -166,19 +168,19 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
               <div className="flex flex-col items-center justify-center py-16 space-y-8">
                 <div className="space-y-4 text-center">
                   <div className="inline-flex justify-center">
-                    <div className="p-6 bg-gradient-to-br from-primary-50 to-primary-100/50 rounded-full shadow-lg shadow-primary-200/30">
+                    <div className="p-6 bg-gradient-to-br from-teal-50 to-teal-100/50 dark:from-teal-500/10 dark:to-teal-500/5 rounded-full shadow-lg shadow-teal-200/30 dark:shadow-none ring-1 ring-inset ring-teal-200/60 dark:ring-teal-500/20">
                       <IOSLoader size="lg" color="primary" />
                     </div>
                   </div>
                   <div>
-                    <p className="text-lg font-bold text-slate-900">
+                    <p className="text-lg font-bold text-slate-900 dark:text-white">
                       {uploadProgress < 50
                         ? "Reading file..."
                         : uploadProgress < 90
                           ? "Processing content..."
                           : "Finalizing..."}
                     </p>
-                    <p className="text-sm text-slate-600 mt-2">
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
                       Please wait while we prepare your content
                     </p>
                   </div>
@@ -186,9 +188,9 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
 
                 {/* Animated Progress Bar */}
                 <div className="w-full max-w-xs space-y-3">
-                  <div className="h-3 bg-slate-200 rounded-full overflow-hidden shadow-inner">
+                  <div className="h-3 bg-slate-200 dark:bg-white/[0.06] rounded-full overflow-hidden shadow-inner dark:shadow-none">
                     <div
-                      className="h-full bg-gradient-to-r from-primary-500 via-primary-600 to-primary-500 transition-all duration-500 ease-out rounded-full shadow-sm"
+                      className="h-full bg-gradient-to-r from-teal-500 via-teal-600 to-teal-500 transition-all duration-500 ease-out rounded-full shadow-sm"
                       style={{
                         width: `${Math.min(uploadProgress, 100)}%`,
                         backgroundSize: "200% 100%",
@@ -197,8 +199,8 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
                     />
                   </div>
                   <div className="flex justify-between items-center text-xs font-medium">
-                    <span className="text-slate-700">{Math.round(uploadProgress)}%</span>
-                    <span className="text-slate-500">
+                    <span className="text-slate-700 dark:text-slate-300 tabular-nums">{Math.round(uploadProgress)}%</span>
+                    <span className="text-slate-500 dark:text-slate-500">
                       {uploadProgress === 100
                         ? "Upload complete"
                         : "Do not close"}
@@ -212,17 +214,17 @@ const UploadDrawer: React.FC<UploadModalProps> = ({
               <div className="flex flex-col items-center justify-center py-16 space-y-6">
                 <div className="inline-flex items-center justify-center">
                   <div className="relative w-24 h-24">
-                    <div className="absolute inset-0 bg-gradient-to-br from-teal-100 to-teal-50 rounded-full shadow-lg shadow-teal-200/50" />
-                    <div className="absolute inset-2 bg-white rounded-full flex items-center justify-center">
-                      <Icons.Check className="h-10 w-10 text-teal-600" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-teal-100 to-teal-50 dark:from-teal-500/15 dark:to-teal-500/5 rounded-full shadow-lg shadow-teal-200/50 dark:shadow-none" />
+                    <div className="absolute inset-2 bg-white dark:bg-sidebar-bg ring-1 ring-inset ring-teal-200/60 dark:ring-teal-500/20 rounded-full flex items-center justify-center">
+                      <Icons.Check className="h-10 w-10 text-teal-600 dark:text-teal-400" />
                     </div>
                   </div>
                 </div>
                 <div className="text-center space-y-2">
-                  <p className="text-xl font-bold text-slate-900">
+                  <p className="text-xl font-bold text-slate-900 dark:text-white">
                     Upload Successful!
                   </p>
-                  <p className="text-sm text-slate-600 max-w-sm">
+                  <p className="text-sm text-slate-600 dark:text-slate-400 max-w-sm">
                     Your content has been added to the knowledge base and is being processed
                   </p>
                 </div>

@@ -7,17 +7,17 @@ import { Icons } from "@/components/ui";
 import type { Appointment } from "@/hooks/useAppointments";
 
 const STATUS_BAR: Record<Appointment["status"], string> = {
-  confirmed: "bg-primary-500",
+  confirmed: "bg-teal-500 dark:bg-teal-400",
   completed: "bg-emerald-500",
-  cancelled: "bg-neutral-300",
-  no_show: "bg-red-400",
+  cancelled: "bg-slate-300 dark:bg-white/[0.10]",
+  no_show: "bg-rose-400",
 };
 
 const STATUS_LABEL: Record<Appointment["status"], string> = {
-  confirmed: "bg-primary-100 text-primary-700",
-  completed: "bg-emerald-100 text-emerald-700",
-  cancelled: "bg-neutral-100 text-neutral-500",
-  no_show: "bg-red-100 text-red-700",
+  confirmed: "bg-teal-50 dark:bg-teal-500/15 text-teal-700 dark:text-teal-300 border border-teal-200/60 dark:border-teal-500/20",
+  completed: "bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-500/20",
+  cancelled: "bg-slate-100 dark:bg-white/[0.04] text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-white/[0.06]",
+  no_show: "bg-rose-50 dark:bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-200/60 dark:border-rose-500/20",
 };
 
 function ModalShell({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
@@ -28,13 +28,15 @@ function ModalShell({ children, onClose }: { children: React.ReactNode; onClose:
   if (!mounted) return null;
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 dark:bg-black/70"
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl border border-neutral-200 shadow-xl w-full max-w-md mx-4 overflow-hidden"
+        className="relative bg-white dark:bg-sidebar-bg rounded-2xl border border-slate-200 dark:border-white/[0.06] shadow-2xl shadow-slate-900/10 dark:shadow-black/60 w-full max-w-md mx-4 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Top hairline glow — same recipe as the sidebar */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-teal-500/20 to-transparent z-10" />
         {children}
       </div>
     </div>,
@@ -56,8 +58,8 @@ export function AppointmentDetailModal({ appointment: a, onClose, onUpdateStatus
       <div className="px-5 py-4">
         <div className="flex items-start justify-between mb-3">
           <div>
-            <h3 className="text-base font-bold text-neutral-900">{a.caller_name || "Unknown"}</h3>
-            <p className="text-xs text-neutral-500 mt-0.5">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">{a.caller_name || "Unknown"}</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               {new Date(a.scheduled_date + "T00:00:00").toLocaleDateString("en-US", {
                 weekday: "long",
                 month: "long",
@@ -65,39 +67,39 @@ export function AppointmentDetailModal({ appointment: a, onClose, onUpdateStatus
               })}
             </p>
           </div>
-          <button onClick={onClose} className="p-1 hover:bg-neutral-100 rounded-lg">
-            <Icons.Close className="h-4 w-4 text-neutral-400" />
+          <button onClick={onClose} className="p-1 hover:bg-slate-100 dark:hover:bg-white/[0.04] rounded-lg">
+            <Icons.Close className="h-4 w-4 text-slate-400 dark:text-slate-400" />
           </button>
         </div>
         <div className="space-y-2 text-sm">
           <div className="flex items-center gap-2.5">
-            <Icons.Clock className="h-3.5 w-3.5 text-neutral-400" />
-            <span className="text-neutral-700">
+            <Icons.Clock className="h-3.5 w-3.5 text-slate-400 dark:text-slate-400" />
+            <span className="text-slate-700 dark:text-slate-300">
               {a.start_time.slice(0, 5)} – {a.end_time.slice(0, 5)} ({a.duration_min} min)
             </span>
           </div>
           {a.caller_phone && (
             <div className="flex items-center gap-2.5">
-              <Icons.Phone className="h-3.5 w-3.5 text-neutral-400" />
-              <span className="text-neutral-700">{a.caller_phone}</span>
+              <Icons.Phone className="h-3.5 w-3.5 text-slate-400 dark:text-slate-400" />
+              <span className="text-slate-700 dark:text-slate-300">{a.caller_phone}</span>
             </div>
           )}
           {a.caller_email && (
             <div className="flex items-center gap-2.5">
-              <Icons.Mail className="h-3.5 w-3.5 text-neutral-400" />
-              <span className="text-neutral-700">{a.caller_email}</span>
+              <Icons.Mail className="h-3.5 w-3.5 text-slate-400 dark:text-slate-400" />
+              <span className="text-slate-700 dark:text-slate-300">{a.caller_email}</span>
             </div>
           )}
           {a.service_type && (
             <div className="flex items-center gap-2.5">
-              <Icons.Briefcase className="h-3.5 w-3.5 text-neutral-400" />
-              <span className="text-neutral-700">{a.service_type}</span>
+              <Icons.Briefcase className="h-3.5 w-3.5 text-slate-400 dark:text-slate-400" />
+              <span className="text-slate-700 dark:text-slate-300">{a.service_type}</span>
             </div>
           )}
           {a.notes && (
             <div className="flex items-start gap-2.5">
-              <Icons.FileText className="h-3.5 w-3.5 text-neutral-400 mt-0.5" />
-              <span className="text-neutral-600">{a.notes}</span>
+              <Icons.FileText className="h-3.5 w-3.5 text-slate-400 dark:text-slate-400 mt-0.5" />
+              <span className="text-slate-600 dark:text-slate-400">{a.notes}</span>
             </div>
           )}
           <div className="flex items-center gap-2.5 pt-1">
@@ -106,7 +108,7 @@ export function AppointmentDetailModal({ appointment: a, onClose, onUpdateStatus
             >
               {a.status.replace("_", " ")}
             </span>
-            <span className="text-xs text-neutral-400">
+            <span className="text-xs text-slate-400 dark:text-slate-400">
               via {a.source === "voice_agent" ? "Phone" : a.source}
             </span>
           </div>
@@ -140,10 +142,10 @@ export function AppointmentDetailModal({ appointment: a, onClose, onUpdateStatus
           onClick={() => {
             if (confirm("Delete this appointment?")) onDelete(a.appointment_id);
           }}
-          className="p-2 hover:bg-red-50 rounded-lg group"
+          className="p-2 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-lg group"
           title="Delete"
         >
-          <Icons.Trash className="h-3.5 w-3.5 text-neutral-300 group-hover:text-red-500 transition-colors" />
+          <Icons.Trash className="h-3.5 w-3.5 text-slate-300 dark:text-slate-600 group-hover:text-rose-500 transition-colors" />
         </button>
       </div>
     </ModalShell>
@@ -206,15 +208,15 @@ export function NewAppointmentModal({
   };
 
   const inputCls =
-    "w-full rounded-xl border border-neutral-200 bg-neutral-50 px-3.5 py-2.5 text-sm placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-400 focus:bg-white transition-all";
-  const labelCls = "text-xs font-semibold text-neutral-600 mb-1.5 block";
+    "w-full rounded-xl border border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-white/[0.02] text-slate-900 dark:text-white px-3.5 py-2.5 text-sm placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 dark:focus:ring-teal-500/30 focus:border-teal-400 dark:focus:border-teal-500/40 focus:bg-white dark:focus:bg-white/[0.04] transition-all [color-scheme:light] dark:[color-scheme:dark]";
+  const labelCls = "text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5 block";
 
   return (
     <ModalShell onClose={onClose}>
-      <div className="px-5 py-4 flex items-center justify-between border-b border-neutral-100">
-        <h3 className="text-sm font-bold text-neutral-900">New Appointment</h3>
-        <button onClick={onClose} className="p-1 hover:bg-neutral-100 rounded-lg">
-          <Icons.Close className="h-4 w-4 text-neutral-400" />
+      <div className="px-5 py-4 flex items-center justify-between border-b border-slate-100 dark:border-white/[0.06]">
+        <h3 className="text-sm font-bold text-slate-900 dark:text-white">New Appointment</h3>
+        <button onClick={onClose} className="p-1 hover:bg-slate-100 dark:hover:bg-white/[0.04] rounded-lg">
+          <Icons.Close className="h-4 w-4 text-slate-400 dark:text-slate-400" />
         </button>
       </div>
       <div className="px-5 py-4 space-y-3">
@@ -284,7 +286,7 @@ export function NewAppointmentModal({
             className={`${inputCls} resize-none`}
           />
         </div>
-        {error && <p className="text-xs text-red-600">{error}</p>}
+        {error && <p className="text-xs text-rose-600 dark:text-rose-400">{error}</p>}
       </div>
       <div className="px-5 pb-4 flex justify-end gap-2">
         <Button variant="ghost" size="sm" onClick={onClose}>

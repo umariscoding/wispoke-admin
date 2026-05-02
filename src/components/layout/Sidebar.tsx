@@ -34,9 +34,9 @@ const getNavigationSections = (): NavigationSection[] => [
         allowedUserTypes: ["company"],
       },
       {
-        name: "Users",
-        href: "/users",
-        icon: Icons.User,
+        name: "Conversations",
+        href: "/conversations",
+        icon: Icons.MessageCircle,
         allowedUserTypes: ["company"],
       },
     ],

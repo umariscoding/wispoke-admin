@@ -72,12 +72,11 @@ const TextUpload: React.FC<TextUploadProps> = ({
 
   return (
     <div className={`space-y-6 ${className}`}>
-      {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Filename Input */}
         <div className="space-y-2">
-          <label className="block text-sm font-bold text-slate-900">
-            Filename <span className="text-red-500">*</span>
+          <label className="block text-sm font-bold text-slate-900 dark:text-white">
+            Filename <span className="text-rose-500 dark:text-rose-400">*</span>
           </label>
           <div className="relative">
             <input
@@ -87,70 +86,67 @@ const TextUpload: React.FC<TextUploadProps> = ({
               placeholder="e.g., company-policy.txt"
               required
               disabled={loading}
-              className={`w-full rounded-xl border px-4 py-3 text-sm bg-white text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all ${
+              className={`w-full rounded-xl border px-4 py-3 text-sm bg-white dark:bg-white/[0.02] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 dark:focus:ring-teal-500/30 focus:border-teal-400 dark:focus:border-teal-500/40 disabled:opacity-50 disabled:cursor-not-allowed transition-all ${
                 errors.filename
-                  ? "border-red-500/60 focus:ring-red-500"
-                  : "border-slate-200/80 hover:border-slate-300"
+                  ? "border-rose-500/60 focus:ring-rose-500/30 focus:border-rose-500"
+                  : "border-slate-200/80 dark:border-white/[0.06] hover:border-slate-300 dark:hover:border-white/[0.10]"
               }`}
             />
           </div>
           {errors.filename && (
-            <p className="text-xs text-red-600 font-medium flex items-center gap-1">
+            <p className="text-xs text-rose-600 dark:text-rose-400 font-medium flex items-center gap-1">
               <Icons.AlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
               {errors.filename}
             </p>
           )}
-          <p className="text-xs text-slate-600 font-medium">
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
             Give your content a descriptive name with .txt extension
           </p>
         </div>
 
         {/* Content Textarea */}
         <div className="space-y-2">
-          <label className="block text-sm font-bold text-slate-900">
-            Content <span className="text-red-500">*</span>
+          <label className="block text-sm font-bold text-slate-900 dark:text-white">
+            Content <span className="text-rose-500 dark:text-rose-400">*</span>
           </label>
           <textarea
             value={content}
             onChange={handleContentChange}
             placeholder="Paste or type your content here..."
             rows={8}
-            className={`w-full rounded-xl border px-4 py-3 text-sm bg-white text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all resize-none ${
+            className={`w-full rounded-xl border px-4 py-3 text-sm bg-white dark:bg-white/[0.02] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20 dark:focus:ring-teal-500/30 focus:border-teal-400 dark:focus:border-teal-500/40 disabled:opacity-50 disabled:cursor-not-allowed transition-all resize-none ${
               errors.content
-                ? "border-red-500/60 focus:ring-red-500"
-                : "border-slate-200/80 hover:border-slate-300"
+                ? "border-rose-500/60 focus:ring-rose-500/30 focus:border-rose-500"
+                : "border-slate-200/80 dark:border-white/[0.06] hover:border-slate-300 dark:hover:border-white/[0.10]"
             }`}
             disabled={loading}
             required
           />
           {errors.content && (
-            <p className="text-xs text-red-600 font-medium flex items-center gap-1">
+            <p className="text-xs text-rose-600 dark:text-rose-400 font-medium flex items-center gap-1">
               <Icons.AlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
               {errors.content}
             </p>
           )}
 
-          {/* Character and Word Count */}
           <div className="flex justify-between items-center pt-2 px-1">
-            <div className="flex gap-4 text-xs font-semibold text-slate-600">
-              <span className="bg-slate-100/50 px-3 py-1 rounded-lg">{wordCount} words</span>
-              <span className="bg-slate-100/50 px-3 py-1 rounded-lg">{charCount} chars</span>
+            <div className="flex gap-2 text-xs font-semibold text-slate-600 dark:text-slate-400">
+              <span className="bg-slate-100 dark:bg-white/[0.04] border border-slate-200/60 dark:border-white/[0.06] px-3 py-1 rounded-lg tabular-nums">{wordCount} words</span>
+              <span className="bg-slate-100 dark:bg-white/[0.04] border border-slate-200/60 dark:border-white/[0.06] px-3 py-1 rounded-lg tabular-nums">{charCount} chars</span>
             </div>
             {content.length > 0 && (
-              <div className="text-xs text-slate-500">
+              <div className="text-xs text-slate-500 dark:text-slate-400">
                 {content.trim().length > 0 ? "✓ Ready" : "Content needed"}
               </div>
             )}
           </div>
         </div>
 
-        {/* Submit Button */}
-        <div className="flex justify-end pt-3 border-t border-slate-200/40">
+        <div className="flex justify-end pt-3 border-t border-slate-200/40 dark:border-white/[0.06]">
           <Button
             type="submit"
             loading={loading}
             disabled={!filename.trim() || !content.trim() || loading}
-            className="bg-gradient-to-r from-primary-600 to-primary-700 hover:shadow-lg hover:shadow-primary-500/30"
           >
             Upload Content
           </Button>
