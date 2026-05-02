@@ -399,7 +399,7 @@ export default function EmbedPage() {
                       type="text"
                       value={settings.primaryColor}
                       onChange={(e) => updateSetting("primaryColor", e.target.value)}
-                      className="w-20 px-2 py-1.5 text-xs border border-slate-200 dark:border-white/[0.10] rounded-lg font-mono focus:outline-none focus:ring-2 focus:ring-teal-500/30 dark:focus:ring-teal-500/40 focus:border-teal-400 dark:focus:border-teal-500/50"
+                      className="w-20 px-2 py-1.5 text-xs border border-slate-200 dark:border-white/[0.10] bg-white dark:bg-white/[0.04] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 rounded-lg font-mono focus:outline-none focus:ring-2 focus:ring-teal-500/30 dark:focus:ring-teal-500/40 focus:border-teal-400 dark:focus:border-teal-500/50"
                       placeholder="#0d9488"
                     />
                   </div>
@@ -447,7 +447,7 @@ export default function EmbedPage() {
                       type="text"
                       value={settings.headerColor}
                       onChange={(e) => updateSetting("headerColor", e.target.value)}
-                      className="w-20 px-2 py-1.5 text-xs border border-slate-200 dark:border-white/[0.10] rounded-lg font-mono focus:outline-none focus:ring-2 focus:ring-teal-500/30 dark:focus:ring-teal-500/40 focus:border-teal-400 dark:focus:border-teal-500/50"
+                      className="w-20 px-2 py-1.5 text-xs border border-slate-200 dark:border-white/[0.10] bg-white dark:bg-white/[0.04] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 rounded-lg font-mono focus:outline-none focus:ring-2 focus:ring-teal-500/30 dark:focus:ring-teal-500/40 focus:border-teal-400 dark:focus:border-teal-500/50"
                       placeholder="auto"
                     />
                   </div>
@@ -784,97 +784,17 @@ export default function EmbedPage() {
                   })}
                 </div>
 
-                {/* Site mockup preview */}
-                <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-white/[0.06]">
-                  {/* Mini browser chrome */}
-                  <div className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 dark:bg-white/[0.04] border-b border-slate-200 dark:border-white/[0.06]">
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-white/[0.10]" />
-                      <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-white/[0.10]" />
-                      <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-white/[0.10]" />
-                    </div>
-                    <div className="flex-1 mx-2 h-4 rounded-md bg-white dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] flex items-center px-2">
-                      <span className="text-[8px] text-slate-400 dark:text-slate-500 font-mono">yourwebsite.com</span>
-                    </div>
-                  </div>
-
-                  {/* Page body */}
-                  <div
-                    className="relative h-36"
-                    style={{
-                      background: settings.theme === "light"
-                        ? "#ffffff"
-                        : "#111114",
-                    }}
-                  >
-                    {/* Fake page content lines */}
-                    <div className="p-4 space-y-2.5">
-                      <div
-                        className="h-3 rounded-full w-2/3"
-                        style={{ background: settings.theme === "light" ? "#e5e7eb" : "#27272a" }}
-                      />
-                      <div
-                        className="h-2 rounded-full w-full"
-                        style={{ background: settings.theme === "light" ? "#f3f4f6" : "#1e1e21" }}
-                      />
-                      <div
-                        className="h-2 rounded-full w-5/6"
-                        style={{ background: settings.theme === "light" ? "#f3f4f6" : "#1e1e21" }}
-                      />
-                      <div
-                        className="h-2 rounded-full w-3/4"
-                        style={{ background: settings.theme === "light" ? "#f3f4f6" : "#1e1e21" }}
-                      />
-                      <div className="pt-1 flex gap-2">
-                        <div
-                          className="h-6 rounded-md w-16"
-                          style={{ background: settings.theme === "light" ? "#e5e7eb" : "#27272a" }}
-                        />
-                        <div
-                          className="h-6 rounded-md w-20"
-                          style={{ background: settings.theme === "light" ? "#f3f4f6" : "#1e1e21" }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Floating launcher button — positioned in corner */}
-                    <div
-                      className={`absolute bottom-3 ${settings.position === "right" ? "right-3" : "left-3"} transition-all`}
-                    >
-                      {/* Pulse ring */}
-                      <div
-                        className="absolute inset-0 rounded-full animate-ping opacity-20"
-                        style={{ background: settings.primaryColor }}
-                      />
-                      <div
-                        className="relative flex items-center justify-center transition-all"
-                        style={{
-                          width: 44,
-                          height: 44,
-                          borderRadius: settings.chatTemplate === "minimal" ? 12 : "50%",
-                          background: settings.primaryColor,
-                          boxShadow: `0 4px 16px ${settings.primaryColor}45, 0 1px 3px rgba(0,0,0,0.1)`,
-                        }}
-                      >
-                        {(() => {
-                          const IconComp = BUTTON_ICON_DEFS.find((d) => d.value === settings.buttonIcon)?.icon || MessageCircle;
-                          return <IconComp className="w-5 h-5 text-white" />;
-                        })()}
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
 
-              {/* Hide Branding */}
+              {/* Show Branding — toggle controls visibility of "Powered by Wispoke" footer */}
               <div className="mx-5 mb-5 flex items-center justify-between rounded-xl border border-slate-200 dark:border-white/[0.06] bg-slate-50/50 dark:bg-white/[0.02] px-4 py-3.5">
                 <div className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${settings.hideBranding ? "bg-teal-50 dark:bg-teal-500/10 ring-1 ring-inset ring-teal-200 dark:ring-teal-500/20" : "bg-slate-100 dark:bg-white/[0.04]"}`}>
-                    <Icons.Eye className={`h-4 w-4 ${settings.hideBranding ? "text-teal-600 dark:text-teal-400" : "text-slate-500 dark:text-slate-400"}`} />
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${!settings.hideBranding ? "bg-teal-50 dark:bg-teal-500/10 ring-1 ring-inset ring-teal-200 dark:ring-teal-500/20" : "bg-slate-100 dark:bg-white/[0.04]"}`}>
+                    <Icons.Eye className={`h-4 w-4 ${!settings.hideBranding ? "text-teal-600 dark:text-teal-400" : "text-slate-500 dark:text-slate-400"}`} />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-slate-900 dark:text-white">
-                      {settings.hideBranding ? "Branding hidden" : "Show branding"}
+                      Show branding
                     </p>
                     <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                       &quot;Powered by Wispoke&quot; footer
@@ -883,14 +803,16 @@ export default function EmbedPage() {
                 </div>
                 <button
                   onClick={() => updateSetting("hideBranding", !settings.hideBranding)}
+                  aria-pressed={!settings.hideBranding}
+                  aria-label="Toggle Powered by Wispoke footer"
                   className={`relative rounded-full transition-colors duration-200 ${
-                    settings.hideBranding ? "bg-teal-500 dark:bg-teal-500/40" : "bg-slate-300 dark:bg-white/[0.10]"
+                    !settings.hideBranding ? "bg-teal-500 dark:bg-teal-500/40" : "bg-slate-300 dark:bg-white/[0.10]"
                   }`}
                   style={{ minWidth: 44, height: 24 }}
                 >
                   <span
                     className={`absolute top-0.5 left-0.5 bg-white rounded-full shadow-sm transition-transform duration-200 ${
-                      settings.hideBranding ? "translate-x-5" : "translate-x-0"
+                      !settings.hideBranding ? "translate-x-5" : "translate-x-0"
                     }`}
                     style={{ width: 20, height: 20 }}
                   />

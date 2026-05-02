@@ -8,20 +8,20 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-white/[0.02]">
-      <nav className="border-b border-slate-100 dark:border-white/[0.06] px-6">
+    <div className="min-h-screen bg-white">
+      <nav className="border-b border-neutral-100 px-6">
         <div className="max-w-3xl mx-auto h-16 flex items-center">
-          <Link href="/" className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
+          <Link href="/" className="text-lg font-bold tracking-tight text-neutral-900">
             {APP_CONFIG.NAME}
           </Link>
         </div>
       </nav>
 
       <main className="max-w-3xl mx-auto px-6 py-16">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">Privacy Policy</h1>
-        <p className="text-sm text-slate-400 dark:text-slate-400 mb-12">Last updated: April 5, 2026</p>
+        <h1 className="text-4xl font-bold tracking-tight text-neutral-900 mb-2">Privacy Policy</h1>
+        <p className="text-sm text-neutral-400 mb-12">Last updated: April 5, 2026</p>
 
-        <div className="prose prose-neutral prose-sm max-w-none [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:text-slate-600 [&_p]:leading-relaxed [&_ul]:text-slate-600 [&_li]:leading-relaxed">
+        <div className="prose prose-neutral prose-sm max-w-none [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:text-neutral-600 [&_p]:leading-relaxed [&_ul]:text-neutral-600 [&_li]:leading-relaxed">
           <h2>1. Information We Collect</h2>
           <p>When you create an account, we collect your name, email address, and company name. When your customers use your chatbot, we collect chat messages, session data, and basic analytics (page views, device type).</p>
           <p>We do not collect sensitive personal information such as financial data, health records, or government identifiers.</p>
@@ -57,7 +57,7 @@ export default function PrivacyPage() {
           <p>We retain your account data for as long as your account is active. Chat conversations are retained per your configured settings. When you delete your account, all associated data is permanently removed within 30 days.</p>
 
           <h2>8. Contact</h2>
-          <p>For privacy-related questions, contact us at <a href="mailto:privacy@wispoke.com" className="text-primary-600 dark:text-primary-400 underline">privacy@wispoke.com</a>.</p>
+          <p>For privacy-related questions, contact us at <a href="mailto:privacy@wispoke.com" className="text-primary-600 underline">privacy@wispoke.com</a>.</p>
         </div>
       </main>
     </div>

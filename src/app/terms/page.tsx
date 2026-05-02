@@ -8,20 +8,20 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-white/[0.02]">
-      <nav className="border-b border-slate-100 dark:border-white/[0.06] px-6">
+    <div className="min-h-screen bg-white">
+      <nav className="border-b border-neutral-100 px-6">
         <div className="max-w-3xl mx-auto h-16 flex items-center">
-          <Link href="/" className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
+          <Link href="/" className="text-lg font-bold tracking-tight text-neutral-900">
             {APP_CONFIG.NAME}
           </Link>
         </div>
       </nav>
 
       <main className="max-w-3xl mx-auto px-6 py-16">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">Terms of Service</h1>
-        <p className="text-sm text-slate-400 dark:text-slate-400 mb-12">Last updated: April 5, 2026</p>
+        <h1 className="text-4xl font-bold tracking-tight text-neutral-900 mb-2">Terms of Service</h1>
+        <p className="text-sm text-neutral-400 mb-12">Last updated: April 5, 2026</p>
 
-        <div className="prose prose-neutral prose-sm max-w-none [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:text-slate-600 [&_p]:leading-relaxed [&_ul]:text-slate-600 [&_li]:leading-relaxed">
+        <div className="prose prose-neutral prose-sm max-w-none [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:text-neutral-600 [&_p]:leading-relaxed [&_ul]:text-neutral-600 [&_li]:leading-relaxed">
           <h2>1. Acceptance of Terms</h2>
           <p>By accessing or using {APP_CONFIG.NAME}, you agree to be bound by these Terms of Service. If you do not agree, do not use the service.</p>
 
@@ -48,7 +48,7 @@ export default function TermsPage() {
           <p>You retain all rights to your content, documents, and knowledge base data. {APP_CONFIG.NAME} retains rights to the platform, software, and service infrastructure. The chatbot widget and embed code are licensed for use on your websites as long as your account is active.</p>
 
           <h2>7. Data and Privacy</h2>
-          <p>Your use of {APP_CONFIG.NAME} is also governed by our <Link href="/privacy" className="text-primary-600 dark:text-primary-400 underline">Privacy Policy</Link>. We process data as described therein. Each company&apos;s data is isolated and never shared across accounts.</p>
+          <p>Your use of {APP_CONFIG.NAME} is also governed by our <Link href="/privacy" className="text-primary-600 underline">Privacy Policy</Link>. We process data as described therein. Each company&apos;s data is isolated and never shared across accounts.</p>
 
           <h2>8. Service Availability</h2>
           <p>We strive for 99.9% uptime but do not guarantee uninterrupted service. We may perform maintenance with reasonable notice. We are not liable for downtime caused by third-party providers or force majeure events.</p>
@@ -63,7 +63,7 @@ export default function TermsPage() {
           <p>We may update these terms from time to time. Material changes will be communicated via email. Continued use after changes constitutes acceptance.</p>
 
           <h2>12. Contact</h2>
-          <p>For questions about these terms, contact us at <a href="mailto:legal@wispoke.com" className="text-primary-600 dark:text-primary-400 underline">legal@wispoke.com</a>.</p>
+          <p>For questions about these terms, contact us at <a href="mailto:legal@wispoke.com" className="text-primary-600 underline">legal@wispoke.com</a>.</p>
         </div>
       </main>
     </div>
