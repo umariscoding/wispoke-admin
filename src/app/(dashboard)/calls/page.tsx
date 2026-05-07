@@ -9,6 +9,9 @@ import CallDetailDrawer from "@/components/calls/CallDetailDrawer";
 export interface TranscriptEntry {
   role: "user" | "assistant" | "tool" | "tool_call" | "system" | string;
   content: string;
+  // Seconds offset into the call recording, if available. Lets the drawer
+  // seek the audio player to the moment a clicked message was spoken.
+  t?: number;
 }
 
 export interface CallLog {
@@ -21,6 +24,8 @@ export interface CallLog {
   transcript: TranscriptEntry[];
   appointment_id: string | null;
   caller_ref: string | null;
+  recording_url: string | null;
+  recording_format: string | null;
 }
 
 interface CallLogsResponse {
