@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 import MinimalButton from "@/components/ui/MinimalButton";
 import {
@@ -33,6 +34,7 @@ interface FormErrors {
   name?: string;
   email?: string;
   password?: string;
+  terms?: string;
 }
 
 export default function CompanyAuthPage() {
@@ -54,22 +56,19 @@ export default function CompanyAuthPage() {
     email: "",
     password: "",
   });
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [formErrors, setFormErrors] = useState<FormErrors>({});
-  const [googleLoading, setGoogleLoading] = useState(false);
   const googleBtnRef = useRef<HTMLDivElement>(null);
   const [googleBtnWidth, setGoogleBtnWidth] = useState(320);
 
   const handleGoogleSuccess = async (response: CredentialResponse) => {
     if (!response.credential) return;
-    setGoogleLoading(true);
     try {
       await dispatch(
         googleAuthCompany({ credential: response.credential }),
       ).unwrap();
     } catch (error) {
       console.error("Google auth failed:", error);
-    } finally {
-      setGoogleLoading(false);
     }
   };
 
@@ -139,6 +138,11 @@ export default function CompanyAuthPage() {
       errors.password = `Password must be at least ${FORM_VALIDATION.PASSWORD.MIN_LENGTH} characters`;
     } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(signupData.password)) {
       errors.password = FORM_VALIDATION.PASSWORD.WEAK;
+    }
+
+    if (!agreedToTerms) {
+      errors.terms =
+        "Please agree to the Terms of Service and Privacy Policy to continue.";
     }
 
     setFormErrors(errors);
@@ -393,13 +397,56 @@ export default function CompanyAuthPage() {
                     {formErrors.password && <p className="text-xs text-error-500 dark:text-error-400">{formErrors.password}</p>}
                   </div>
 
+                  <div className="space-y-1.5">
+                    <label className="flex items-start gap-2.5 cursor-pointer select-none group">
+                      <input
+                        type="checkbox"
+                        required
+                        checked={agreedToTerms}
+                        onChange={(e) => {
+                          setAgreedToTerms(e.target.checked);
+                          if (e.target.checked && formErrors.terms) {
+                            setFormErrors((prev) => ({ ...prev, terms: undefined }));
+                          }
+                        }}
+                        className="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-neutral-300 dark:border-white/[0.12] bg-white dark:bg-white/[0.02] text-primary-600 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 cursor-pointer accent-primary-600"
+                        aria-invalid={!!formErrors.terms}
+                        aria-required="true"
+                      />
+                      <span className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        I agree to the{" "}
+                        <Link
+                          href="/terms"
+                          target="_blank"
+                          className="text-primary-600 dark:text-primary-400 hover:underline font-medium"
+                        >
+                          Terms of Service
+                        </Link>{" "}
+                        and{" "}
+                        <Link
+                          href="/privacy"
+                          target="_blank"
+                          className="text-primary-600 dark:text-primary-400 hover:underline font-medium"
+                        >
+                          Privacy Policy
+                        </Link>
+                        , and consent to receive transactional emails.
+                      </span>
+                    </label>
+                    {formErrors.terms && (
+                      <p className="text-xs text-error-500 dark:text-error-400 ml-6">
+                        {formErrors.terms}
+                      </p>
+                    )}
+                  </div>
+
                   <MinimalButton
                     type="submit"
                     variant="primary"
                     size="lg"
                     fullWidth
                     loading={companyLoading}
-                    disabled={companyLoading}
+                    disabled={companyLoading || !agreedToTerms}
                     className=""
                   >
                     Create Account
@@ -417,7 +464,10 @@ export default function CompanyAuthPage() {
 
                 <div
                   ref={googleBtnRef}
-                  className="w-full flex justify-center [&>div]:!w-full [&_iframe]:!w-full [&_iframe]:!rounded-full overflow-hidden rounded-full"
+                  className={`w-full flex justify-center [&>div]:!w-full [&_iframe]:!w-full [&_iframe]:!rounded-full overflow-hidden rounded-full transition-opacity ${
+                    agreedToTerms ? "" : "opacity-40 pointer-events-none"
+                  }`}
+                  aria-disabled={!agreedToTerms}
                 >
                   <GoogleLogin
                     onSuccess={handleGoogleSuccess}
@@ -429,12 +479,30 @@ export default function CompanyAuthPage() {
                     logo_alignment="center"
                   />
                 </div>
+                <p
+                  aria-hidden={agreedToTerms}
+                  className={`mt-3 text-center text-[11px] text-slate-400 dark:text-slate-500 transition-opacity duration-200 ${
+                    agreedToTerms ? "opacity-0" : "opacity-100"
+                  }`}
+                >
+                  Agree to the terms above to continue with Google.
+                </p>
               </>
             )}
 
-            <p className="mt-8 text-center text-xs text-slate-400 dark:text-slate-400">
-              By continuing, you agree to our Terms of Service and Privacy Policy
-            </p>
+            {isLogin && (
+              <p className="mt-8 text-center text-xs text-slate-400 dark:text-slate-400">
+                By continuing, you agree to our{" "}
+                <Link href="/terms" className="underline hover:text-slate-600 dark:hover:text-slate-300">
+                  Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link href="/privacy" className="underline hover:text-slate-600 dark:hover:text-slate-300">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            )}
           </div>
         </div>
       </div>

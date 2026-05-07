@@ -42,6 +42,14 @@ const faqs = [
     q: "How long does it take to set up?",
     a: "Most teams are live in under 10 minutes. Upload your data, customize the look, copy the embed code — done.",
   },
+  {
+    q: "How does the voice agent work?",
+    a: `Connect a Twilio phone number, set your business name and greeting, and your AI starts answering calls. It books appointments, captures caller details, and saves a full transcript of every call to your dashboard.`,
+  },
+  {
+    q: "Do I need a phone number to use the voice agent?",
+    a: "Yes — you bring your own Twilio number. We don't resell numbers. Once you paste your Twilio credentials, your AI agent picks up every incoming call automatically.",
+  },
 ];
 
 /* ─── Page ─────────────────────────────────────────────── */
@@ -121,6 +129,7 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-8">
             {[
               ["Features", "#features"],
+              ["Voice Agent", "#voice"],
               ["Platform", "#platform"],
               ["Pricing", "#pricing"],
               ["FAQ", "#faq"],
@@ -211,8 +220,8 @@ export default function Home() {
           </h1>
 
           <p className="animate-slide-up-d1 text-base sm:text-xl text-neutral-500 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2">
-            Upload your knowledge base, customize the widget, embed on any site
-            with one line of code.
+            AI chat on your website, AI voice agents on your phone line.
+            Trained on your data, embed in one line, live in minutes.
           </p>
 
           <div className="animate-slide-up-d2 flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 sm:mb-16 lg:mb-24">
@@ -656,6 +665,181 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ═══════════ VOICE AGENT ═══════════ */}
+      <section
+        id="voice"
+        className="relative py-20 sm:py-24 lg:py-36 px-5 sm:px-6 bg-neutral-900 overflow-hidden"
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          aria-hidden="true"
+        >
+          <div className="absolute -top-32 -right-24 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-24 -left-32 w-[28rem] h-[28rem] bg-primary-500/[0.06] rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-6xl mx-auto">
+          <div className="scroll-reveal text-center mb-14 sm:mb-20">
+            <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-primary-300 bg-primary-500/15 border border-primary-500/20 rounded-full px-3 py-1 mb-5">
+              Voice Agent
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4 sm:mb-5">
+              An AI receptionist
+              <br />
+              that never sleeps
+            </h2>
+            <p className="text-neutral-400 text-base sm:text-lg max-w-xl mx-auto">
+              Plug in a phone number. Your AI answers every call, books
+              appointments, and captures leads — 24/7, in your voice.
+            </p>
+          </div>
+
+          <div className="scroll-reveal grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left: floating UI cards */}
+            <div className="relative min-h-[460px] order-2 lg:order-1 hidden lg:block">
+              {/* Card 1: Incoming call */}
+              <div className="absolute top-0 left-0 w-[300px] bg-neutral-800/90 backdrop-blur-xl text-white rounded-2xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden z-10">
+                <div className="px-5 py-4 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary-500/20 flex items-center justify-center">
+                    <svg
+                      className="w-5 h-5 text-primary-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={1.8}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold">Incoming call</p>
+                    <p className="text-xs text-neutral-400">+1 (415) 555-0142</p>
+                  </div>
+                  <span className="flex h-2 w-2 relative shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                </div>
+                <div className="px-5 pb-4 border-t border-white/5 pt-3">
+                  <p className="text-[10px] uppercase tracking-widest text-neutral-500 font-bold">
+                    AI Agent
+                  </p>
+                  <p className="text-sm text-neutral-200 mt-1">
+                    Answering as Joe&apos;s Plumbing…
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 2: Live transcript */}
+              <div className="absolute top-40 right-0 w-[300px] bg-white rounded-2xl shadow-2xl shadow-black/40 overflow-hidden z-20 rotate-2">
+                <div className="px-5 py-3 border-b border-neutral-100 flex items-center justify-between">
+                  <span className="text-sm font-semibold text-neutral-900">
+                    Live transcript
+                  </span>
+                  <span className="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                    REC
+                  </span>
+                </div>
+                <div className="p-4 space-y-2.5">
+                  <div>
+                    <p className="text-[9px] uppercase font-bold tracking-widest text-neutral-400 mb-1">
+                      Caller
+                    </p>
+                    <div className="bg-neutral-50 text-neutral-700 text-xs px-3 py-2 rounded-xl rounded-tl-sm">
+                      I need a plumber tomorrow morning if possible.
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-[9px] uppercase font-bold tracking-widest text-primary-500 mb-1">
+                      Agent
+                    </p>
+                    <div className="bg-primary-500 text-white text-xs px-3 py-2 rounded-xl rounded-tl-sm">
+                      Got it — can I grab your name and best callback number?
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3: Booking confirmation pill */}
+              <div className="absolute bottom-4 left-12 bg-white rounded-2xl shadow-xl shadow-black/30 px-4 py-3 flex items-center gap-3 z-30 -rotate-3">
+                <div className="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                  <svg
+                    className="w-4 h-4 text-emerald-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-neutral-900">
+                    Appointment booked
+                  </p>
+                  <p className="text-[11px] text-neutral-500">
+                    Tue, May 9 — 2:30 PM
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: feature list */}
+            <div className="order-1 lg:order-2">
+              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3">
+                Every call answered.
+                <br />
+                Every lead captured.
+              </h3>
+              <p className="text-neutral-400 text-base mb-8 sm:mb-10 max-w-md">
+                Your voice agent runs on a Twilio number you own and books
+                straight into your calendar.
+              </p>
+              <ul className="divide-y divide-white/[0.08]">
+                {[
+                  "24/7 phone answering — never miss a call",
+                  "Books appointments with custom fields",
+                  "Captures caller name, phone, and notes",
+                  "Multiple natural voice models",
+                  "Custom greeting and agent instructions",
+                  "Bring your own Twilio phone number",
+                  "Full transcripts of every conversation",
+                ].map((f) => (
+                  <li
+                    key={f}
+                    className="py-3.5 text-sm sm:text-base text-neutral-200 font-medium flex items-start gap-3"
+                  >
+                    <svg
+                      className="w-4 h-4 text-primary-400 mt-1 flex-shrink-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ═══════════ VALUE PROPS ═══════════ */}
       <section className="relative py-12 sm:py-16 px-5 sm:px-6 border-y border-neutral-100">
         <div className="scroll-reveal max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
@@ -884,6 +1068,66 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
+
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-3">
+                      Voice Agent
+                    </p>
+                    <div className="space-y-2.5">
+                      {[
+                        "AI receptionist on your Twilio number",
+                        "Multiple natural voice models",
+                        "Custom greeting & instructions",
+                      ].map((f) => (
+                        <div key={f} className="flex items-start gap-2.5">
+                          <svg
+                            className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <span className="text-sm text-neutral-300">{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500 mb-3">
+                      Calls & Booking
+                    </p>
+                    <div className="space-y-2.5">
+                      {[
+                        "Appointment booking with custom fields",
+                        "Call transcripts & history",
+                        "Availability & calendar sync",
+                      ].map((f) => (
+                        <div key={f} className="flex items-start gap-2.5">
+                          <svg
+                            className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <span className="text-sm text-neutral-300">{f}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1012,6 +1256,7 @@ export default function Home() {
               <h4 className="text-sm font-semibold text-neutral-900 mb-4">Product</h4>
               <ul className="space-y-2.5">
                 <li><a href="#features" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Features</a></li>
+                <li><a href="#voice" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Voice Agent</a></li>
                 <li><a href="#pricing" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Pricing</a></li>
                 <li><a href="#platform" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">Platforms</a></li>
                 <li><a href="#faq" className="text-sm text-neutral-400 hover:text-neutral-600 transition-colors">FAQ</a></li>
