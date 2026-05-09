@@ -245,7 +245,7 @@ export default function BillingSection() {
 
           {/* Free plan — upgrade CTA */}
           {isFree && (
-            <div className="bg-gradient-to-br from-neutral-50 to-primary-50/30 border border-neutral-200 dark:border-white/[0.06] rounded-xl p-4">
+            <div className="bg-gradient-to-br from-neutral-50 to-primary-50/30 dark:from-white/[0.02] dark:to-primary-500/[0.04] border border-neutral-200 dark:border-white/[0.06] rounded-xl p-4">
               <div className="space-y-2.5 mb-4">
                 {PRO_FEATURES.map((feature) => (
                   <div key={feature} className="flex items-center gap-2.5">

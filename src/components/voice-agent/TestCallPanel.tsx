@@ -218,7 +218,7 @@ export default function TestCallPanel({ open, onClose }: Props) {
           <div className="px-5 py-6 border-b border-slate-100 dark:border-white/[0.06]">
             <UpgradePrompt
               feature="Voice Agent"
-              description="Upgrade to Pro to test calls in your browser and receive Twilio calls."
+              description="Upgrade to Pro to test calls in your browser."
             />
           </div>
         ) : (
