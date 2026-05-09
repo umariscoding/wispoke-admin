@@ -63,6 +63,9 @@ import {
   Calendar,
   CalendarDays,
   Mic,
+  Play,
+  Square,
+  Loader2,
 } from "lucide-react";
 
 // Icon component props interface
@@ -334,5 +337,17 @@ export const Icons = {
 
   Mic: ({ className = "h-5 w-5", size }: IconProps) => (
     <Mic className={className} size={size} />
+  ),
+
+  Play: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Play className={className} size={size} />
+  ),
+
+  Square: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Square className={className} size={size} />
+  ),
+
+  Loader2: ({ className = "h-5 w-5", size }: IconProps) => (
+    <Loader2 className={className} size={size} />
   ),
 };
